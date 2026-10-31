@@ -377,7 +377,9 @@ function isValidBorrowerName(name: string): boolean {
 // Multi-strategy parser that tries different table formats
 function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
   const $ = cheerio.load(html);
-  const seenBorrowers = new Map<string, Holding>();
+  // Track holdings with the table index they were first seen in
+  // This allows aggregating tranches within the same table while deduplicating across tables
+  const seenBorrowers = new Map<string, { holding: Holding; tableIdx: number }>();
 
   // Detect if values are in thousands
   const inThousands =
@@ -768,24 +770,40 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
         investmentType = "Equity";
       else if (rowText.includes("warrant")) investmentType = "Warrant";
 
-      // Deduplicate by company - keep first occurrence (Schedule of Investments comes first)
+      // Deduplicate across tables but aggregate within the same table
+      // Same borrower in same table = multiple tranches (aggregate)
+      // Same borrower in different table = duplicate from Fair Value Hierarchy table (skip)
       const borrowerKey = currentCompany.toLowerCase().substring(0, 40);
 
-      if (!seenBorrowers.has(borrowerKey)) {
+      const existing = seenBorrowers.get(borrowerKey);
+      if (!existing) {
+        // First time seeing this borrower - store with table index
         seenBorrowers.set(borrowerKey, {
-          borrower: currentCompany,
-          industry: currentIndustry || "Unknown",
-          investmentType,
-          rate,
-          maturity: maturity || "N/A",
-          principal,
-          fairValue,
+          holding: {
+            borrower: currentCompany,
+            industry: currentIndustry || "Unknown",
+            investmentType,
+            rate,
+            maturity: maturity || "N/A",
+            principal,
+            fairValue,
+          },
+          tableIdx,
         });
+      } else if (existing.tableIdx === tableIdx) {
+        // Same table - aggregate values (multiple tranches of same borrower)
+        existing.holding.principal += principal;
+        existing.holding.fairValue += fairValue;
+        // Keep higher rate if different
+        if (rate !== null && (existing.holding.rate === null || rate > existing.holding.rate)) {
+          existing.holding.rate = rate;
+        }
       }
+      // Different table - skip (duplicate from summary/Fair Value Hierarchy table)
     });
   });
 
-  return Array.from(seenBorrowers.values());
+  return Array.from(seenBorrowers.values()).map((entry) => entry.holding);
 }
 
 async function processBDC(bdc: (typeof BDCS)[0]): Promise<FundData | null> {
