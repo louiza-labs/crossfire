@@ -7,8 +7,6 @@ import { NextResponse } from "next/server";
 import { fetchFundsFromBlob, getLastUpdated } from "@/lib/blob-data";
 import fundsData from "@/data/funds.json";
 
-export const revalidate = 3600; // Cache for 1 hour
-
 export async function GET() {
   // Try to fetch from blob first
   const blobData = await fetchFundsFromBlob();
