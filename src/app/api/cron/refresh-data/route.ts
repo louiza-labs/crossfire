@@ -100,11 +100,15 @@ function parseNumber(text: string): number | null {
 }
 
 function isValidBorrowerName(name: string): boolean {
-  const lowerName = name.toLowerCase();
+  const lowerName = name.toLowerCase().trim();
+
+  // Must be at least 5 chars with letters
+  if (name.length < 5 || !/[a-zA-Z]{3,}/.test(name)) return false;
+
   const invalidPatterns = [
     "total",
     "subtotal",
-    "net",
+    "net ",
     "less:",
     "balance",
     "accrued",
@@ -113,9 +117,68 @@ function isValidBorrowerName(name: string): boolean {
     "assets",
     "liabilities",
     "cash",
+    // Balance sheet items
+    "other assets",
+    "other liabilities",
+    "accounts payable",
+    "accounts receivable",
+    "deferred tax",
+    "deferred revenue",
+    "transfers in",
+    "transfers out",
+    "level 3",
+    "level 2",
+    "level 1",
+    "beginning balance",
+    "ending balance",
+    "cash and cash",
+    "cash equivalents",
+    // Security/investment types
+    "unsecured debt",
+    "secured loan",
+    "secured debt",
+    "unsecured loan",
+    "unsecured notes",
+    "derivative instrument",
+    "derivatives designated",
+    "derivatives not designated",
+    "asset-backed",
+    "equipment financing",
+    "asset based finance",
+    "funding facility",
+    // Table structure elements
+    "$ in millions",
+    "$ in thousands",
+    "in millions",
+    "($ in",
+    // Filing boilerplate
+    "schedule of",
+    "fair value",
+    "footnote",
+    "see accompanying",
   ];
   if (invalidPatterns.some((p) => lowerName.includes(p))) return false;
-  if (/^(first lien|second lien|senior|subordinated)/i.test(name)) return false;
+
+  // Skip investment type headers
+  if (
+    /^(first lien|second lien|senior|subordinated|1st lien|2nd lien|mezzanine|unitranche|revolving|delayed draw)/i.test(
+      name
+    )
+  )
+    return false;
+
+  // Skip geographic headers
+  if (
+    /^(united states|united kingdom|canada|europe|north america|asia|other countries)$/i.test(name)
+  )
+    return false;
+
+  // Skip standalone "Company" column header
+  if (lowerName === "company") return false;
+
+  // Skip interest rate descriptions (e.g., "7.75% Unsecured Notes")
+  if (/^\d+\.\d+%\s+(unsecured|secured|notes)/i.test(name)) return false;
+
   return true;
 }
 

@@ -15,6 +15,52 @@ import {
   type BorrowerGroup,
 } from "./lib/normalize-borrower";
 
+// Invalid borrower names to filter out (security types, balance sheet items, etc.)
+const INVALID_BORROWER_PATTERNS = new Set([
+  "unsecured debt",
+  "secured loan",
+  "secured debt",
+  "unsecured loan",
+  "derivative instrument",
+  "derivative instruments",
+  "derivatives designated as hedges",
+  "derivatives not designated as hedges",
+  "equipment financing",
+  "asset based finance",
+  "other assets",
+  "other liabilities",
+  "deferred tax liabilities",
+  "accounts payable",
+  "business services",
+  "consumer services",
+  "financial services",
+  "healthcare services",
+  "company",
+  "united states",
+  "united kingdom",
+  "unknown",
+]);
+
+const INVALID_BORROWER_REGEX = [
+  /^\d+\.\d+%\s+(unsecured|secured)/i, // "7.75% Unsecured Notes"
+  /^(1st|2nd|first|second)\s+lien/i, // Investment type headers
+  /funding facility$/i, // "BNP Funding Facility"
+  /^(net|total|sub-?total)\s/i, // Totals
+  /\s(in|out)\s+of\s+level/i, // Fair value hierarchy
+  /^transfers\s+(in|out)/i, // Transfer rows
+  /assets?\s+\(\$\s+in/i, // "Assets ($ in millions)"
+  /^(short|long)[\s-]term\s+unsecured/i, // "Short-term unsecured debt"
+  /unitranche\s+secured\s+loans/i, // Security type
+  /^unsecured\s+(debt|loan|notes)/i, // Security types
+];
+
+function isInvalidBorrower(name: string): boolean {
+  const lowerName = name.toLowerCase().trim();
+  if (INVALID_BORROWER_PATTERNS.has(lowerName)) return true;
+  if (INVALID_BORROWER_REGEX.some((pattern) => pattern.test(name))) return true;
+  return false;
+}
+
 // Input/output types
 interface RawHolding {
   borrower: string;
@@ -225,16 +271,32 @@ async function normalize(): Promise<void> {
   // Track all borrower names for duplicate detection
   const allBorrowerNames: string[] = [];
 
+  // Track filtered holdings for reporting
+  let filteredCount = 0;
+
   // Enrich each fund
   const enrichedFunds: EnrichedFund[] = rawData.map((fund) => {
     console.log(`Processing ${fund.ticker}...`);
 
-    const enrichedHoldings = fund.holdings.map((h) => {
+    // Filter out invalid borrower names (security types, balance sheet items, etc.)
+    const validHoldings = fund.holdings.filter((h) => {
+      if (isInvalidBorrower(h.borrower)) {
+        filteredCount++;
+        return false;
+      }
+      return true;
+    });
+
+    const enrichedHoldings = validHoldings.map((h) => {
       allBorrowerNames.push(h.borrower);
       return enrichHolding(h, classificationCache);
     });
 
     const dataQuality = calculateFundQuality(enrichedHoldings);
+
+    console.log(
+      `  ${fund.ticker}: ${enrichedHoldings.length} holdings (${fund.holdings.length - enrichedHoldings.length} filtered)`
+    );
 
     return {
       ...fund,
@@ -242,6 +304,8 @@ async function normalize(): Promise<void> {
       dataQuality,
     };
   });
+
+  console.log(`\nFiltered out ${filteredCount} invalid borrower entries total.`);
 
   // Detect potential duplicate borrowers
   console.log("\nAnalyzing borrower name variations...");
