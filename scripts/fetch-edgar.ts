@@ -325,13 +325,61 @@ function isValidBorrowerName(name: string): boolean {
   // Skip entries that look like interest rate descriptions
   if (/^\d+\.\d+%\s+(unsecured|secured|notes)/i.test(name)) return false;
 
+  // Skip entries that START with security type (no company name prefix)
+  if (
+    /^(common\s+(stock|equity|units|lp)|preferred\s+(stock|equity)|warrants?(\s|$)|equity\s+(interest|investment)|membership\s+interest)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip industry section headers
+  if (
+    /^(aerospace|business\s+services|consumer\s+(goods|services)|specialty\s+retail|telecommunications|financials?|industrials?|materials?|healthcare|real\s+estate|utilities|energy|information\s+technology|software|capital\s+goods|commercial\s+services)(\s|$|:|&)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip accounting/balance sheet terms and filing structure
+  if (
+    /^(liabilities|net\s+(change|unrealized)|unrealized|realized|carrying\s+value|repayments|purchases\s+and|transfers\s+(between|in|out)|accretion|selected\s+balance|investments$|structured\s+finance|equity\s+and\s+other|valuation\s+techniques)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip filing period headers
+  if (/^\d+\s+(months?|years?)\s+ended/i.test(name)) {
+    return false;
+  }
+
+  // Skip geographic regions
+  if (
+    /^(mid-atlantic|northeast|southeast|midwest|southwest|west\s+coast|pacific|northwest)$/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip standalone single-word generic terms and common headers
+  if (/^(company|investments|assets|securities|research\s+&\s+consulting)$/i.test(name)) {
+    return false;
+  }
+
   return true;
 }
 
 // Multi-strategy parser that tries different table formats
 function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
   const $ = cheerio.load(html);
-  const seenBorrowers = new Map<string, Holding>();
+  // Track holdings with the table index they were first seen in
+  // This allows aggregating tranches within the same table while deduplicating across tables
+  const seenBorrowers = new Map<string, { holding: Holding; tableIdx: number }>();
 
   // Detect if values are in thousands
   const inThousands =
@@ -722,31 +770,40 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
         investmentType = "Equity";
       else if (rowText.includes("warrant")) investmentType = "Warrant";
 
-      // Aggregate by company
+      // Deduplicate across tables but aggregate within the same table
+      // Same borrower in same table = multiple tranches (aggregate)
+      // Same borrower in different table = duplicate from Fair Value Hierarchy table (skip)
       const borrowerKey = currentCompany.toLowerCase().substring(0, 40);
-      const existing = seenBorrowers.get(borrowerKey);
 
-      if (existing) {
-        existing.principal += principal;
-        existing.fairValue += fairValue;
-        if (rate && (!existing.rate || rate > existing.rate)) {
-          existing.rate = rate;
-        }
-      } else {
+      const existing = seenBorrowers.get(borrowerKey);
+      if (!existing) {
+        // First time seeing this borrower - store with table index
         seenBorrowers.set(borrowerKey, {
-          borrower: currentCompany,
-          industry: currentIndustry || "Unknown",
-          investmentType,
-          rate,
-          maturity: maturity || "N/A",
-          principal,
-          fairValue,
+          holding: {
+            borrower: currentCompany,
+            industry: currentIndustry || "Unknown",
+            investmentType,
+            rate,
+            maturity: maturity || "N/A",
+            principal,
+            fairValue,
+          },
+          tableIdx,
         });
+      } else if (existing.tableIdx === tableIdx) {
+        // Same table - aggregate values (multiple tranches of same borrower)
+        existing.holding.principal += principal;
+        existing.holding.fairValue += fairValue;
+        // Keep higher rate if different
+        if (rate !== null && (existing.holding.rate === null || rate > existing.holding.rate)) {
+          existing.holding.rate = rate;
+        }
       }
+      // Different table - skip (duplicate from summary/Fair Value Hierarchy table)
     });
   });
 
-  return Array.from(seenBorrowers.values());
+  return Array.from(seenBorrowers.values()).map((entry) => entry.holding);
 }
 
 async function processBDC(bdc: (typeof BDCS)[0]): Promise<FundData | null> {

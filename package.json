@@ -17,7 +17,10 @@
     "prepare": "lefthook install",
     "normalize": "tsx scripts/normalize.ts",
     "clean-data": "tsx scripts/clean-data.ts",
-    "etl": "pnpm normalize && pnpm clean-data"
+    "etl": "pnpm normalize && pnpm clean-data",
+    "fetch-data": "tsx scripts/fetch-edgar.ts",
+    "upload-blob": "tsx scripts/upload-blob.ts",
+    "refresh-data": "pnpm fetch-data && pnpm normalize && pnpm upload-blob"
   },
   "dependencies": {
     "3d-force-graph": "^1.80.1",

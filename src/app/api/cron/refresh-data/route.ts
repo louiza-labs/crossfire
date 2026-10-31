@@ -179,6 +179,30 @@ function isValidBorrowerName(name: string): boolean {
   // Skip interest rate descriptions (e.g., "7.75% Unsecured Notes")
   if (/^\d+\.\d+%\s+(unsecured|secured|notes)/i.test(name)) return false;
 
+  // Skip entries that START with security type (no company name prefix)
+  if (
+    /^(common\s+(stock|equity|units|lp)|preferred\s+(stock|equity)|warrants?(\s|$)|equity\s+(interest|investment)|membership\s+interest)/i.test(
+      name
+    )
+  )
+    return false;
+
+  // Skip industry section headers
+  if (
+    /^(aerospace|consumer\s+goods|specialty\s+retail|telecommunications|financials?|industrials?|materials?|healthcare|real\s+estate|utilities|energy)(\s|$|:)/i.test(
+      name
+    )
+  )
+    return false;
+
+  // Skip accounting/balance sheet terms
+  if (
+    /^(liabilities|net\s+change|unrealized|realized|carrying\s+value|repayments|purchases\s+and)/i.test(
+      name
+    )
+  )
+    return false;
+
   return true;
 }
 
