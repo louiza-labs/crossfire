@@ -1,0 +1,38 @@
+# Lefthook configuration for Crossfire
+# https://lefthook.dev/configuration/
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint
+      glob: "*.{js,ts,jsx,tsx,mjs}"
+      run: pnpm eslint {staged_files} --fix
+      stage_fixed: true
+
+    - name: format
+      glob: "*.{js,ts,jsx,tsx,json,md,css,yml,yaml}"
+      run: pnpm prettier --write {staged_files}
+      stage_fixed: true
+
+    - name: typecheck
+      run: pnpm tsc --noEmit
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: test
+      run: pnpm test run
+
+    - name: build
+      run: pnpm build
+
+commit-msg:
+  jobs:
+    - name: validate
+      run: |
+        # Conventional commit format check
+        if ! head -1 {1} | grep -qE "^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?: .{1,}$"; then
+          echo "Invalid commit message format. Use: type(scope): description"
+          echo "Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+          exit 1
+        fi

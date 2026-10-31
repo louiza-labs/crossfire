@@ -131,8 +131,14 @@
 
 /* Terminal cursor blink animation */
 @keyframes cursor-blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .terminal-cursor {
@@ -141,8 +147,14 @@
 
 /* Fade in animation */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
@@ -151,27 +163,42 @@
 
 /* Neon glow effects */
 .neon-emerald {
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.3), 0 0 40px rgba(0, 255, 136, 0.1);
+  text-shadow:
+    0 0 10px rgba(0, 255, 136, 0.5),
+    0 0 20px rgba(0, 255, 136, 0.3),
+    0 0 40px rgba(0, 255, 136, 0.1);
 }
 
 .neon-cyan {
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+  text-shadow:
+    0 0 10px rgba(0, 212, 255, 0.5),
+    0 0 20px rgba(0, 212, 255, 0.3),
+    0 0 40px rgba(0, 212, 255, 0.1);
 }
 
 .neon-pink {
-  text-shadow: 0 0 10px rgba(255, 0, 128, 0.5), 0 0 20px rgba(255, 0, 128, 0.3), 0 0 40px rgba(255, 0, 128, 0.1);
+  text-shadow:
+    0 0 10px rgba(255, 0, 128, 0.5),
+    0 0 20px rgba(255, 0, 128, 0.3),
+    0 0 40px rgba(255, 0, 128, 0.1);
 }
 
 .glow-emerald {
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3), 0 0 20px rgba(0, 255, 136, 0.1);
+  box-shadow:
+    0 0 10px rgba(0, 255, 136, 0.3),
+    0 0 20px rgba(0, 255, 136, 0.1);
 }
 
 .glow-cyan {
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.1);
+  box-shadow:
+    0 0 10px rgba(0, 212, 255, 0.3),
+    0 0 20px rgba(0, 212, 255, 0.1);
 }
 
 .glow-pink {
-  box-shadow: 0 0 10px rgba(255, 0, 128, 0.3), 0 0 20px rgba(255, 0, 128, 0.1);
+  box-shadow:
+    0 0 10px rgba(255, 0, 128, 0.3),
+    0 0 20px rgba(255, 0, 128, 0.1);
 }
 
 /* Selection styling */
@@ -500,4 +527,199 @@
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* =============================================================================
+   MOBILE-FIRST RESPONSIVE UTILITIES (2026)
+   ============================================================================= */
+
+/* Safe area insets for notched devices */
+.safe-area-pt {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-pl {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-pr {
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-area-inset {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Bottom nav spacing for pages */
+.pb-mobile-nav {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .pb-mobile-nav {
+    padding-bottom: 0;
+  }
+}
+
+/* Touch-friendly tap targets (min 44px) */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Mobile-optimized horizontal scroll container */
+.mobile-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.mobile-scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-scroll-x > * {
+  scroll-snap-align: start;
+}
+
+/* Scroll hint gradient for horizontal overflow */
+.scroll-hint-right::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8));
+  pointer-events: none;
+}
+
+/* Mobile card layout for tables */
+@media (max-width: 639px) {
+  .mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mobile-cards .mobile-card {
+    background: rgba(9, 9, 11, 0.8);
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .mobile-cards .mobile-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .mobile-cards .mobile-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .mobile-cards .mobile-card-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .mobile-cards .mobile-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+  }
+
+  .mobile-cards .mobile-card-value {
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: #fafafa;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improved focus states for accessibility */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(0, 212, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Mobile-optimized sticky header */
+@media (max-width: 767px) {
+  .sticky-mobile {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Responsive text utilities */
+.text-responsive-xl {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+}
+
+.text-responsive-base {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+/* Mobile-friendly table wrapper */
+.table-mobile-wrapper {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .table-mobile-wrapper::before {
+    content: "← Scroll →";
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    color: #52525b;
+    padding: 0.5rem;
+    border-bottom: 1px solid #27272a;
+  }
+}
+
+/* Pull-to-refresh indicator area */
+.pull-indicator {
+  height: 0;
+  overflow: hidden;
+  transition: height 200ms;
+}
+
+.pull-indicator.active {
+  height: 48px;
 }

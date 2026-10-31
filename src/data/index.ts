@@ -79,7 +79,7 @@ let borrowerIdCounter = 1;
 const fundTotals = fundsData.map((fund) => ({
   ...fund,
   totalAssets: fund.holdings
-    .filter(h => !isIndustryCategory(h.borrower))
+    .filter((h) => !isIndustryCategory(h.borrower))
     .reduce((sum, h) => sum + h.fairValue, 0),
   manager: deriveManager(fund.name),
   type: "BDC",
@@ -212,7 +212,7 @@ export function getSharedBorrowers(): {
   }
 
   return Array.from(borrowerFundMap.entries())
-    .filter(([_, data]) => data.funds.size > 1)
+    .filter(([, data]) => data.funds.size > 1)
     .map(([borrowerId, data]) => ({
       borrower: borrowers.find((b) => b.id === borrowerId)!,
       funds: Array.from(data.funds).map((fid) => funds.find((f) => f.id === fid)!),
@@ -226,8 +226,7 @@ export function getSharedBorrowers(): {
 export function getStats() {
   const totalExposure = holdings.reduce((sum, h) => sum + h.fairValue, 0);
   const sharedBorrowers = getSharedBorrowers();
-  const avgRate =
-    holdings.reduce((sum, h) => sum + h.rate, 0) / holdings.length;
+  const avgRate = holdings.reduce((sum, h) => sum + h.rate, 0) / holdings.length;
 
   return {
     totalFunds: funds.length,
@@ -441,7 +440,11 @@ export function filterHoldings(options: FilterOptions): Holding[] {
     if (options.fundIds && options.fundIds.length > 0 && !options.fundIds.includes(h.fundId)) {
       return false;
     }
-    if (options.industries && options.industries.length > 0 && !options.industries.includes(h.industry)) {
+    if (
+      options.industries &&
+      options.industries.length > 0 &&
+      !options.industries.includes(h.industry)
+    ) {
       return false;
     }
     if (options.minExposure !== undefined && h.fairValue < options.minExposure) {
@@ -635,7 +638,10 @@ export interface StressTestResult {
  * @param borrowerId - The borrower to stress test
  * @param haircutPercent - Loss percentage (0-100). 100 = total default
  */
-export function getStressTestImpact(borrowerId: string, haircutPercent: number): StressTestResult | null {
+export function getStressTestImpact(
+  borrowerId: string,
+  haircutPercent: number
+): StressTestResult | null {
   const borrower = borrowers.find((b) => b.id === borrowerId);
   if (!borrower) return null;
 
@@ -676,7 +682,8 @@ export function getStressTestImpact(borrowerId: string, haircutPercent: number):
     systemWideImpact: {
       totalAffectedFunds: impacts.length,
       totalLoss,
-      avgPctImpact: pctImpacts.length > 0 ? pctImpacts.reduce((a, b) => a + b, 0) / pctImpacts.length : 0,
+      avgPctImpact:
+        pctImpacts.length > 0 ? pctImpacts.reduce((a, b) => a + b, 0) / pctImpacts.length : 0,
       maxPctImpact: Math.max(...pctImpacts, 0),
     },
   };
@@ -726,16 +733,20 @@ export function getSystemHealthMetrics(): SystemHealthMetrics {
   // Fund overlap stats
   const overlaps = getFundOverlap();
   const overlapPcts = overlaps.flatMap((o) => [o.overlapPct1, o.overlapPct2]);
-  const avgFundOverlap = overlapPcts.length > 0 ? overlapPcts.reduce((a, b) => a + b, 0) / overlapPcts.length : 0;
+  const avgFundOverlap =
+    overlapPcts.length > 0 ? overlapPcts.reduce((a, b) => a + b, 0) / overlapPcts.length : 0;
   const maxFundOverlap = Math.max(...overlapPcts, 0);
 
   // Shared borrower ratio
   const sharedBorrowers = getSharedBorrowers();
-  const sharedBorrowerRatio = borrowers.length > 0 ? (sharedBorrowers.length / borrowers.length) * 100 : 0;
+  const sharedBorrowerRatio =
+    borrowers.length > 0 ? (sharedBorrowers.length / borrowers.length) * 100 : 0;
 
   // Critical/elevated counts
   const criticalBorrowers = sharedBorrowers.filter((b) => b.funds.length >= 4).length;
-  const elevatedBorrowers = sharedBorrowers.filter((b) => b.funds.length >= 2 && b.funds.length < 4).length;
+  const elevatedBorrowers = sharedBorrowers.filter(
+    (b) => b.funds.length >= 2 && b.funds.length < 4
+  ).length;
 
   return {
     totalSystemAUM,
