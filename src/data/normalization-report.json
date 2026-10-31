@@ -1,48 +1,48 @@
 {
-  "timestamp": "2026-10-31T17:29:07.558Z",
+  "timestamp": "2026-10-31T18:40:50.618Z",
   "inputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/edgar-data.json",
   "outputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/funds-normalized.json",
   "totalFunds": 41,
-  "totalHoldingsRaw": 6314,
-  "totalHoldingsEnriched": 6314,
+  "totalHoldingsRaw": 6225,
+  "totalHoldingsEnriched": 6225,
   "industryClassification": {
-    "classified": 3394,
-    "unclassified": 2920,
-    "highConfidence": 541,
-    "mediumConfidence": 2715,
-    "lowConfidence": 3058,
+    "classified": 3382,
+    "unclassified": 2843,
+    "highConfidence": 539,
+    "mediumConfidence": 2706,
+    "lowConfidence": 2980,
     "topSectors": [
       {
         "sector": "Industrials",
-        "count": 824
+        "count": 815
       },
       {
         "sector": "Information Technology",
-        "count": 623
+        "count": 625
       },
       {
         "sector": "Health Care",
-        "count": 556
+        "count": 553
       },
       {
         "sector": "Consumer Discretionary",
-        "count": 286
+        "count": 282
       },
       {
         "sector": "Financials",
-        "count": 271
+        "count": 273
       },
       {
         "sector": "Communication Services",
-        "count": 248
+        "count": 249
       },
       {
         "sector": "Consumer Staples",
-        "count": 224
+        "count": 225
       },
       {
         "sector": "Materials",
-        "count": 153
+        "count": 152
       },
       {
         "sector": "Real Estate",
@@ -50,14 +50,14 @@
       },
       {
         "sector": "Energy",
-        "count": 87
+        "count": 86
       }
     ]
   },
   "borrowerNormalization": {
-    "uniqueRaw": 5666,
-    "uniqueNormalized": 5214,
-    "potentialDuplicates": 876,
+    "uniqueRaw": 5607,
+    "uniqueNormalized": 5169,
+    "potentialDuplicates": 869,
     "duplicateGroups": [
       {
         "canonicalName": "First Lien Revolving Loan",
@@ -94,25 +94,6 @@
         "count": 28
       },
       {
-        "canonicalName": "Common Equity",
-        "aliases": [
-          "Common Equity (52,763 Class A units)",
-          "Common Equity (3,695 Class B units)",
-          "Common Equity (1,290 Class A units)",
-          "Common equity, warrants and other",
-          "Common Equity - Class A-1 Common",
-          "Common LP Units (23.8 units)",
-          "Common Equity (12,663 Units)",
-          "Common Equity - Common Stock",
-          "Common Equity (1,135 units)",
-          "Common equity and warrants",
-          "Common Equity (499 units)",
-          "Common equity & warrants",
-          "Common Equity"
-        ],
-        "count": 13
-      },
-      {
         "canonicalName": "Leia Acquisition",
         "aliases": [
           "Leia Acquisition Ltd. (fka Swift Worldwide Resources Holdco Ltd)",
@@ -128,20 +109,6 @@
         "count": 9
       },
       {
-        "canonicalName": "Warrants",
-        "aliases": [
-          "Warrants (to purchase 50,456 Class A Common Units of Marine One Holdco, LLC)",
-          "Warrants (to purchase Class A Common Units of Marine One Holdco, LLC)",
-          "Warrants (warrants to purchase up to $73,000 in common stock)",
-          "Warrants - Class D (0.2471 units)",
-          "Warrants of EF Holdco, LLC",
-          "Warrants (3,841 warrants)",
-          "Warrants - Warrants",
-          "Warrants"
-        ],
-        "count": 8
-      },
-      {
         "canonicalName": "Growth Capital Loan",
         "aliases": [
           "Growth Capital Loan (Prime + 5.75% PIK interest, 13.25% floor, 4.52% EOT payment)",
@@ -155,15 +122,15 @@
         "count": 7
       },
       {
-        "canonicalName": "Preferred LP Units",
+        "canonicalName": "Kbhs Acquisition",
         "aliases": [
-          "Preferred LP Units (71,000 units) (SOFR + 6.00%, 9.7% Cash)",
-          "Preferred Units (47,074,638 units)",
-          "Preferred Units (80,539,543 units)",
-          "Preferred A Units",
-          "Preferred B Units",
-          "Preferred equity",
-          "Preferred Equity"
+          "KBHS Acquisition, LLC (d/b/a Alita Care, LLC)",
+          "HS4 Acquisitionco, Inc. (Revolver)",
+          "KPSKY Acquisition, Inc.",
+          "HS4 Acquisitionco, Inc.",
+          "GS Acquisitionco, Inc.",
+          "KPSKY Acquisition Inc.",
+          "SG Acquisition, Inc."
         ],
         "count": 7
       },
@@ -181,15 +148,15 @@
         "count": 7
       },
       {
-        "canonicalName": "Structured Credit",
+        "canonicalName": "Class A Units",
         "aliases": [
-          "Structured Credit ($5,000 par, due 1/2038)",
-          "Structured Credit ($3,000 par, due 1/2039)",
-          "Structured Credit Partners JV, LLC",
-          "Structured credit investments",
-          "Structured Finance (A)",
-          "Structured products",
-          "Structured Finance"
+          "Class A Units (925,796,475 units)",
+          "Class B Units (1,124,813 units)",
+          "Class A Units (222,886 units)",
+          "Class AA Units (19,093 units)",
+          "Class A Units (251.4 units)",
+          "Class P Units",
+          "Class A Units"
         ],
         "count": 7
       },
@@ -230,42 +197,6 @@
         "count": 6
       },
       {
-        "canonicalName": "Accretion OF Discounts ON Notes Issued",
-        "aliases": [
-          "Accretion of discounts (premium) on notes issued",
-          "Accretion of discount (amortization of premium)",
-          "Accretion of discounts and premiums, net",
-          "Accretion of discounts on notes issued",
-          "Accretion of discounts",
-          "Accretion of discount"
-        ],
-        "count": 6
-      },
-      {
-        "canonicalName": "Kbhs Acquisition",
-        "aliases": [
-          "KBHS Acquisition, LLC (d/b/a Alita Care, LLC)",
-          "HS4 Acquisitionco, Inc. (Revolver)",
-          "KPSKY Acquisition, Inc.",
-          "HS4 Acquisitionco, Inc.",
-          "GS Acquisitionco, Inc.",
-          "SG Acquisition, Inc."
-        ],
-        "count": 6
-      },
-      {
-        "canonicalName": "Class A Units",
-        "aliases": [
-          "Class A Units (925,796,475 units)",
-          "Class B Units (1,124,813 units)",
-          "Class A Units (222,886 units)",
-          "Class AA Units (19,093 units)",
-          "Class P Units",
-          "Class A Units"
-        ],
-        "count": 6
-      },
-      {
         "canonicalName": "Bayside",
         "aliases": [
           "Bayside Parent, LLC (dba Pro-PT)",
@@ -278,6 +209,40 @@
         "count": 6
       },
       {
+        "canonicalName": "CM Acquisitions",
+        "aliases": [
+          "CM Acquisitions Holdings Inc.",
+          "DCG Acquisition Corp.",
+          "NDC Acquisition Corp.",
+          "Mach Acquisition, LLC",
+          "PM Acquisition LLC",
+          "CW AcquisitionsCo"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Eclipse",
+        "aliases": [
+          "Eclipse Topco Holdings, Inc. (fka Transcendia Holdings, Inc.)",
+          "Eclipse Business Capital, LLC(d)",
+          "Eclipse Business Capital, LLC",
+          "Eclipse Topco, Inc.",
+          "Eclipse Buyer Inc."
+        ],
+        "count": 5
+      },
+      {
+        "canonicalName": "Preferred LP Units",
+        "aliases": [
+          "Preferred LP Units (71,000 units) (SOFR + 6.00%, 9.7% Cash)",
+          "Preferred Units (47,074,638 units)",
+          "Preferred Units (80,539,543 units)",
+          "Preferred A Units",
+          "Preferred B Units"
+        ],
+        "count": 5
+      },
+      {
         "canonicalName": "Clearway",
         "aliases": [
           "Clearway Corporation (f/k/a NP/Clearway Holdings, Inc.)",
@@ -285,6 +250,17 @@
           "Clearwater Analytics LLC",
           "Clearview Buyer, Inc.",
           "CLEARWATER GROUP, LLC"
+        ],
+        "count": 5
+      },
+      {
+        "canonicalName": "Class A Common Units OF RK Logistics",
+        "aliases": [
+          "Class A Common Units of RK Logistics Holdings Inc.",
+          "Class B Common Units of RK Logistics Holdings Inc.",
+          "Class C Common Units of RK Logistics Holdings Inc.",
+          "Class A Common Units of Marine One Holdco, LLC",
+          "Class B Common Units of Redstone Holdco 1 LP"
         ],
         "count": 5
       },
@@ -311,6 +287,17 @@
         "count": 5
       },
       {
+        "canonicalName": "Structured Credit",
+        "aliases": [
+          "Structured Credit ($5,000 par, due 1/2038)",
+          "Structured Credit ($3,000 par, due 1/2039)",
+          "Structured Credit Partners JV, LLC",
+          "Structured credit investments",
+          "Structured products"
+        ],
+        "count": 5
+      },
+      {
         "canonicalName": "Sma Technologies",
         "aliases": [
           "SMA Technologies Holdings, LLC",
@@ -322,13 +309,13 @@
         "count": 5
       },
       {
-        "canonicalName": "CM Acquisitions",
+        "canonicalName": "Transportation Infrastructure",
         "aliases": [
-          "CM Acquisitions Holdings Inc.",
-          "DCG Acquisition Corp.",
-          "NDC Acquisition Corp.",
-          "Mach Acquisition, LLC",
-          "CW AcquisitionsCo"
+          "Transportation Infrastructure",
+          "Transportation Insight, LLC",
+          "Transportation & Logistics",
+          "Transportation: Consumer",
+          "Transportation: Cargo"
         ],
         "count": 5
       }
@@ -338,17 +325,17 @@
     {
       "ticker": "ARCC",
       "score": 88,
-      "holdings": 643
+      "holdings": 639
     },
     {
       "ticker": "BXSL",
       "score": 94,
-      "holdings": 368
+      "holdings": 367
     },
     {
       "ticker": "FSK",
       "score": 77,
-      "holdings": 288
+      "holdings": 287
     },
     {
       "ticker": "OBDC",
@@ -357,53 +344,53 @@
     },
     {
       "ticker": "MAIN",
-      "score": 68,
+      "score": 67,
       "holdings": 224
     },
     {
       "ticker": "GBDC",
       "score": 32,
-      "holdings": 663
+      "holdings": 656
     },
     {
       "ticker": "HTGC",
-      "score": 54,
-      "holdings": 179
+      "score": 55,
+      "holdings": 174
     },
     {
       "ticker": "PSEC",
-      "score": 68,
-      "holdings": 169
+      "score": 71,
+      "holdings": 154
     },
     {
       "ticker": "TSLX",
-      "score": 45,
-      "holdings": 205
+      "score": 46,
+      "holdings": 197
     },
     {
       "ticker": "OCSL",
-      "score": 77,
-      "holdings": 377
+      "score": 78,
+      "holdings": 371
     },
     {
       "ticker": "NMFC",
-      "score": 72,
-      "holdings": 191
+      "score": 67,
+      "holdings": 236
     },
     {
       "ticker": "ORCC",
-      "score": 64,
-      "holdings": 306
+      "score": 61,
+      "holdings": 297
     },
     {
       "ticker": "GSBD",
-      "score": 56,
-      "holdings": 58
+      "score": 59,
+      "holdings": 54
     },
     {
       "ticker": "BBDC",
-      "score": 39,
-      "holdings": 391
+      "score": 40,
+      "holdings": 384
     },
     {
       "ticker": "BCSF",
@@ -413,12 +400,12 @@
     {
       "ticker": "TRIN",
       "score": 50,
-      "holdings": 210
+      "holdings": 209
     },
     {
       "ticker": "CSWC",
-      "score": 59,
-      "holdings": 199
+      "score": 62,
+      "holdings": 188
     },
     {
       "ticker": "TCPC",
@@ -432,8 +419,8 @@
     },
     {
       "ticker": "PFLT",
-      "score": 65,
-      "holdings": 86
+      "score": 66,
+      "holdings": 84
     },
     {
       "ticker": "MFIC",
@@ -442,28 +429,28 @@
     },
     {
       "ticker": "FDUS",
-      "score": 45,
-      "holdings": 55
+      "score": 48,
+      "holdings": 45
     },
     {
       "ticker": "TPVG",
-      "score": 63,
-      "holdings": 87
+      "score": 64,
+      "holdings": 84
     },
     {
       "ticker": "SLRC",
-      "score": 45,
-      "holdings": 2
+      "score": 13,
+      "holdings": 1
     },
     {
       "ticker": "CCAP",
       "score": 13,
-      "holdings": 6
+      "holdings": 5
     },
     {
       "ticker": "HRZN",
-      "score": 19,
-      "holdings": 69
+      "score": 18,
+      "holdings": 68
     },
     {
       "ticker": "WHF",
@@ -472,23 +459,23 @@
     },
     {
       "ticker": "GLAD",
-      "score": 74,
-      "holdings": 108
+      "score": 75,
+      "holdings": 106
     },
     {
       "ticker": "GAIN",
       "score": 44,
-      "holdings": 340
+      "holdings": 330
     },
     {
       "ticker": "SCM",
       "score": 13,
-      "holdings": 4
+      "holdings": 3
     },
     {
       "ticker": "SAR",
-      "score": 22,
-      "holdings": 88
+      "score": 24,
+      "holdings": 76
     },
     {
       "ticker": "NEWT",
@@ -507,13 +494,13 @@
     },
     {
       "ticker": "MRCC",
-      "score": 62,
-      "holdings": 206
+      "score": 64,
+      "holdings": 199
     },
     {
       "ticker": "OXSQ",
-      "score": 13,
-      "holdings": 7
+      "score": 34,
+      "holdings": 3
     },
     {
       "ticker": "OFS",
@@ -522,7 +509,7 @@
     },
     {
       "ticker": "PFX",
-      "score": 13,
+      "score": 28,
       "holdings": 3
     },
     {
@@ -538,7 +525,7 @@
     {
       "ticker": "ICMB",
       "score": 13,
-      "holdings": 19
+      "holdings": 18
     }
   ]
 }

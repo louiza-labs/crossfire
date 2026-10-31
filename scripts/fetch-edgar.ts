@@ -325,6 +325,52 @@ function isValidBorrowerName(name: string): boolean {
   // Skip entries that look like interest rate descriptions
   if (/^\d+\.\d+%\s+(unsecured|secured|notes)/i.test(name)) return false;
 
+  // Skip entries that START with security type (no company name prefix)
+  if (
+    /^(common\s+(stock|equity|units|lp)|preferred\s+(stock|equity)|warrants?(\s|$)|equity\s+(interest|investment)|membership\s+interest)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip industry section headers
+  if (
+    /^(aerospace|business\s+services|consumer\s+(goods|services)|specialty\s+retail|telecommunications|financials?|industrials?|materials?|healthcare|real\s+estate|utilities|energy|information\s+technology|software|capital\s+goods|commercial\s+services)(\s|$|:|&)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip accounting/balance sheet terms and filing structure
+  if (
+    /^(liabilities|net\s+(change|unrealized)|unrealized|realized|carrying\s+value|repayments|purchases\s+and|transfers\s+(between|in|out)|accretion|selected\s+balance|investments$|structured\s+finance|equity\s+and\s+other|valuation\s+techniques)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip filing period headers
+  if (/^\d+\s+(months?|years?)\s+ended/i.test(name)) {
+    return false;
+  }
+
+  // Skip geographic regions
+  if (
+    /^(mid-atlantic|northeast|southeast|midwest|southwest|west\s+coast|pacific|northwest)$/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip standalone single-word generic terms and common headers
+  if (/^(company|investments|assets|securities|research\s+&\s+consulting)$/i.test(name)) {
+    return false;
+  }
+
   return true;
 }
 
@@ -722,17 +768,10 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
         investmentType = "Equity";
       else if (rowText.includes("warrant")) investmentType = "Warrant";
 
-      // Aggregate by company
+      // Deduplicate by company - keep first occurrence (Schedule of Investments comes first)
       const borrowerKey = currentCompany.toLowerCase().substring(0, 40);
-      const existing = seenBorrowers.get(borrowerKey);
 
-      if (existing) {
-        existing.principal += principal;
-        existing.fairValue += fairValue;
-        if (rate && (!existing.rate || rate > existing.rate)) {
-          existing.rate = rate;
-        }
-      } else {
+      if (!seenBorrowers.has(borrowerKey)) {
         seenBorrowers.set(borrowerKey, {
           borrower: currentCompany,
           industry: currentIndustry || "Unknown",

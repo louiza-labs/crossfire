@@ -101,17 +101,29 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   // Balance sheet items
   "other assets",
   "other liabilities",
+  "liabilities",
+  "assets",
   "deferred tax liabilities",
   "accounts payable",
   "transfers in and/or (out) of level 3",
+  "carrying value",
+  "equity and other investments",
+  "repayments and sales",
   // Table/filing structure elements
   "company",
   "assets ($ in millions)",
-  // Geographic headers
+  // Geographic headers/regions
   "united states",
   "united kingdom",
   "canada",
   "europe",
+  "mid-atlantic",
+  "northeast",
+  "southeast",
+  "midwest",
+  "southwest",
+  "west",
+  "pacific",
 ]);
 
 // Additional patterns to filter (for partial matching)
@@ -121,6 +133,11 @@ const INVALID_BORROWER_PATTERNS = [
   /funding facility$/i, // "BNP Funding Facility"
   /^(net|total|sub-?total)\s/i, // Totals
   /\s(in|out)\s+of\s+level/i, // Fair value hierarchy
+  /^transfers\s+(between|in|out|into)/i, // Transfer rows
+  /^selected\s+balance\s+sheet/i, // Filing headers
+  /^(carrying|fair)\s+value$/i, // Accounting terms
+  /^(repayments|purchases|sales)\s+(and|of)/i, // Transaction summaries
+  /^equity\s+(and|investments)/i, // Equity section headers
 ];
 
 // Check if a borrower name is actually an industry category header or invalid entry
