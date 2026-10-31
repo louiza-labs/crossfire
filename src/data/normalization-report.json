@@ -1,48 +1,48 @@
 {
-  "timestamp": "2026-10-31T18:40:50.618Z",
+  "timestamp": "2026-10-31T19:39:44.304Z",
   "inputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/edgar-data.json",
   "outputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/funds-normalized.json",
   "totalFunds": 41,
-  "totalHoldingsRaw": 6225,
-  "totalHoldingsEnriched": 6225,
+  "totalHoldingsRaw": 6118,
+  "totalHoldingsEnriched": 6118,
   "industryClassification": {
-    "classified": 3382,
-    "unclassified": 2843,
-    "highConfidence": 539,
-    "mediumConfidence": 2706,
-    "lowConfidence": 2980,
+    "classified": 3344,
+    "unclassified": 2774,
+    "highConfidence": 535,
+    "mediumConfidence": 2674,
+    "lowConfidence": 2909,
     "topSectors": [
       {
         "sector": "Industrials",
-        "count": 815
+        "count": 805
       },
       {
         "sector": "Information Technology",
-        "count": 625
+        "count": 623
       },
       {
         "sector": "Health Care",
-        "count": 553
+        "count": 547
       },
       {
         "sector": "Consumer Discretionary",
-        "count": 282
+        "count": 277
       },
       {
         "sector": "Financials",
-        "count": 273
+        "count": 271
       },
       {
         "sector": "Communication Services",
-        "count": 249
+        "count": 243
       },
       {
         "sector": "Consumer Staples",
-        "count": 225
+        "count": 221
       },
       {
         "sector": "Materials",
-        "count": 152
+        "count": 149
       },
       {
         "sector": "Real Estate",
@@ -55,9 +55,9 @@
     ]
   },
   "borrowerNormalization": {
-    "uniqueRaw": 5607,
-    "uniqueNormalized": 5169,
-    "potentialDuplicates": 869,
+    "uniqueRaw": 5558,
+    "uniqueNormalized": 5120,
+    "potentialDuplicates": 861,
     "duplicateGroups": [
       {
         "canonicalName": "First Lien Revolving Loan",
@@ -344,33 +344,33 @@
     },
     {
       "ticker": "MAIN",
-      "score": 67,
+      "score": 68,
       "holdings": 224
     },
     {
       "ticker": "GBDC",
       "score": 32,
-      "holdings": 656
+      "holdings": 637
     },
     {
       "ticker": "HTGC",
-      "score": 55,
-      "holdings": 174
+      "score": 56,
+      "holdings": 171
     },
     {
       "ticker": "PSEC",
-      "score": 71,
-      "holdings": 154
+      "score": 70,
+      "holdings": 141
     },
     {
       "ticker": "TSLX",
-      "score": 46,
-      "holdings": 197
+      "score": 48,
+      "holdings": 189
     },
     {
       "ticker": "OCSL",
-      "score": 78,
-      "holdings": 371
+      "score": 80,
+      "holdings": 359
     },
     {
       "ticker": "NMFC",
@@ -379,18 +379,18 @@
     },
     {
       "ticker": "ORCC",
-      "score": 61,
-      "holdings": 297
+      "score": 62,
+      "holdings": 289
     },
     {
       "ticker": "GSBD",
       "score": 59,
-      "holdings": 54
+      "holdings": 52
     },
     {
       "ticker": "BBDC",
       "score": 40,
-      "holdings": 384
+      "holdings": 383
     },
     {
       "ticker": "BCSF",
@@ -400,12 +400,12 @@
     {
       "ticker": "TRIN",
       "score": 50,
-      "holdings": 209
+      "holdings": 208
     },
     {
       "ticker": "CSWC",
-      "score": 62,
-      "holdings": 188
+      "score": 63,
+      "holdings": 186
     },
     {
       "ticker": "TCPC",
@@ -420,7 +420,7 @@
     {
       "ticker": "PFLT",
       "score": 66,
-      "holdings": 84
+      "holdings": 83
     },
     {
       "ticker": "MFIC",
@@ -464,8 +464,8 @@
     },
     {
       "ticker": "GAIN",
-      "score": 44,
-      "holdings": 330
+      "score": 42,
+      "holdings": 304
     },
     {
       "ticker": "SCM",
@@ -474,8 +474,8 @@
     },
     {
       "ticker": "SAR",
-      "score": 24,
-      "holdings": 76
+      "score": 25,
+      "holdings": 69
     },
     {
       "ticker": "NEWT",
@@ -494,8 +494,8 @@
     },
     {
       "ticker": "MRCC",
-      "score": 64,
-      "holdings": 199
+      "score": 65,
+      "holdings": 196
     },
     {
       "ticker": "OXSQ",
@@ -514,8 +514,8 @@
     },
     {
       "ticker": "LIEN",
-      "score": 50,
-      "holdings": 45
+      "score": 51,
+      "holdings": 44
     },
     {
       "ticker": "NCDL",

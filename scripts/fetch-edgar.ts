@@ -310,9 +310,9 @@ function isValidBorrowerName(name: string): boolean {
     return false;
   }
 
-  // Skip geographic headers used as section dividers
+  // Skip geographic headers used as section dividers (countries and regions)
   if (
-    /^(united states|united kingdom|canada|europe|north america|asia|other countries|other regions)$/i.test(
+    /^(united states|united kingdom|canada|europe|north america|asia|other countries|other regions|netherlands|germany|france|italy|spain|australia|japan|china|ireland|luxembourg|switzerland|belgium|sweden|norway|denmark|finland|austria|portugal|greece|poland|czech|hungary|brazil|mexico|india|singapore|hong kong|south korea|taiwan|new zealand|israel|south africa|middle east|latin america|eastern europe|western europe|caribbean|bermuda|cayman islands|british virgin islands)$/i.test(
       name
     )
   ) {
@@ -334,12 +334,26 @@ function isValidBorrowerName(name: string): boolean {
     return false;
   }
 
-  // Skip industry section headers
+  // Skip column headers
   if (
-    /^(aerospace|business\s+services|consumer\s+(goods|services)|specialty\s+retail|telecommunications|financials?|industrials?|materials?|healthcare|real\s+estate|utilities|energy|information\s+technology|software|capital\s+goods|commercial\s+services)(\s|$|:|&)/i.test(
+    /^(investment\s+type|asset\s+type|security\s+type|instrument\s+type|portfolio\s+company|borrower|issuer|description|footnotes?|reference\s+rate|spread|maturity|principal|fair\s+value|cost|industry|sector)$/i.test(
       name
     )
   ) {
+    return false;
+  }
+
+  // Skip GICS industry and sector names (exact matches and patterns)
+  if (
+    /^(aerospace|business\s+services|consumer\s+(goods|services|discretionary|staples)|specialty\s+retail|telecommunications|financials?|industrials?|materials?|healthcare|health\s+care|real\s+estate|utilities|energy|information\s+technology|software|capital\s+goods|commercial\s+services|air\s+freight\s*&?\s*logistics|construction\s*&?\s*(engineering|building|materials)|it\s+services|professional\s+services|road\s*&?\s*rail|trading\s+companies|electrical\s+equipment|machinery|building\s+products|containers\s*&?\s*packaging|diversified\s+financials?|insurance|banks|thrifts|consumer\s+finance|communications?\s+equipment|semiconductors?|tech(nology)?\s+hardware|electronic\s+equipment|hotels?\s*,?\s*restaurants?\s*&?\s*leisure|household\s+(durables|products)|textiles?\s*,?\s*apparel|leisure\s+(products|equipment)|auto\s+components|automobiles|distributors|internet\s*&?\s*(direct\s+)?retail|multiline\s+retail|food\s*&?\s*staples|beverages?|food\s+products|tobacco|household\s+products|personal\s+products|pharmaceuticals?|biotechnology|life\s+sciences|health\s+care\s+(equipment|providers|services)|diversified\s+reits?|equity\s+reits?|mortgage\s+reits?|real\s+estate\s+(management|services)|independent\s+power|electric\s+utilities|gas\s+utilities|multi-?utilities|water\s+utilities|oil\s*,?\s*gas\s*&?\s*consumable|metals\s*&?\s*mining|paper\s*&?\s*forest|chemicals|construction\s+materials|media|entertainment|interactive\s+media|movies\s*&?\s*entertainment|diversified\s+telecommunication|wireless\s+telecommunication|cable\s*&?\s*satellite)(\s|$|:|&)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip media sub-industry format "Media: Something & Something"
+  if (/^media:\s/i.test(name)) {
     return false;
   }
 
