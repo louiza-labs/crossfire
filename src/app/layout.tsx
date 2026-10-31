@@ -14,8 +14,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Capital — Private Credit Intelligence",
-  description: "Revealing the hidden web of private credit. Map syndicated debt, uncover fund interconnections, and analyze systemic exposure.",
+  title: "Crossfire — Private Credit Intelligence",
+  description: "Exposing systemic risk in private credit. Map shared borrowers across BDC funds, analyze interconnections, and stress test default scenarios.",
+  metadataBase: new URL("https://crossfire.finance"),
+  openGraph: {
+    title: "Crossfire — Private Credit Intelligence",
+    description: "Exposing systemic risk in private credit. Map shared borrowers across BDC funds, analyze interconnections, and stress test default scenarios.",
+    siteName: "Crossfire",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Crossfire — Private Credit Intelligence",
+    description: "Exposing systemic risk in private credit. Map shared borrowers, analyze fund interconnections, stress test defaults.",
+  },
 };
 
 function Header() {
@@ -23,15 +36,20 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 h-12 bg-black/95 backdrop-blur-sm border-b border-zinc-800/50">
       <div className="h-full max-w-[1800px] mx-auto px-6 flex items-center justify-between">
         {/* Logo/Brand */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center">
-            <span className="text-[10px] font-bold text-black">C</span>
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+            <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
           </div>
-          <span className="text-sm font-semibold text-white tracking-tight">Capital</span>
+          <span className="text-sm font-semibold text-white tracking-tight">Crossfire</span>
         </Link>
 
         {/* Navigation */}
         <nav className="flex items-center gap-1">
+          <NavLink href="/dashboard">Dashboard</NavLink>
           <NavLink href="/">Network</NavLink>
           <NavLink href="/funds">Funds</NavLink>
           <NavLink href="/borrowers">Borrowers</NavLink>

@@ -101,7 +101,7 @@ export default function Home() {
                 introPhase >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Capital
+              Crossfire
             </h1>
             <p
               className={`text-sm md:text-base text-zinc-600 font-mono transition-all duration-700 ${
@@ -132,7 +132,7 @@ export default function Home() {
         <div className="h-full flex flex-col px-6 py-6 bg-gradient-to-r from-black/95 via-black/70 to-transparent">
           {/* Header with branding */}
           <div className="mb-6 pointer-events-auto">
-            <h1 className="text-xl font-semibold text-white tracking-tight">Capital</h1>
+            <h1 className="text-xl font-semibold text-white tracking-tight">Crossfire</h1>
             <p className="text-[10px] text-zinc-600 uppercase tracking-wider mt-0.5">Private Credit Network</p>
           </div>
 

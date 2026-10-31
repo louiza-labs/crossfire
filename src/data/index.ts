@@ -518,7 +518,9 @@ export function getSystemicBorrowers(): SystemicBorrower[] {
         pctOfFundAUM: f.fund.totalAssets > 0 ? (f.exposure / f.fund.totalAssets) * 100 : 0,
       }));
       const maxSingleFundExposure = Math.max(...fundsArray.map((f) => f.exposure));
-      const systemicScore = (fundCount ** 2 * d.totalExposure) / 1e9;
+      // Score formula: fundCount^2 * totalExposure (values already in millions)
+      // Normalize to readable range (0-100ish for top borrowers)
+      const systemicScore = (fundCount ** 2 * d.totalExposure) / 100;
 
       return {
         borrower: d.borrower,
