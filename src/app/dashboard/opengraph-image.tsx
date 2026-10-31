@@ -1,7 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 import { getSystemHealthMetrics, getSystemicBorrowers, funds } from "@/data";
 
-export const runtime = "nodejs";
 export const alt = "Crossfire Dashboard — Credit Exposure Monitor";
 export const size = {
   width: 1200,

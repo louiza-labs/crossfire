@@ -1,7 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 import { borrowers, getFundsByBorrower } from "@/data";
 
-export const runtime = "nodejs";
 export const alt = "Crossfire — Borrower Details";
 export const size = {
   width: 1200,

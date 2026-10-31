@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
+import { PostHogProvider } from "@/components/PostHogProvider";
+import { PostHogPageView } from "@/components/PostHogPageView";
 import "./globals.css";
 
 const inter = Inter({
@@ -77,8 +79,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
     >
       <body className="min-h-full bg-black text-zinc-100" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-        <Header />
-        <main className="pt-12">{children}</main>
+        <PostHogProvider>
+          <PostHogPageView />
+          <Header />
+          <main className="pt-12">{children}</main>
+        </PostHogProvider>
       </body>
     </html>
   );

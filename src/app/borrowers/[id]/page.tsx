@@ -1,6 +1,22 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import { borrowers, getFundsByBorrower } from "@/data";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const borrower = borrowers.find((b) => b.id === id);
+  if (!borrower) return { title: "Borrower Not Found — Crossfire" };
+
+  const fundHoldings = getFundsByBorrower(borrower.id);
+  const fundCount = fundHoldings.length;
+  const riskLevel = fundCount >= 4 ? "Critical" : fundCount >= 2 ? "Elevated" : "Normal";
+
+  return {
+    title: `${borrower.name} — Crossfire`,
+    description: `${riskLevel} risk: ${borrower.name} has exposure across ${fundCount} BDC fund${fundCount !== 1 ? "s" : ""}. View debt distribution, loan terms, and stress test scenarios.`,
+  };
+}
 
 // Generate static params for all borrowers
 export function generateStaticParams() {

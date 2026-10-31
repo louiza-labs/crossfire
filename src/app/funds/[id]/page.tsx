@@ -1,9 +1,23 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { funds, getHoldingsByFund } from "@/data";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const fund = funds.find((f) => f.id === id);
+  if (!fund) return { title: "Fund Not Found — Crossfire" };
+
+  const holdings = getHoldingsByFund(fund.id);
+
+  return {
+    title: `${fund.ticker} — ${fund.name} — Crossfire`,
+    description: `${fund.ticker} (${fund.name}) holds ${holdings.length} positions. Managed by ${fund.managerName}. View holdings, industry breakdown, and interconnection analysis.`,
+  };
+}
 
 // Generate static params for all funds
 export function generateStaticParams() {

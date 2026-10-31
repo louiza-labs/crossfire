@@ -1,6 +1,5 @@
 import { ImageResponse } from "@vercel/og";
 
-export const runtime = "nodejs";
 export const alt = "Crossfire — Private Credit Intelligence";
 export const size = {
   width: 1200,
