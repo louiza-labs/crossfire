@@ -122,7 +122,10 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function getLatestFiling(cik: string, formTypes: string[] = ["10-Q", "10-K"]): Promise<Filing | null> {
+async function getLatestFiling(
+  cik: string,
+  formTypes: string[] = ["10-Q", "10-K"]
+): Promise<Filing | null> {
   const paddedCik = cik.padStart(10, "0");
   const url = `https://data.sec.gov/submissions/CIK${paddedCik}.json`;
 
@@ -188,25 +191,78 @@ function isValidBorrowerName(name: string): boolean {
 
   // Filter out common non-borrower rows
   const invalidPatterns = [
-    "total", "subtotal", "sub-total", "net assets", "fair value", "cost",
-    "principal", "amortized", "portfolio", "investments at fair",
-    "dollar amounts", "footnote", "see accompanying", "continued",
-    "schedule of", "consolidated", "as of", "year ended", "industry",
-    "interest rate", "maturity", "the following", "expense", "fee",
-    "management", "incentive", "accrued", "return", "note ", "notes to",
-    "weighted-average", "weighted average", "contingent", "basis spread",
-    "variable rate", "affiliate", "non-affiliate", "non-control",
-    "control investments", "components of", "applicable to",
-    "payment receivable", "earn out", "earnout", "fair value of",
-    "december", "january", "february", "march", "april", "may", "june",
-    "july", "august", "september", "october", "november", "shares",
-    "stockholders", "shareholders", "par value", "issued and outstanding",
+    "total",
+    "subtotal",
+    "sub-total",
+    "net assets",
+    "fair value",
+    "cost",
+    "principal",
+    "amortized",
+    "portfolio",
+    "investments at fair",
+    "dollar amounts",
+    "footnote",
+    "see accompanying",
+    "continued",
+    "schedule of",
+    "consolidated",
+    "as of",
+    "year ended",
+    "industry",
+    "interest rate",
+    "maturity",
+    "the following",
+    "expense",
+    "fee",
+    "management",
+    "incentive",
+    "accrued",
+    "return",
+    "note ",
+    "notes to",
+    "weighted-average",
+    "weighted average",
+    "contingent",
+    "basis spread",
+    "variable rate",
+    "affiliate",
+    "non-affiliate",
+    "non-control",
+    "control investments",
+    "components of",
+    "applicable to",
+    "payment receivable",
+    "earn out",
+    "earnout",
+    "fair value of",
+    "december",
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "shares",
+    "stockholders",
+    "shareholders",
+    "par value",
+    "issued and outstanding",
   ];
 
   if (invalidPatterns.some((p) => lowerName.includes(p))) return false;
 
   // Skip if starts with investment type descriptors
-  if (/^(first lien|second lien|senior|junior|subordinated|revolving|delayed draw|term loan|revolver|delayed)/i.test(name)) {
+  if (
+    /^(first lien|second lien|senior|junior|subordinated|revolving|delayed draw|term loan|revolver|delayed)/i.test(
+      name
+    )
+  ) {
     return false;
   }
 
@@ -222,8 +278,8 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
   const seenBorrowers = new Map<string, Holding>();
 
   // Detect if values are in thousands
-  const inThousands = html.toLowerCase().includes("(in thousands)") ||
-                      html.toLowerCase().includes("in thousands");
+  const inThousands =
+    html.toLowerCase().includes("(in thousands)") || html.toLowerCase().includes("in thousands");
   const divisor = inThousands ? 1000 : 1;
 
   // Strategy 1: Look for tables with company names and loan indicators
@@ -231,11 +287,13 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
     const tableText = $(table).text().toLowerCase();
 
     // Skip balance sheet / summary tables
-    if (tableText.includes("stockholders' equity") ||
-        tableText.includes("shareholders' equity") ||
-        tableText.includes("total investments, beginning") ||
-        tableText.includes("statements of operations") ||
-        tableText.includes("statements of changes")) {
+    if (
+      tableText.includes("stockholders' equity") ||
+      tableText.includes("shareholders' equity") ||
+      tableText.includes("total investments, beginning") ||
+      tableText.includes("statements of operations") ||
+      tableText.includes("statements of changes")
+    ) {
       return;
     }
 
@@ -254,22 +312,186 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
     const rows = $(table).find("tr");
     let currentCompany = "";
     let currentIndustry = "";
+    let sectionIndustry = ""; // For BXSL-style section headers
+    let industryColumnIndex = -1; // For FSK-style dedicated Industry column
+
+    // Known GICS-style industry names (for section header detection)
+    const knownIndustryPatterns = [
+      "aerospace",
+      "defense",
+      "air freight",
+      "logistics",
+      "automobiles",
+      "auto",
+      "biotechnology",
+      "biotech",
+      "building products",
+      "capital goods",
+      "capital markets",
+      "chemicals",
+      "commercial services",
+      "professional services",
+      "communications equipment",
+      "construction",
+      "engineering",
+      "consumer discretionary",
+      "consumer durables",
+      "apparel",
+      "consumer finance",
+      "consumer services",
+      "consumer staples",
+      "containers",
+      "packaging",
+      "diversified",
+      "electric utilities",
+      "electrical equipment",
+      "electronic equipment",
+      "energy",
+      "entertainment",
+      "financial services",
+      "financials",
+      "food",
+      "beverage",
+      "tobacco",
+      "ground transportation",
+      "health care",
+      "healthcare",
+      "hotels",
+      "restaurants",
+      "leisure",
+      "household",
+      "personal products",
+      "human resource",
+      "employment",
+      "industrial",
+      "information technology",
+      "insurance",
+      "interactive media",
+      "internet",
+      "it services",
+      "life sciences",
+      "tools & services",
+      "machinery",
+      "marine",
+      "materials",
+      "media",
+      "metals",
+      "mining",
+      "multi-utilities",
+      "oil",
+      "gas",
+      "consumable fuels",
+      "paper",
+      "forest products",
+      "passenger airlines",
+      "pharmaceuticals",
+      "real estate",
+      "retailing",
+      "retail",
+      "semiconductors",
+      "software",
+      "specialty retail",
+      "technology hardware",
+      "storage",
+      "peripherals",
+      "telecommunication",
+      "telecom",
+      "textiles",
+      "luxury",
+      "trading companies",
+      "distributors",
+      "transportation",
+      "utilities",
+      "water utilities",
+      "wireless",
+    ];
+
+    // Check if a string looks like an industry section header
+    function isIndustrySectionHeader(text: string): boolean {
+      // Remove "(continued)" suffix and clean up
+      const cleaned = text
+        .toLowerCase()
+        .replace(/\s*\(continued\)\s*/gi, "")
+        .replace(/\s*-\s*non-controlled.*$/i, "")
+        .replace(/\s*-\s*controlled.*$/i, "")
+        .trim();
+
+      // Skip debt type headers
+      if (
+        cleaned.includes("first lien") ||
+        cleaned.includes("second lien") ||
+        cleaned.includes("subordinated") ||
+        cleaned.includes("equity investments") ||
+        cleaned.includes("total ") ||
+        cleaned.includes("subtotal")
+      ) {
+        return false;
+      }
+
+      // Check if it matches any industry pattern
+      return knownIndustryPatterns.some((pattern) => cleaned.includes(pattern));
+    }
+
+    // First pass: find header row to detect Industry column index
+    rows.each((rowIdx, row) => {
+      if (industryColumnIndex >= 0) return; // Already found
+
+      const cells = $(row).find("td, th");
+      cells.each((colIdx, cell) => {
+        const text = $(cell).text().toLowerCase().trim();
+        if (text === "industry" || text === "industry classification") {
+          industryColumnIndex = colIdx;
+          return false; // Break inner loop
+        }
+      });
+    });
 
     rows.each((_, row) => {
       const cells = $(row).find("td, th");
-      if (cells.length < 2) return;
 
-      // Collect all cell texts
+      // Collect all cell texts first (needed for section header detection)
       const cellTexts: string[] = [];
       cells.each((_, cell) => {
         cellTexts.push($(cell).text().replace(/\s+/g, " ").trim());
       });
 
       const rowText = cellTexts.join(" ").toLowerCase();
+      const nonEmptyCells = cellTexts.filter((t) => t.length > 0);
+      const firstCell = cellTexts[0]?.trim() || "";
+      const firstCellLower = firstCell.toLowerCase();
+
+      // Skip debt type headers first
+      if (
+        firstCellLower.includes("first lien") ||
+        firstCellLower.includes("second lien") ||
+        firstCellLower.includes("subordinated") ||
+        firstCellLower.includes("equity investments") ||
+        firstCellLower.startsWith("total ")
+      ) {
+        return; // Skip this row
+      }
+
+      // Check if this is an industry section header (1-3 non-empty cells, matches industry pattern)
+      // This must happen BEFORE the cells.length < 2 check since section headers often have 1 cell
+      if (nonEmptyCells.length <= 3 && nonEmptyCells.length >= 1 && firstCell.length > 3) {
+        if (isIndustrySectionHeader(firstCell)) {
+          const cleanedIndustry = firstCell.replace(/\s*\(continued\)\s*/gi, "").trim();
+          sectionIndustry = cleanedIndustry;
+          return; // Skip this row, it's not a company
+        }
+      }
+
+      // Skip rows with too few cells for company data
+      if (cells.length < 2) return;
 
       // Skip obvious header rows
       if (rowText.includes("portfolio company") && rowText.includes("fair value")) return;
-      if (rowText.includes("investments") && rowText.includes("footnotes") && rowText.includes("reference rate")) return;
+      if (
+        rowText.includes("investments") &&
+        rowText.includes("footnotes") &&
+        rowText.includes("reference rate")
+      )
+        return;
 
       // Try to identify company name - usually in first or second cell
       // Company names often end with Inc., LLC, Corp., LP, Holdings, etc.
@@ -283,30 +505,68 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
         const cellText = cellTexts[i];
         if (cellText.length < 5) continue;
 
-        const looksLikeCompany = companyPatterns.some(p => p.test(cellText)) ||
-          (cellText.length > 10 && isValidBorrowerName(cellText) &&
-           // Contains capital letters (company names are capitalized)
-           /[A-Z]/.test(cellText));
+        const looksLikeCompany =
+          companyPatterns.some((p) => p.test(cellText)) ||
+          (cellText.length > 10 &&
+            isValidBorrowerName(cellText) &&
+            // Contains capital letters (company names are capitalized)
+            /[A-Z]/.test(cellText));
 
         if (looksLikeCompany && isValidBorrowerName(cellText)) {
           // Clean up company name
           const cleaned = cellText
-            .replace(/\s*\(\d+\)\s*/g, "")  // Remove footnotes like (1)
+            .replace(/\s*\(\d+\)\s*/g, "") // Remove footnotes like (1)
             .replace(/\s*\([\d,]+\)\s*/g, "") // Remove numbers in parens
             .trim();
 
           if (cleaned.length >= 5) {
             currentCompany = cleaned.substring(0, 100);
 
-            // Try to find industry - often in next cell or a cell with keywords
-            for (let j = i + 1; j < Math.min(i + 3, cellTexts.length); j++) {
-              const maybeIndustry = cellTexts[j];
-              const industryKeywords = ["provider", "software", "services", "solutions",
-                "manufacturer", "operator", "developer", "healthcare", "technology",
-                "platform", "producer", "supplier", "company that", "offers", "develops"];
-              if (maybeIndustry.length > 15 && industryKeywords.some(kw => maybeIndustry.toLowerCase().includes(kw))) {
-                currentIndustry = maybeIndustry.substring(0, 100);
-                break;
+            // Strategy 1: FSK-style - use Industry column if detected
+            if (industryColumnIndex >= 0 && industryColumnIndex < cellTexts.length) {
+              const colIndustry = cellTexts[industryColumnIndex];
+              if (
+                colIndustry &&
+                colIndustry.length > 2 &&
+                !colIndustry.match(/^[\d\.\$\%\,\(\)]+$/)
+              ) {
+                currentIndustry = colIndustry.substring(0, 100);
+              }
+            }
+
+            // Strategy 2: BXSL-style - use section header industry
+            if (!currentIndustry && sectionIndustry) {
+              currentIndustry = sectionIndustry;
+            }
+
+            // Strategy 3: ARCC-style - look for description in adjacent cells
+            if (!currentIndustry) {
+              for (let j = i + 1; j < Math.min(i + 3, cellTexts.length); j++) {
+                const maybeIndustry = cellTexts[j];
+                const industryKeywords = [
+                  "provider",
+                  "software",
+                  "services",
+                  "solutions",
+                  "manufacturer",
+                  "operator",
+                  "developer",
+                  "healthcare",
+                  "technology",
+                  "platform",
+                  "producer",
+                  "supplier",
+                  "company that",
+                  "offers",
+                  "develops",
+                ];
+                if (
+                  maybeIndustry.length > 15 &&
+                  industryKeywords.some((kw) => maybeIndustry.toLowerCase().includes(kw))
+                ) {
+                  currentIndustry = maybeIndustry.substring(0, 100);
+                  break;
+                }
               }
             }
             break;
@@ -318,16 +578,24 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
 
       // Check if this row has investment data
       const hasInvestmentType =
-        rowText.includes("first lien") || rowText.includes("second lien") ||
-        rowText.includes("senior secured") || rowText.includes("subordinated") ||
-        rowText.includes("preferred") || rowText.includes("common") ||
-        rowText.includes("warrant") || rowText.includes("revolving") ||
-        rowText.includes("delayed draw") || rowText.includes("term loan") ||
-        rowText.includes("sofr") || rowText.includes("libor") ||
-        rowText.includes("equity") || rowText.includes("units");
+        rowText.includes("first lien") ||
+        rowText.includes("second lien") ||
+        rowText.includes("senior secured") ||
+        rowText.includes("subordinated") ||
+        rowText.includes("preferred") ||
+        rowText.includes("common") ||
+        rowText.includes("warrant") ||
+        rowText.includes("revolving") ||
+        rowText.includes("delayed draw") ||
+        rowText.includes("term loan") ||
+        rowText.includes("sofr") ||
+        rowText.includes("libor") ||
+        rowText.includes("equity") ||
+        rowText.includes("units");
 
       // Also check for date patterns (maturity dates) and numeric values
-      const hasMaturityDate = /\d{1,2}\/\d{1,2}\/\d{4}/.test(rowText) || /\d{1,2}\/\d{4}/.test(rowText);
+      const hasMaturityDate =
+        /\d{1,2}\/\d{1,2}\/\d{4}/.test(rowText) || /\d{1,2}\/\d{4}/.test(rowText);
 
       // Extract numeric values
       const numericValues: number[] = [];
@@ -336,7 +604,8 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
         if (/^\d{1,2}\/\d{1,2}\/?\d{4}$/.test(text)) return; // Skip dates
         if (text.includes("SOFR") || text.includes("+")) return;
         const num = parseNumber(text);
-        if (num !== null && num > 0 && num < 100000) { // Reasonable range
+        if (num !== null && num > 0 && num < 100000) {
+          // Reasonable range
           numericValues.push(num);
         }
       });
@@ -371,7 +640,7 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
 
       // Get values - sort and use largest as principal, next as fair value
       const sorted = [...numericValues].sort((a, b) => b - a);
-      let principal = sorted[0] / divisor;
+      const principal = sorted[0] / divisor;
       let fairValue = sorted.length >= 2 ? sorted[1] / divisor : principal;
 
       // Sometimes the order is Principal, Cost, Fair Value (take 1st and 3rd)
@@ -388,8 +657,13 @@ function parseScheduleOfInvestments(html: string, ticker: string): Holding[] {
       if (rowText.includes("second lien")) investmentType = "Second Lien";
       else if (rowText.includes("subordinated")) investmentType = "Subordinated";
       else if (rowText.includes("preferred")) investmentType = "Preferred Equity";
-      else if (rowText.includes("common") || rowText.includes("class a") ||
-               rowText.includes("limited partner") || rowText.includes("units")) investmentType = "Equity";
+      else if (
+        rowText.includes("common") ||
+        rowText.includes("class a") ||
+        rowText.includes("limited partner") ||
+        rowText.includes("units")
+      )
+        investmentType = "Equity";
       else if (rowText.includes("warrant")) investmentType = "Warrant";
 
       // Aggregate by company
@@ -438,12 +712,13 @@ async function processBDC(bdc: (typeof BDCS)[0]): Promise<FundData | null> {
 
     // Try each document to find Schedule of Investments
     // Priority: look for files with ticker name or schedule-related names
-    const priorityDocs = docs.filter(d =>
-      d.toLowerCase().includes(bdc.ticker.toLowerCase()) ||
-      d.toLowerCase().includes("schedule") ||
-      d.toLowerCase().includes("exhibit")
+    const priorityDocs = docs.filter(
+      (d) =>
+        d.toLowerCase().includes(bdc.ticker.toLowerCase()) ||
+        d.toLowerCase().includes("schedule") ||
+        d.toLowerCase().includes("exhibit")
     );
-    const otherDocs = docs.filter(d => !priorityDocs.includes(d));
+    const otherDocs = docs.filter((d) => !priorityDocs.includes(d));
     const orderedDocs = [...priorityDocs, ...otherDocs].slice(0, 15);
 
     for (const docName of orderedDocs) {
@@ -472,7 +747,9 @@ async function processBDC(bdc: (typeof BDCS)[0]): Promise<FundData | null> {
     const totalFairValue = uniqueHoldings.reduce((sum, h) => sum + h.fairValue, 0);
     const totalPrincipal = uniqueHoldings.reduce((sum, h) => sum + h.principal, 0);
 
-    console.log(`  Final: ${uniqueHoldings.length} unique holdings, $${totalFairValue.toFixed(0)}M fair value`);
+    console.log(
+      `  Final: ${uniqueHoldings.length} unique holdings, $${totalFairValue.toFixed(0)}M fair value`
+    );
 
     return {
       ticker: bdc.ticker,
@@ -499,7 +776,7 @@ async function main() {
   const batchSize = 3;
   for (let i = 0; i < BDCS.length; i += batchSize) {
     const batch = BDCS.slice(i, i + batchSize);
-    const batchResults = await Promise.all(batch.map(bdc => processBDC(bdc)));
+    const batchResults = await Promise.all(batch.map((bdc) => processBDC(bdc)));
 
     for (const data of batchResults) {
       if (data && data.holdings.length > 0) {
@@ -523,7 +800,9 @@ async function main() {
 
   console.log("\nSummary:");
   for (const fund of results) {
-    console.log(`  ${fund.ticker}: ${fund.holdings.length} holdings, $${fund.totalFairValue.toFixed(0)}M fair value`);
+    console.log(
+      `  ${fund.ticker}: ${fund.holdings.length} holdings, $${fund.totalFairValue.toFixed(0)}M fair value`
+    );
   }
 
   // Find shared borrowers

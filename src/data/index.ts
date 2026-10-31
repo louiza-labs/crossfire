@@ -29,12 +29,19 @@ export interface Holding {
   fairValue: number;
   rate: number;
   maturity: string;
+  // Enriched fields from normalization pipeline
+  gicsSector?: string;
+  gicsIndustryGroup?: string;
+  industryConfidence?: "high" | "medium" | "low";
+  dataQualityScore?: number;
 }
 
 export interface Borrower {
   id: string;
   name: string;
   industry: string;
+  gicsSector?: string;
+  gicsIndustryGroup?: string;
 }
 
 // Derive manager from fund name (e.g., "Ares Capital Corp" -> "Ares")
@@ -128,10 +135,18 @@ fundsData.forEach((fundData, fundIdx) => {
     const borrowerKey = holding.borrower.toLowerCase().trim();
 
     if (!borrowerMap.has(borrowerKey)) {
+      // Use GICS sector as primary industry if available
+      const industry =
+        holding.gicsSector && holding.gicsSector !== "Unclassified"
+          ? holding.gicsSector
+          : holding.industry || "Unclassified";
+
       borrowerMap.set(borrowerKey, {
         id: `b${borrowerIdCounter++}`,
         name: holding.borrower,
-        industry: holding.industry || "Unclassified",
+        industry,
+        gicsSector: holding.gicsSector,
+        gicsIndustryGroup: holding.gicsIndustryGroup,
       });
     }
 
@@ -141,16 +156,27 @@ fundsData.forEach((fundData, fundIdx) => {
     const principal = Math.round(holding.principal * 100) / 100;
     const fairValue = Math.round(holding.fairValue * 100) / 100;
 
+    // Use GICS sector as primary industry if available
+    const industry =
+      holding.gicsSector && holding.gicsSector !== "Unclassified"
+        ? holding.gicsSector
+        : holding.industry || "Unclassified";
+
     holdings.push({
       id: `h${fundIdx}_${holdingIdx}`,
       fundId,
       borrowerId: borrower.id,
       borrowerName: borrower.name,
-      industry: holding.industry || "Unclassified",
+      industry,
       principal,
       fairValue,
       rate: holding.rate ?? 0,
       maturity: holding.maturity,
+      // Preserve enriched fields
+      gicsSector: holding.gicsSector,
+      gicsIndustryGroup: holding.gicsIndustryGroup,
+      industryConfidence: holding.industryConfidence as "high" | "medium" | "low" | undefined,
+      dataQualityScore: holding.dataQualityScore,
     });
   });
 });

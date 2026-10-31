@@ -5,6 +5,15 @@
 import * as fs from "fs";
 import * as path from "path";
 
+interface DataQuality {
+  hasIndustry: boolean;
+  hasRate: boolean;
+  hasMaturity: boolean;
+  hasValidPrincipal: boolean;
+  hasValidFairValue: boolean;
+  overallScore: number;
+}
+
 interface RawHolding {
   borrower: string;
   industry: string;
@@ -13,6 +22,13 @@ interface RawHolding {
   maturity: string;
   principal: number;
   fairValue: number;
+  // Enriched fields from normalize.ts
+  normalizedBorrower?: string;
+  gicsSector?: string;
+  gicsIndustryGroup?: string;
+  industryConfidence?: "high" | "medium" | "low";
+  industryMatchedKeywords?: string[];
+  dataQuality?: DataQuality;
 }
 
 interface RawFund {
@@ -46,7 +62,7 @@ const NON_COMPANY_PATTERNS = [
   /^incremental\s/i,
   /^senior\s/i,
   /^subordinated/i,
-  /term\sloan\s*(a|b|to)/i,  // "Term Loan A to...", "Term Loan B"
+  /term\sloan\s*(a|b|to)/i, // "Term Loan A to...", "Term Loan B"
   /^number\sof/i,
   /^investment\scommitment/i,
   /^unfunded/i,
@@ -56,7 +72,7 @@ const NON_COMPANY_PATTERNS = [
   /^payable/i,
   /^assets$/i,
   /^liabilities$/i,
-  /^\(\d+\)/,  // Footnote references
+  /^\(\d+\)/, // Footnote references
   /^note\s/i,
   /^see\s/i,
   /^the\scompany/i,
@@ -68,8 +84,8 @@ const NON_COMPANY_PATTERNS = [
   /^percentage/i,
   /^as\sof/i,
   /^for\sthe/i,
-  /^\d+\.?\d*%?$/,  // Just numbers
-  /^[\$\-\,\.\(\)]+$/,  // Just currency symbols
+  /^\d+\.?\d*%?$/, // Just numbers
+  /^[\$\-\,\.\(\)]+$/, // Just currency symbols
   // Balance sheet line items
   /cash\s*(and\s*)?cash\s*equivalents/i,
   /accounts\s*(payable|receivable)/i,
@@ -147,33 +163,49 @@ function cleanIndustry(industry: string): string {
 }
 
 function main() {
-  const inputPath = path.join(process.cwd(), "src", "data", "edgar-data.json");
+  // Use normalized data if available, fallback to raw edgar data
+  const normalizedPath = path.join(process.cwd(), "src", "data", "funds-normalized.json");
+  const rawPath = path.join(process.cwd(), "src", "data", "edgar-data.json");
+  const inputPath = fs.existsSync(normalizedPath) ? normalizedPath : rawPath;
   const outputPath = path.join(process.cwd(), "src", "data", "funds.json");
+
+  console.log(`Using input: ${inputPath}`);
 
   const rawData: RawFund[] = JSON.parse(fs.readFileSync(inputPath, "utf-8"));
 
   const cleanedFunds = rawData
-    .filter(fund => fund.totalFairValue > 0) // Filter funds with negative fair values
-    .map(fund => {
+    .filter((fund) => fund.totalFairValue > 0) // Filter funds with negative fair values
+    .map((fund) => {
       const cleanedHoldings = fund.holdings
-        .filter(h => isLikelyCompany(h.borrower))
-        .filter(h => h.fairValue > 0 && h.fairValue < 5000) // Reasonable range: $0-5B per holding
-        .filter(h => h.principal > 0)
+        .filter((h) => isLikelyCompany(h.borrower))
+        .filter((h) => h.fairValue > 0 && h.fairValue < 5000) // Reasonable range: $0-5B per holding
+        .filter((h) => h.principal > 0)
         // Rate is nice to have but not required - many equity positions don't have rates
-        .map(h => ({
+        .map((h) => ({
           ...h,
-          industry: cleanIndustry(h.industry),
-          // Normalize borrower name
-          borrower: h.borrower
-            .replace(/\s+/g, " ")
-            .trim()
-            .replace(/,?\s*(Inc\.?|LLC|Corp\.?|Ltd\.?|L\.?P\.?)$/i, "")
-            .trim(),
+          // Use GICS sector if available, otherwise clean raw industry
+          industry:
+            h.gicsSector && h.gicsSector !== "Unclassified"
+              ? h.gicsSector
+              : cleanIndustry(h.industry),
+          // Use normalized borrower if available, otherwise do basic cleanup
+          borrower:
+            h.normalizedBorrower ||
+            h.borrower
+              .replace(/\s+/g, " ")
+              .trim()
+              .replace(/,?\s*(Inc\.?|LLC|Corp\.?|Ltd\.?|L\.?P\.?)$/i, "")
+              .trim(),
+          // Preserve enriched fields
+          gicsSector: h.gicsSector,
+          gicsIndustryGroup: h.gicsIndustryGroup,
+          industryConfidence: h.industryConfidence,
+          dataQualityScore: h.dataQuality?.overallScore,
         }));
 
       // Deduplicate by normalized borrower name
       const uniqueHoldings = Array.from(
-        new Map(cleanedHoldings.map(h => [h.borrower.toLowerCase(), h])).values()
+        new Map(cleanedHoldings.map((h) => [h.borrower.toLowerCase(), h])).values()
       );
 
       return {
@@ -183,7 +215,7 @@ function main() {
         totalPrincipal: uniqueHoldings.reduce((sum, h) => sum + h.principal, 0),
       };
     })
-    .filter(fund => fund.holdings.length >= 5); // Require at least 5 holdings (more lenient to capture more funds)
+    .filter((fund) => fund.holdings.length >= 5); // Require at least 5 holdings (more lenient to capture more funds)
 
   fs.writeFileSync(outputPath, JSON.stringify(cleanedFunds, null, 2));
 
@@ -195,13 +227,13 @@ function main() {
     console.log(`  Holdings: ${fund.holdings.length}`);
     console.log(`  Fair Value: $${fund.totalFairValue.toFixed(0)}M`);
     console.log(`  Sample holdings:`);
-    fund.holdings.slice(0, 5).forEach(h => {
+    fund.holdings.slice(0, 5).forEach((h) => {
       console.log(`    - ${h.borrower} ($${h.fairValue}M)`);
     });
   }
 
   // Find shared borrowers
-  const borrowerFundMap = new Map<string, { funds: string[], totalExposure: number }>();
+  const borrowerFundMap = new Map<string, { funds: string[]; totalExposure: number }>();
 
   for (const fund of cleanedFunds) {
     for (const holding of fund.holdings) {
