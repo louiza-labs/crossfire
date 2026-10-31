@@ -253,13 +253,66 @@ function isValidBorrowerName(name: string): boolean {
     "shareholders",
     "par value",
     "issued and outstanding",
+    // Balance sheet items
+    "other assets",
+    "other liabilities",
+    "accounts payable",
+    "accounts receivable",
+    "deferred tax",
+    "deferred revenue",
+    "transfers in",
+    "transfers out",
+    "level 3",
+    "level 2",
+    "level 1",
+    "beginning balance",
+    "ending balance",
+    "cash and cash",
+    "cash equivalents",
+    // Security/investment types (not company names)
+    "unsecured debt",
+    "secured loan",
+    "secured debt",
+    "unsecured loan",
+    "unsecured notes",
+    "derivative instrument",
+    "derivatives designated",
+    "derivatives not designated",
+    "asset-backed",
+    "equipment financing",
+    "asset based finance",
+    "funding facility",
+    // Table structure elements
+    "$ in millions",
+    "$ in thousands",
+    "in millions",
+    "($ in",
+    // Catch standalone "Company" column header
+    "^company$",
   ];
 
-  if (invalidPatterns.some((p) => lowerName.includes(p))) return false;
+  if (
+    invalidPatterns.some((p) => {
+      if (p.startsWith("^") && p.endsWith("$")) {
+        return lowerName === p.slice(1, -1);
+      }
+      return lowerName.includes(p);
+    })
+  )
+    return false;
 
   // Skip if starts with investment type descriptors
   if (
-    /^(first lien|second lien|senior|junior|subordinated|revolving|delayed draw|term loan|revolver|delayed)/i.test(
+    /^(first lien|second lien|senior|junior|subordinated|revolving|delayed draw|term loan|revolver|delayed|1st lien|2nd lien|mezzanine|unitranche)/i.test(
+      name
+    )
+  ) {
+    return false;
+  }
+
+  // Skip geographic headers used as section dividers
+  if (
+    /^(united states|united kingdom|canada|europe|north america|asia|other countries|other regions)$/i.test(
       name
     )
   ) {
@@ -268,6 +321,9 @@ function isValidBorrowerName(name: string): boolean {
 
   // Skip footnote references
   if (/^\(\d+\)/.test(name)) return false;
+
+  // Skip entries that look like interest rate descriptions
+  if (/^\d+\.\d+%\s+(unsecured|secured|notes)/i.test(name)) return false;
 
   return true;
 }

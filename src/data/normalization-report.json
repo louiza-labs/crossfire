@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-10-31T16:41:46.456Z",
+  "timestamp": "2026-10-31T17:29:07.558Z",
   "inputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/edgar-data.json",
   "outputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/funds-normalized.json",
   "totalFunds": 41,
-  "totalHoldingsRaw": 6432,
-  "totalHoldingsEnriched": 6432,
+  "totalHoldingsRaw": 6314,
+  "totalHoldingsEnriched": 6314,
   "industryClassification": {
-    "classified": 3405,
-    "unclassified": 3027,
-    "highConfidence": 542,
-    "mediumConfidence": 2724,
-    "lowConfidence": 3166,
+    "classified": 3394,
+    "unclassified": 2920,
+    "highConfidence": 541,
+    "mediumConfidence": 2715,
+    "lowConfidence": 3058,
     "topSectors": [
       {
         "sector": "Industrials",
@@ -18,7 +18,7 @@
       },
       {
         "sector": "Information Technology",
-        "count": 628
+        "count": 623
       },
       {
         "sector": "Health Care",
@@ -26,11 +26,11 @@
       },
       {
         "sector": "Consumer Discretionary",
-        "count": 288
+        "count": 286
       },
       {
         "sector": "Financials",
-        "count": 274
+        "count": 271
       },
       {
         "sector": "Communication Services",
@@ -38,7 +38,7 @@
       },
       {
         "sector": "Consumer Staples",
-        "count": 225
+        "count": 224
       },
       {
         "sector": "Materials",
@@ -55,9 +55,9 @@
     ]
   },
   "borrowerNormalization": {
-    "uniqueRaw": 5771,
-    "uniqueNormalized": 5310,
-    "potentialDuplicates": 897,
+    "uniqueRaw": 5666,
+    "uniqueNormalized": 5214,
+    "potentialDuplicates": 876,
     "duplicateGroups": [
       {
         "canonicalName": "First Lien Revolving Loan",
@@ -194,18 +194,6 @@
         "count": 7
       },
       {
-        "canonicalName": "Net Change IN Unrealized Appreciation ON Investment Transactions Due TO Gcic/gbdc 3 A",
-        "aliases": [
-          "Net change in unrealized appreciation (depreciation) on investment transactions due to GCIC/GBDC 3 a",
-          "Net change in unrealized appreciation (depreciation) of investments",
-          "Net change in unrealized (depreciation) appreciation of investments",
-          "Net change in unrealized appreciation (depreciation)",
-          "Net change in unrealized appreciation on investments",
-          "Net change in unrealized appreciation/(depreciation)"
-        ],
-        "count": 6
-      },
-      {
         "canonicalName": "Series A Preferred Units TO Spartan Energy",
         "aliases": [
           "Series A Preferred Units to Spartan Energy Holdings, Inc.",
@@ -254,18 +242,6 @@
         "count": 6
       },
       {
-        "canonicalName": "Net Realized /gains Included IN Earnings",
-        "aliases": [
-          "Net realized (losses)/gains included in earnings",
-          "Net realized and unrealized (losses) gains",
-          "Net realized losses included in earnings",
-          "Net realized gains (losses)",
-          "Net realized gain (loss)(A)",
-          "Net realized gain (loss)"
-        ],
-        "count": 6
-      },
-      {
         "canonicalName": "Kbhs Acquisition",
         "aliases": [
           "KBHS Acquisition, LLC (d/b/a Alita Care, LLC)",
@@ -274,18 +250,6 @@
           "HS4 Acquisitionco, Inc.",
           "GS Acquisitionco, Inc.",
           "SG Acquisition, Inc."
-        ],
-        "count": 6
-      },
-      {
-        "canonicalName": "Transfers IN And/or OF Level 3",
-        "aliases": [
-          "Transfers in and/or (out) of level 3",
-          "Transfers in (out) of Level 3",
-          "Transfers into Level 33",
-          "Transfers into Level 3",
-          "Transfers in (a)(c)",
-          "Transfers in (a)"
         ],
         "count": 6
       },
@@ -314,25 +278,57 @@
         "count": 6
       },
       {
-        "canonicalName": "6.875% Notes Due 2029",
+        "canonicalName": "Clearway",
         "aliases": [
-          "6.875% Notes due 2029",
-          "6.125% Notes due 2030",
-          "6.125% Notes due 2031",
-          "8.625% Notes due 2025",
-          "2.625% Notes due 2027",
-          "7.875% Notes due 2029"
+          "Clearway Corporation (f/k/a NP/Clearway Holdings, Inc.)",
+          "Clearwater Analytics, LLC",
+          "Clearwater Analytics LLC",
+          "Clearview Buyer, Inc.",
+          "CLEARWATER GROUP, LLC"
         ],
-        "count": 6
+        "count": 5
       },
       {
-        "canonicalName": "Money Market Funds",
+        "canonicalName": "Cloud Software",
         "aliases": [
-          "Money market funds (included in cash equivalents and restricted cash equivalents)",
-          "Money market securities",
-          "Money market funds",
-          "Money market rate",
-          "Money Market Fund"
+          "Cloud Software Group Inc (fka TIBCO Software Inc)",
+          "Cloud Software Group, Inc.",
+          "Cloud Software Group Inc.",
+          "Cloud Software Group Inc",
+          "Coupa Software, Inc."
+        ],
+        "count": 5
+      },
+      {
+        "canonicalName": "Kar Wash",
+        "aliases": [
+          "Kar Wash Holdings, LLC (17,988 preferred units)",
+          "Kar Wash Holdings, LLC (99,807 Class A units)",
+          "Kar Wash Holdings, LLC (Delayed Draw)",
+          "Kar Wash Holdings, LLC (Revolver)",
+          "Kar Wash Holdings, LLC"
+        ],
+        "count": 5
+      },
+      {
+        "canonicalName": "Sma Technologies",
+        "aliases": [
+          "SMA Technologies Holdings, LLC",
+          "Saama Technologies, LLC",
+          "Beam Technologies, Inc.",
+          "Silk Technologies, Inc.",
+          "Lark Technologies, Inc."
+        ],
+        "count": 5
+      },
+      {
+        "canonicalName": "CM Acquisitions",
+        "aliases": [
+          "CM Acquisitions Holdings Inc.",
+          "DCG Acquisition Corp.",
+          "NDC Acquisition Corp.",
+          "Mach Acquisition, LLC",
+          "CW AcquisitionsCo"
         ],
         "count": 5
       }
@@ -342,17 +338,17 @@
     {
       "ticker": "ARCC",
       "score": 88,
-      "holdings": 644
+      "holdings": 643
     },
     {
       "ticker": "BXSL",
       "score": 94,
-      "holdings": 369
+      "holdings": 368
     },
     {
       "ticker": "FSK",
-      "score": 75,
-      "holdings": 299
+      "score": 77,
+      "holdings": 288
     },
     {
       "ticker": "OBDC",
@@ -362,47 +358,47 @@
     {
       "ticker": "MAIN",
       "score": 68,
-      "holdings": 225
+      "holdings": 224
     },
     {
       "ticker": "GBDC",
       "score": 32,
-      "holdings": 666
+      "holdings": 663
     },
     {
       "ticker": "HTGC",
       "score": 54,
-      "holdings": 181
+      "holdings": 179
     },
     {
       "ticker": "PSEC",
-      "score": 66,
-      "holdings": 176
+      "score": 68,
+      "holdings": 169
     },
     {
       "ticker": "TSLX",
       "score": 45,
-      "holdings": 206
+      "holdings": 205
     },
     {
       "ticker": "OCSL",
-      "score": 76,
-      "holdings": 382
+      "score": 77,
+      "holdings": 377
     },
     {
       "ticker": "NMFC",
-      "score": 71,
-      "holdings": 197
+      "score": 72,
+      "holdings": 191
     },
     {
       "ticker": "ORCC",
-      "score": 63,
-      "holdings": 313
+      "score": 64,
+      "holdings": 306
     },
     {
       "ticker": "GSBD",
-      "score": 54,
-      "holdings": 61
+      "score": 56,
+      "holdings": 58
     },
     {
       "ticker": "BBDC",
@@ -417,17 +413,17 @@
     {
       "ticker": "TRIN",
       "score": 50,
-      "holdings": 215
+      "holdings": 210
     },
     {
       "ticker": "CSWC",
       "score": 59,
-      "holdings": 202
+      "holdings": 199
     },
     {
       "ticker": "TCPC",
-      "score": 14,
-      "holdings": 12
+      "score": 15,
+      "holdings": 11
     },
     {
       "ticker": "CGBD",
@@ -436,23 +432,23 @@
     },
     {
       "ticker": "PFLT",
-      "score": 64,
-      "holdings": 89
+      "score": 65,
+      "holdings": 86
     },
     {
       "ticker": "MFIC",
       "score": 13,
-      "holdings": 19
+      "holdings": 12
     },
     {
       "ticker": "FDUS",
-      "score": 43,
-      "holdings": 58
+      "score": 45,
+      "holdings": 55
     },
     {
       "ticker": "TPVG",
-      "score": 62,
-      "holdings": 90
+      "score": 63,
+      "holdings": 87
     },
     {
       "ticker": "SLRC",
@@ -476,13 +472,13 @@
     },
     {
       "ticker": "GLAD",
-      "score": 71,
-      "holdings": 114
+      "score": 74,
+      "holdings": 108
     },
     {
       "ticker": "GAIN",
       "score": 44,
-      "holdings": 347
+      "holdings": 340
     },
     {
       "ticker": "SCM",
@@ -492,12 +488,12 @@
     {
       "ticker": "SAR",
       "score": 22,
-      "holdings": 94
+      "holdings": 88
     },
     {
       "ticker": "NEWT",
       "score": 13,
-      "holdings": 51
+      "holdings": 43
     },
     {
       "ticker": "CION",
@@ -511,13 +507,13 @@
     },
     {
       "ticker": "MRCC",
-      "score": 61,
-      "holdings": 213
+      "score": 62,
+      "holdings": 206
     },
     {
       "ticker": "OXSQ",
       "score": 13,
-      "holdings": 14
+      "holdings": 7
     },
     {
       "ticker": "OFS",
@@ -536,13 +532,13 @@
     },
     {
       "ticker": "NCDL",
-      "score": 17,
-      "holdings": 14
+      "score": 18,
+      "holdings": 13
     },
     {
       "ticker": "ICMB",
       "score": 13,
-      "holdings": 22
+      "holdings": 19
     }
   ]
 }

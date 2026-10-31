@@ -53,6 +53,7 @@ function deriveManager(fundName: string): string {
 // Industry category names that are sometimes incorrectly parsed as borrower names
 // These are section headers in SEC filings, not actual companies
 const INDUSTRY_CATEGORY_NAMES = new Set([
+  // Industry headers
   "business services",
   "consumer services",
   "distribution & logistics",
@@ -70,11 +71,64 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "utilities",
   "materials",
   "unknown",
+  "aerospace and defense",
+  "aerospace & defense",
+  "capital goods",
+  "commercial services",
+  "professional services",
+  "information technology",
+  "software & services",
+  "health care",
+  "consumer discretionary",
+  "consumer staples",
+  "specialty retail",
+  // Security/investment types (not company names)
+  "unsecured debt",
+  "secured loan",
+  "secured debt",
+  "unsecured loan",
+  "derivative instrument",
+  "derivative instruments",
+  "derivatives designated as hedges",
+  "derivatives not designated as hedges",
+  "short term unsecured debt",
+  "long term unsecured debt",
+  "unsecured debt term loan",
+  "unsecured debt corporate bond",
+  "unitranche secured loans",
+  "equipment financing",
+  "asset based finance",
+  // Balance sheet items
+  "other assets",
+  "other liabilities",
+  "deferred tax liabilities",
+  "accounts payable",
+  "transfers in and/or (out) of level 3",
+  // Table/filing structure elements
+  "company",
+  "assets ($ in millions)",
+  // Geographic headers
+  "united states",
+  "united kingdom",
+  "canada",
+  "europe",
 ]);
 
-// Check if a borrower name is actually an industry category header
+// Additional patterns to filter (for partial matching)
+const INVALID_BORROWER_PATTERNS = [
+  /^\d+\.\d+%\s+(unsecured|secured)/i, // "7.75% Unsecured Notes"
+  /^(1st|2nd|first|second)\s+lien/i, // Investment type headers
+  /funding facility$/i, // "BNP Funding Facility"
+  /^(net|total|sub-?total)\s/i, // Totals
+  /\s(in|out)\s+of\s+level/i, // Fair value hierarchy
+];
+
+// Check if a borrower name is actually an industry category header or invalid entry
 function isIndustryCategory(name: string): boolean {
-  return INDUSTRY_CATEGORY_NAMES.has(name.toLowerCase().trim());
+  const lowerName = name.toLowerCase().trim();
+  if (INDUSTRY_CATEGORY_NAMES.has(lowerName)) return true;
+  if (INVALID_BORROWER_PATTERNS.some((pattern) => pattern.test(name))) return true;
+  return false;
 }
 
 // Transform raw data into app data model
@@ -176,7 +230,7 @@ fundsData.forEach((fundData, fundIdx) => {
       gicsSector: holding.gicsSector,
       gicsIndustryGroup: holding.gicsIndustryGroup,
       industryConfidence: holding.industryConfidence as "high" | "medium" | "low" | undefined,
-      dataQualityScore: holding.dataQualityScore,
+      dataQualityScore: holding.dataQuality?.overallScore,
     });
   });
 });
@@ -199,10 +253,17 @@ export function getManagerById(id: string): Manager | undefined {
 export function getHoldingsByFund(fundId: string): (Holding & { borrower: Borrower })[] {
   return holdings
     .filter((h) => h.fundId === fundId)
-    .map((h) => ({
-      ...h,
-      borrower: borrowerMap.get(h.borrowerName.toLowerCase())!,
-    }));
+    .map((h) => {
+      const borrower = borrowerMap.get(h.borrowerName.toLowerCase().trim());
+      if (!borrower) {
+        console.warn(`Borrower not found for holding: ${h.borrowerName}`);
+      }
+      return {
+        ...h,
+        borrower: borrower!,
+      };
+    })
+    .filter((h) => h.borrower !== undefined);
 }
 
 export function getFundsByBorrower(borrowerId: string): (Holding & { fund: Fund })[] {

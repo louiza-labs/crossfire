@@ -6,7 +6,7 @@
     "filingDate": "2026-10-27",
     "holdings": [
       {
-        "borrower": "Deferred tax liabilities",
+        "borrower": "Payable for open trades",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -5721,7 +5721,7 @@
         "fairValue": 36.4
       },
       {
-        "borrower": "Other assets",
+        "borrower": "Selected Balance Sheet Information:",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -5730,7 +5730,7 @@
         "fairValue": 570
       },
       {
-        "borrower": "Other liabilities",
+        "borrower": "Liabilities",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -5757,7 +5757,7 @@
         "fairValue": 390
       },
       {
-        "borrower": "BNP Funding Facility",
+        "borrower": "Carrying Value",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -9106,15 +9106,6 @@
         "fairValue": 13.956
       },
       {
-        "borrower": "Unsecured debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 208.359,
-        "fairValue": 185.19
-      },
-      {
         "borrower": "Bermuda/Cayman Islands",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -9133,8 +9124,8 @@
         "fairValue": 0.137
       }
     ],
-    "totalFairValue": 19127.346000000005,
-    "totalPrincipal": 20882.094999999983
+    "totalFairValue": 18942.156000000006,
+    "totalPrincipal": 20673.735999999983
   },
   {
     "ticker": "FSK",
@@ -9472,8 +9463,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": 8.4,
         "maturity": "06/01/2031",
-        "principal": 244.9,
-        "fairValue": 242.10000000000002
+        "principal": 285.8,
+        "fairValue": 270.40000000000003
       },
       {
         "borrower": "Dental365 LLC",
@@ -10426,8 +10417,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": 9,
         "maturity": "12/01/2028",
-        "principal": 24,
-        "fairValue": 15.399999999999999
+        "principal": 52.3,
+        "fairValue": 40.5
       },
       {
         "borrower": "Peraton Corp",
@@ -11159,31 +11150,13 @@
         "fairValue": 7.5
       },
       {
-        "borrower": "6.875% Notes due 2029",
+        "borrower": "Description",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "08/01/2029",
-        "principal": 1224,
-        "fairValue": 58
-      },
-      {
-        "borrower": "6.125% Notes due 2030",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "01/01/2030",
-        "principal": 1422,
-        "fairValue": 72
-      },
-      {
-        "borrower": "Other Senior Secured Debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 206.2,
-        "fairValue": 170.4
+        "principal": 3000,
+        "fairValue": 89
       },
       {
         "borrower": "Bond Aviation Holdings LLC, ABF Equity",
@@ -11555,15 +11528,6 @@
         "fairValue": 28.7
       },
       {
-        "borrower": "6.125% Notes due 2031",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "01/01/2031",
-        "principal": 400,
-        "fairValue": 3
-      },
-      {
         "borrower": "Galaxy Universal LLC, Common Stock",
         "industry": "Unknown",
         "investmentType": "Equity",
@@ -11654,7 +11618,16 @@
         "fairValue": 0.4
       },
       {
-        "borrower": "Derivative Instrument",
+        "borrower": "(Unaudited)",
+        "industry": "Unknown",
+        "investmentType": "First Lien Senior Secured",
+        "rate": null,
+        "maturity": "N/A",
+        "principal": 130,
+        "fairValue": 110
+      },
+      {
+        "borrower": "Notional Amount",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -11704,8 +11677,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 345,
-        "fairValue": 112
+        "principal": 461,
+        "fairValue": 218
       },
       {
         "borrower": "CCT Tokyo Funding Credit Facility",
@@ -11718,60 +11691,6 @@
       },
       {
         "borrower": "Darby Creek Credit Facility",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 17,
-        "fairValue": 16
-      },
-      {
-        "borrower": "8.625% Notes due 2025",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 5,
-        "fairValue": 4
-      },
-      {
-        "borrower": "3.400% Notes due 2026",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 21,
-        "fairValue": 17
-      },
-      {
-        "borrower": "2.625% Notes due 2027",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 5,
-        "fairValue": 5
-      },
-      {
-        "borrower": "3.250% Notes due 2027",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 9,
-        "fairValue": 8
-      },
-      {
-        "borrower": "3.125% Notes due 2028",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 13,
-        "fairValue": 12
-      },
-      {
-        "borrower": "7.875% Notes due 2029",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -11798,13 +11717,13 @@
         "fairValue": 206
       },
       {
-        "borrower": "Asset Based Finance",
+        "borrower": "New Investment Activity by Asset Class",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 332,
-        "fairValue": 209
+        "principal": 339,
+        "fairValue": 216
       },
       {
         "borrower": "Equity/Other",
@@ -11835,7 +11754,7 @@
       }
     ],
     "totalFairValue": 30276.999999999985,
-    "totalPrincipal": 43235.690000000046
+    "totalPrincipal": 43235.69000000005
   },
   {
     "ticker": "OBDC",
@@ -11908,7 +11827,7 @@
     "filingDate": "2026-08-07",
     "holdings": [
       {
-        "borrower": "Deferred tax liability, net",
+        "borrower": "Dividend payable",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -13717,15 +13636,6 @@
         "fairValue": 144.953
       },
       {
-        "borrower": "Company",
-        "industry": "Unknown",
-        "investmentType": "Equity",
-        "rate": 12,
-        "maturity": "N/A",
-        "principal": 156.78999999999996,
-        "fairValue": 150.471
-      },
-      {
         "borrower": "Spring Engineering Holdings, LLC",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -13933,8 +13843,8 @@
         "fairValue": 3.453
       }
     ],
-    "totalFairValue": 14959.788999999995,
-    "totalPrincipal": 18267.871999999996
+    "totalFairValue": 14809.317999999996,
+    "totalPrincipal": 18111.081999999995
   },
   {
     "ticker": "GBDC",
@@ -13943,7 +13853,7 @@
     "filingDate": "2026-08-03",
     "holdings": [
       {
-        "borrower": "Accounts payable and other liabilities",
+        "borrower": "Interest payable",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -18439,17 +18349,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": 12,
         "maturity": "09/01/2027",
-        "principal": 26.110000000000003,
-        "fairValue": 23.831999999999997
-      },
-      {
-        "borrower": "Money market funds (included in cash equivalents and restricted cash equivalents)",
-        "industry": "IT Services",
-        "investmentType": "First Lien Senior Secured",
-        "rate": 4,
-        "maturity": "N/A",
-        "principal": 137.215,
-        "fairValue": 137.215
+        "principal": 163.325,
+        "fairValue": 161.047
       },
       {
         "borrower": "Abita Brewing Co. LLC",
@@ -19559,7 +19460,7 @@
         "fairValue": 4.371
       },
       {
-        "borrower": "United Kingdom",
+        "borrower": "Mid-Atlantic",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -21342,13 +21243,13 @@
         "fairValue": 469.44199999999995
       },
       {
-        "borrower": "Unsecured Debt",
+        "borrower": "Investments",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 229.849,
-        "fairValue": 207.377
+        "principal": 195.493,
+        "fairValue": 175.29000000000002
       },
       {
         "borrower": "Escrow Receivables",
@@ -21360,16 +21261,7 @@
         "fairValue": 49.726
       },
       {
-        "borrower": "Investments",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 42.79,
-        "fairValue": 37.527
-      },
-      {
-        "borrower": "2031 Asset-Backed Notes",
+        "borrower": "2028 Convertible Notes",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -21527,17 +21419,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 0.4048,
-        "fairValue": 0.4022
-      },
-      {
-        "borrower": "Tangible assets (in millions)",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 0.42119999999999996,
-        "fairValue": 0.4174
+        "principal": 0.826,
+        "fairValue": 0.8196
       },
       {
         "borrower": "Investment Grading",
@@ -21576,8 +21459,8 @@
         "fairValue": 2.7720000000000002
       }
     ],
-    "totalFairValue": 9464.046600000003,
-    "totalPrincipal": 10436.367000000007
+    "totalFairValue": 9394.432600000004,
+    "totalPrincipal": 10359.221000000005
   },
   {
     "ticker": "PSEC",
@@ -21595,7 +21478,7 @@
         "fairValue": 27.057
       },
       {
-        "borrower": "Unsecured Debt",
+        "borrower": "Type of Investment",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -21611,15 +21494,6 @@
         "maturity": "N/A",
         "principal": 40.549,
         "fairValue": 23.914
-      },
-      {
-        "borrower": "Type of Investment",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 7.2,
-        "fairValue": 7.2
       },
       {
         "borrower": "Aerospace & Defense",
@@ -21784,7 +21658,7 @@
         "fairValue": 14.128
       },
       {
-        "borrower": "Other liabilities",
+        "borrower": "Due to broker",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -23139,39 +23013,12 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 13.602,
-        "fairValue": 11.846
-      },
-      {
-        "borrower": "Transfers into Level 3",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 183.185,
-        "fairValue": 62.153000000000006
-      },
-      {
-        "borrower": "Transfers within Level 3",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 36.86,
-        "fairValue": 10.706
-      },
-      {
-        "borrower": "Derivative Instruments",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 2.026,
-        "fairValue": 2.024
+        "principal": 233.647,
+        "fairValue": 84.70500000000001
       }
     ],
-    "totalFairValue": 13476.766699999998,
-    "totalPrincipal": 17143.1428
+    "totalFairValue": 13467.542699999998,
+    "totalPrincipal": 17133.9168
   },
   {
     "ticker": "TSLX",
@@ -23180,7 +23027,7 @@
     "filingDate": "2026-08-04",
     "holdings": [
       {
-        "borrower": "Other liabilities",
+        "borrower": "Liabilities",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -24751,17 +24598,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 148.493,
-        "fairValue": 116.769
-      },
-      {
-        "borrower": "Mezzanine debt investments",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 126.304,
-        "fairValue": 124.934
+        "principal": 274.797,
+        "fairValue": 241.703
       },
       {
         "borrower": "Structured credit investments",
@@ -24989,7 +24827,7 @@
         "fairValue": 22.163
       },
       {
-        "borrower": "United Kingdom",
+        "borrower": "Switzerland",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -25035,7 +24873,7 @@
       }
     ],
     "totalFairValue": 7971.6217000000015,
-    "totalPrincipal": 8513.578900000002
+    "totalPrincipal": 8513.5789
   },
   {
     "ticker": "OCSL",
@@ -26718,13 +26556,13 @@
         "fairValue": 45.883
       },
       {
-        "borrower": "Transfers in (a)",
+        "borrower": "Sales and repayments",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 22.551,
-        "fairValue": 20.974
+        "principal": 39.831999999999994,
+        "fairValue": 30.644
       },
       {
         "borrower": "Net realized gains (losses)",
@@ -26743,15 +26581,6 @@
         "maturity": "N/A",
         "principal": 3.583,
         "fairValue": 0.109
-      },
-      {
-        "borrower": "Transfers in (a)(c)",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 17.281,
-        "fairValue": 9.67
       },
       {
         "borrower": "LLC equity interests of the JVs",
@@ -26856,10 +26685,10 @@
         "borrower": "Alternative Carriers",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
-        "rate": null,
+        "rate": 6.39,
         "maturity": "N/A",
-        "principal": 50.597,
-        "fairValue": 18.204
+        "principal": 54.121,
+        "fairValue": 21.704
       },
       {
         "borrower": "Air Freight & Logistics",
@@ -27753,15 +27582,6 @@
         "fairValue": 4.555
       },
       {
-        "borrower": "Level 3 Financing Inc.",
-        "industry": "Alternative Carriers",
-        "investmentType": "First Lien Senior Secured",
-        "rate": 6.39,
-        "maturity": "03/01/2032",
-        "principal": 3.524,
-        "fairValue": 3.5
-      },
-      {
         "borrower": "Lsf12 Crown US Commercial Bidco LLC",
         "industry": "Building Products",
         "investmentType": "First Lien Senior Secured",
@@ -28492,7 +28312,7 @@
     "filingDate": "2026-08-03",
     "holdings": [
       {
-        "borrower": "Other liabilities",
+        "borrower": "Payable for unsettled securities purchased",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -30220,22 +30040,13 @@
         "fairValue": 39.318
       },
       {
-        "borrower": "Transfers into Level III",
+        "borrower": "Proceeds from sales and paydowns of investments",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 59.855,
-        "fairValue": 38.813
-      },
-      {
-        "borrower": "Transfers out of Level III",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 196.858,
-        "fairValue": 145.982
+        "principal": 256.713,
+        "fairValue": 184.795
       },
       {
         "borrower": "Net realized gains (losses) on investments",
@@ -31828,8 +31639,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": 6.5,
         "maturity": "12/01/2030",
-        "principal": 23.181,
-        "fairValue": 20.751
+        "principal": 34.573,
+        "fairValue": 32.143
       },
       {
         "borrower": "CorePower Yoga, LLC",
@@ -32386,17 +32197,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 331.14199999999994,
-        "fairValue": 207.251
-      },
-      {
-        "borrower": "United Kingdom",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 362.5559999999999,
-        "fairValue": 287.288
+        "principal": 451.42099999999994,
+        "fairValue": 327.53
       },
       {
         "borrower": "Cayman Islands",
@@ -32404,8 +32206,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 158.28900000000002,
-        "fairValue": 113.576
+        "principal": 406.751,
+        "fairValue": 309.473
       },
       {
         "borrower": "Netherlands",
@@ -32696,15 +32498,6 @@
         "fairValue": 33.202
       },
       {
-        "borrower": "Cash Equivalents",
-        "industry": "Retail",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 40.184,
-        "fairValue": 40.184
-      },
-      {
         "borrower": "Cardo",
         "industry": "Aerospace & Defense",
         "investmentType": "First Lien Senior Secured",
@@ -32755,8 +32548,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 8.691,
-        "fairValue": 2.843
+        "principal": 37.483000000000004,
+        "fairValue": 31.635
       },
       {
         "borrower": "Orchard Park BidCo, Inc.",
@@ -33056,31 +32849,13 @@
         "fairValue": 69.904
       },
       {
-        "borrower": "Cash and cash equivalents",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 120.279,
-        "fairValue": 120.279
-      },
-      {
         "borrower": "Foreign cash",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 18.108,
-        "fairValue": 17.108999999999998
-      },
-      {
-        "borrower": "Restricted cash and cash equivalents",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 51.134,
-        "fairValue": 51.134
+        "principal": 69.242,
+        "fairValue": 68.243
       },
       {
         "borrower": "Investment Performance Rating",
@@ -33092,8 +32867,8 @@
         "fairValue": 0.2
       }
     ],
-    "totalFairValue": 15520.848000000002,
-    "totalPrincipal": 17309.164000000008
+    "totalFairValue": 15429.457,
+    "totalPrincipal": 17195.07000000001
   },
   {
     "ticker": "GSBD",
@@ -33561,22 +33336,13 @@
         "fairValue": 13.776
       },
       {
-        "borrower": "2nd Lien/Senior Secured Debt",
+        "borrower": "Investment Type",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 235.505,
-        "fairValue": 200.43099999999998
-      },
-      {
-        "borrower": "Unsecured Debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 64.159,
-        "fairValue": 55.921
+        "principal": 106.14099999999999,
+        "fairValue": 80.21600000000001
       },
       {
         "borrower": "Preferred Stock",
@@ -33593,8 +33359,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 157.84499999999997,
-        "fairValue": 154.921
+        "principal": 337.92400000000004,
+        "fairValue": 291.406
       },
       {
         "borrower": "Specialty Retail",
@@ -33604,15 +33370,6 @@
         "maturity": "N/A",
         "principal": 0.2353,
         "fairValue": 0.2292
-      },
-      {
-        "borrower": "1st Lien/Senior Secured Debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 206.781,
-        "fairValue": 151.198
       },
       {
         "borrower": "Liabilities",
@@ -33633,15 +33390,6 @@
         "fairValue": 0.252
       },
       {
-        "borrower": "1st Lien/Last-Out Unitranche",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 25.712,
-        "fairValue": 7.215
-      },
-      {
         "borrower": "Investment Performance Rating",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -33651,8 +33399,8 @@
         "fairValue": 3.05383
       }
     ],
-    "totalFairValue": 1883.5980299999997,
-    "totalPrincipal": 2243.73523
+    "totalFairValue": 1685.5340299999996,
+    "totalPrincipal": 1997.7982299999996
   },
   {
     "ticker": "BBDC",
@@ -39995,17 +39743,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 11.914,
-        "fairValue": 10.998
-      },
-      {
-        "borrower": "Equipment Financing",
-        "industry": "Artificial Intelligence (\"AI\") Automation & Infrastructure",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 625.694,
-        "fairValue": 608.1290000000001
+        "principal": 25.118000000000002,
+        "fairValue": 23.392
       },
       {
         "borrower": "D-Wave Quantum Inc.",
@@ -40094,17 +39833,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 73.801,
-        "fairValue": 71.901
-      },
-      {
-        "borrower": "Secured Loan",
-        "industry": "Artificial Intelligence (\"AI\") Automation & Infrastructure",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 1357.451000000001,
-        "fairValue": 1320.2479999999994
+        "principal": 100.801,
+        "fairValue": 98.34799999999998
       },
       {
         "borrower": "Candel Therapeutics, Inc.",
@@ -40130,8 +39860,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 28.563000000000002,
-        "fairValue": 27.559
+        "principal": 74.71799999999999,
+        "fairValue": 72.987
       },
       {
         "borrower": "Vertical Communications, Inc.",
@@ -40139,8 +39869,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 73.50399999999999,
-        "fairValue": 60.912
+        "principal": 199.36700000000002,
+        "fairValue": 180
       },
       {
         "borrower": "Bobbie Baby, Inc.",
@@ -40166,8 +39896,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 12.24,
-        "fairValue": 10.622
+        "principal": 40.946,
+        "fairValue": 38.142999999999994
       },
       {
         "borrower": "Quip NYC, Inc.",
@@ -40184,8 +39914,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 76.456,
-        "fairValue": 75.592
+        "principal": 113.045,
+        "fairValue": 111.94500000000001
       },
       {
         "borrower": "Artera Inc.",
@@ -40220,8 +39950,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 15.741,
-        "fairValue": 14.092
+        "principal": 57.354,
+        "fairValue": 53.357
       },
       {
         "borrower": "Alt Lending SPV II, LLC",
@@ -40238,8 +39968,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 164.291,
-        "fairValue": 61.403
+        "principal": 169.982,
+        "fairValue": 66.987
       },
       {
         "borrower": "Centivo Corporation",
@@ -40247,8 +39977,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 492.216,
-        "fairValue": 9.31
+        "principal": 530.0910000000001,
+        "fairValue": 46.128
       },
       {
         "borrower": "Cherry Technologies, Inc.",
@@ -40256,8 +39986,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 15.017,
-        "fairValue": 14.47
+        "principal": 30.044,
+        "fairValue": 28.94
       },
       {
         "borrower": "Tilt Finance, Inc. (dba Empower Financial, Inc.)",
@@ -40265,8 +39995,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 164.50300000000001,
-        "fairValue": 129.81700000000004
+        "principal": 191.097,
+        "fairValue": 155.73200000000003
       },
       {
         "borrower": "Inshur, Inc.",
@@ -40292,8 +40022,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 85.67,
-        "fairValue": 10.658999999999999
+        "principal": 86.89,
+        "fairValue": 11.811
       },
       {
         "borrower": "Lendflow, Inc.",
@@ -40301,8 +40031,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 89.923,
-        "fairValue": 4.183999999999999
+        "principal": 91.963,
+        "fairValue": 6.190999999999999
       },
       {
         "borrower": "Mesa Financial, Inc.",
@@ -40337,8 +40067,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 133.38899999999998,
-        "fairValue": 11.619
+        "principal": 144.789,
+        "fairValue": 22.677999999999997
       },
       {
         "borrower": "Slope Tech, Inc.",
@@ -40364,8 +40094,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 25.057,
-        "fairValue": 24.442
+        "principal": 25.881999999999998,
+        "fairValue": 25.252
       },
       {
         "borrower": "DrinkPak, LLC",
@@ -40382,8 +40112,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 6.333,
-        "fairValue": 5.729
+        "principal": 161.882,
+        "fairValue": 157.95499999999998
       },
       {
         "borrower": "Electric Hydrogen Co.",
@@ -40391,8 +40121,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 177.757,
-        "fairValue": 4.473
+        "principal": 191.08100000000002,
+        "fairValue": 17.257
       },
       {
         "borrower": "Form Energy Inc.",
@@ -40400,8 +40130,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 209.31,
-        "fairValue": 38.506
+        "principal": 219.699,
+        "fairValue": 48.62499999999999
       },
       {
         "borrower": "Luxwall, Inc.",
@@ -40418,8 +40148,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 2.231,
-        "fairValue": 2.188
+        "principal": 3.205,
+        "fairValue": 3.141
       },
       {
         "borrower": "Torus Inc.",
@@ -40427,8 +40157,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 19.917,
-        "fairValue": 5.71
+        "principal": 22.151,
+        "fairValue": 7.9399999999999995
       },
       {
         "borrower": "B.Well Connected Health, Inc.",
@@ -40436,8 +40166,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 141.046,
-        "fairValue": 11.762
+        "principal": 147.88600000000002,
+        "fairValue": 18.487000000000002
       },
       {
         "borrower": "Lightning Step Technologies, LLC",
@@ -40445,8 +40175,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 18,
-        "fairValue": 17.576999999999998
+        "principal": 36,
+        "fairValue": 35.244
       },
       {
         "borrower": "Paytient Technologies, Inc.",
@@ -40454,8 +40184,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 16.25,
-        "fairValue": 15.769
+        "principal": 32.509,
+        "fairValue": 31.761
       },
       {
         "borrower": "Pearl Health, Inc.",
@@ -40499,8 +40229,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 81.68599999999999,
-        "fairValue": 69.607
+        "principal": 93.88599999999998,
+        "fairValue": 81.13300000000001
       },
       {
         "borrower": "Grabit Interactive Media, Inc.",
@@ -40526,8 +40256,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 21.607,
-        "fairValue": 20.821
+        "principal": 130.376,
+        "fairValue": 125.37199999999999
       },
       {
         "borrower": "Apiject Holdings, Inc.",
@@ -40535,8 +40265,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 30.064999999999998,
-        "fairValue": 26.587
+        "principal": 42.556,
+        "fairValue": 37.88099999999999
       },
       {
         "borrower": "Cagent Vascular, Inc.",
@@ -40544,8 +40274,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 6.4399999999999995,
-        "fairValue": 6.291
+        "principal": 9.599,
+        "fairValue": 9.421
       },
       {
         "borrower": "Cala Health, Inc.",
@@ -40589,8 +40319,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 182.493,
-        "fairValue": 56.696000000000005
+        "principal": 192.032,
+        "fairValue": 66.06099999999999
       },
       {
         "borrower": "Monteris Medical US, Inc.",
@@ -40607,8 +40337,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 41.291,
-        "fairValue": 40
+        "principal": 71.366,
+        "fairValue": 69.741
       },
       {
         "borrower": "Neuros Medical, Inc.",
@@ -40643,8 +40373,17 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 57.207,
-        "fairValue": 55.3
+        "principal": 89.32,
+        "fairValue": 86.798
+      },
+      {
+        "borrower": "Multi-Sector Holdings",
+        "industry": "Unknown",
+        "investmentType": "First Lien Senior Secured",
+        "rate": null,
+        "maturity": "N/A",
+        "principal": 180.19899999999998,
+        "fairValue": 167.55599999999998
       },
       {
         "borrower": "Cellares Corporation",
@@ -40652,8 +40391,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 55.222,
-        "fairValue": 52.39
+        "principal": 111.902,
+        "fairValue": 107.681
       },
       {
         "borrower": "LHV Newco LLC",
@@ -40670,8 +40409,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 92.27600000000001,
-        "fairValue": 89.89899999999999
+        "principal": 107.993,
+        "fairValue": 105.536
       },
       {
         "borrower": "Renalogic Holdings, Inc.",
@@ -40697,8 +40436,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 270.282,
-        "fairValue": 140.04200000000003
+        "principal": 273.54099999999994,
+        "fairValue": 143.24200000000002
       },
       {
         "borrower": "Knockaway Trinity Holdings, LLC",
@@ -40715,8 +40454,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 286.07000000000005,
-        "fairValue": 86.887
+        "principal": 346.55600000000004,
+        "fairValue": 146.32600000000002
       },
       {
         "borrower": "Consensus Sales, LLC",
@@ -40751,8 +40490,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 6.5,
-        "fairValue": 6.395
+        "principal": 23.269999999999996,
+        "fairValue": 22.878
       },
       {
         "borrower": "Hometown Ticketing, Inc.",
@@ -40760,8 +40499,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 49.287000000000006,
-        "fairValue": 48.474999999999994
+        "principal": 51.285000000000004,
+        "fairValue": 50.473
       },
       {
         "borrower": "CCP InterGalactic Buyer, LLC",
@@ -40769,8 +40508,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 15.075,
-        "fairValue": 14.753
+        "principal": 21.662,
+        "fairValue": 21.229
       },
       {
         "borrower": "Kibo Software, Inc.",
@@ -40796,8 +40535,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 27.236,
-        "fairValue": 26.804
+        "principal": 43.843,
+        "fairValue": 43.145999999999994
       },
       {
         "borrower": "Silk Technologies, Inc.",
@@ -40814,8 +40553,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 71.295,
-        "fairValue": 69.545
+        "principal": 84.496,
+        "fairValue": 82.46
       },
       {
         "borrower": "Steno Agency, Inc.",
@@ -40823,8 +40562,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 228.23899999999998,
-        "fairValue": 8.215
+        "principal": 243.024,
+        "fairValue": 22.624
       },
       {
         "borrower": "Ticketure LLC",
@@ -40832,8 +40571,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 49.751,
-        "fairValue": 48.538
+        "principal": 64.624,
+        "fairValue": 63.351
       },
       {
         "borrower": "Xytech Systems, LLC",
@@ -40841,8 +40580,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 75.2,
-        "fairValue": 73.731
+        "principal": 80.605,
+        "fairValue": 78.96499999999999
       },
       {
         "borrower": "Astranis Space Technology Corporation",
@@ -40850,8 +40589,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 472.0580000000001,
-        "fairValue": 15.098
+        "principal": 574.9720000000001,
+        "fairValue": 114.614
       },
       {
         "borrower": "Hermeus Corporation",
@@ -40859,8 +40598,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 95.813,
-        "fairValue": 15.437
+        "principal": 98.263,
+        "fairValue": 17.835000000000004
       },
       {
         "borrower": "Impulse Space, Inc.",
@@ -40868,8 +40607,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 128.122,
-        "fairValue": 6.308
+        "principal": 136.19,
+        "fairValue": 14.213000000000001
       },
       {
         "borrower": "Kymeta Corporation",
@@ -40877,8 +40616,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 16.730999999999998,
-        "fairValue": 16.043
+        "principal": 32.847,
+        "fairValue": 31.830000000000002
       },
       {
         "borrower": "Slingshot Aerospace, Inc.",
@@ -40886,8 +40625,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 49.351000000000006,
-        "fairValue": 48.047
+        "principal": 149.726,
+        "fairValue": 145.811
       },
       {
         "borrower": "Inktavo, LLC",
@@ -40913,8 +40652,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 0.42,
-        "fairValue": 0.39
+        "principal": 184.22699999999998,
+        "fairValue": 175.915
       },
       {
         "borrower": "EH Leasing Company, LLC",
@@ -40940,8 +40679,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 19.89,
-        "fairValue": 18.012
+        "principal": 20.064,
+        "fairValue": 18.172
       },
       {
         "borrower": "Uveye, Inc.",
@@ -40949,8 +40688,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 30.088,
-        "fairValue": 25.993000000000002
+        "principal": 138.408,
+        "fairValue": 133.317
       },
       {
         "borrower": "Zuum Transportation, Inc.",
@@ -40976,8 +40715,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 39.555,
-        "fairValue": 38.665000000000006
+        "principal": 109.00400000000002,
+        "fairValue": 106.622
       },
       {
         "borrower": "Earthdaily Constellation Holdings, LP",
@@ -40985,8 +40724,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 35.23499999999999,
-        "fairValue": 33.25600000000001
+        "principal": 75.232,
+        "fairValue": 72.66799999999999
       },
       {
         "borrower": "GoFor Delivers, Inc.",
@@ -41030,8 +40769,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 84.416,
-        "fairValue": 59.618
+        "principal": 215.08300000000003,
+        "fairValue": 187.684
       },
       {
         "borrower": "Zandivio PLC",
@@ -41057,8 +40796,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 10.065,
-        "fairValue": 8.43
+        "principal": 31.055,
+        "fairValue": 29.121000000000002
       },
       {
         "borrower": "Tarana Wireless, Inc.",
@@ -41120,8 +40859,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 244.05499999999998,
-        "fairValue": 18.712000000000003
+        "principal": 253.804,
+        "fairValue": 27.702000000000005
       },
       {
         "borrower": "Mainspring Energy, Inc.",
@@ -41183,8 +40922,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 159.853,
-        "fairValue": 7.808
+        "principal": 167.344,
+        "fairValue": 15.178
       },
       {
         "borrower": "Athletic Brewing Company, LLC",
@@ -41399,8 +41138,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 129.06,
-        "fairValue": 42.962999999999994
+        "principal": 152.362,
+        "fairValue": 66.265
       },
       {
         "borrower": "Digilens, Inc.",
@@ -41552,8 +41291,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 1.554,
-        "fairValue": 1.53
+        "principal": 4.801,
+        "fairValue": 4.721
       },
       {
         "borrower": "Edblox, Inc.",
@@ -41615,8 +41354,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 5.241,
-        "fairValue": 4.989
+        "principal": 31.447,
+        "fairValue": 29.932
       },
       {
         "borrower": "Nalu Medical, Inc",
@@ -41633,8 +41372,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 95.024,
-        "fairValue": 15.148
+        "principal": 95.22200000000001,
+        "fairValue": 15.334999999999999
       },
       {
         "borrower": "Intelligent Brands, Inc. (f.k.a. PSB Holdings, Inc.)",
@@ -41736,15 +41475,6 @@
         "fairValue": 89.641
       },
       {
-        "borrower": "Multi-Sector Holdings",
-        "industry": "Multi-Sector Holdings (1)",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 128.659,
-        "fairValue": 116.01599999999999
-      },
-      {
         "borrower": "Connectivity",
         "industry": "Connectivity",
         "investmentType": "First Lien Senior Secured",
@@ -41824,15 +41554,6 @@
         "maturity": "N/A",
         "principal": 58.237,
         "fairValue": 55.392
-      },
-      {
-        "borrower": "Equipment Financings",
-        "industry": "Unknown",
-        "investmentType": "Warrant",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 80.722,
-        "fairValue": 78.12599999999999
       },
       {
         "borrower": "Identical Assets",
@@ -41916,8 +41637,8 @@
         "fairValue": 28.113
       }
     ],
-    "totalFairValue": 8675.825939999999,
-    "totalPrincipal": 16037.586339999993
+    "totalFairValue": 8597.69994,
+    "totalPrincipal": 15956.864339999993
   },
   {
     "ticker": "CSWC",
@@ -41926,7 +41647,7 @@
     "filingDate": "2026-08-03",
     "holdings": [
       {
-        "borrower": "Deferred tax liability",
+        "borrower": "Income tax payable",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -43799,15 +43520,6 @@
         "fairValue": 49.73
       },
       {
-        "borrower": "(Dollars in millions)",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 197.8,
-        "fairValue": 101.5
-      },
-      {
         "borrower": "Equity-based compensation",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -43862,8 +43574,8 @@
         "fairValue": 3.7
       }
     ],
-    "totalFairValue": 1300.7700000000002,
-    "totalPrincipal": 1635.1999999999998
+    "totalFairValue": 1199.2700000000002,
+    "totalPrincipal": 1437.3999999999999
   },
   {
     "ticker": "CGBD",
@@ -46663,7 +46375,7 @@
     "filingDate": "2026-08-04",
     "holdings": [
       {
-        "borrower": "Payable for investments and cash equivalents purchased",
+        "borrower": "Liabilities",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -47515,17 +47227,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 3.796,
-        "fairValue": 3.628
-      },
-      {
-        "borrower": "Mortgage and asset-backed",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 0.558,
-        "fairValue": 0.444
+        "principal": 4.354,
+        "fairValue": 4.072
       },
       {
         "borrower": "GM Financial receivables",
@@ -47546,22 +47249,13 @@
         "fairValue": 89.65
       },
       {
-        "borrower": "Secured debt",
+        "borrower": "Carrying Amount",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 49.766,
-        "fairValue": 47.534
-      },
-      {
-        "borrower": "Unsecured debt(a)",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 15.468,
-        "fairValue": 15.12
+        "principal": 133.841,
+        "fairValue": 126.362
       },
       {
         "borrower": "Finance lease liabilities",
@@ -47571,24 +47265,6 @@
         "maturity": "N/A",
         "principal": 0.615,
         "fairValue": 0.614
-      },
-      {
-        "borrower": "Unsecured debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 68.607,
-        "fairValue": 63.708
-      },
-      {
-        "borrower": "Derivatives designated as hedges(a)",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 33.88,
-        "fairValue": 32.554
       },
       {
         "borrower": "Cash flow hedges",
@@ -47605,48 +47281,21 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 9.226,
-        "fairValue": 8.655
+        "principal": 10.256,
+        "fairValue": 9.460999999999999
       },
       {
-        "borrower": "Derivatives not designated as hedges(a)",
+        "borrower": "Carrying Amount of Hedged Items",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 1.03,
-        "fairValue": 0.806
-      },
-      {
-        "borrower": "Short-term unsecured debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 4.633,
-        "fairValue": 3.479
-      },
-      {
-        "borrower": "Long-term unsecured debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 30.554,
-        "fairValue": 28.996
-      },
-      {
-        "borrower": "GM Financial unsecured debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 35.187,
-        "fairValue": 32.474
+        "principal": 70.374,
+        "fairValue": 64.949
       }
     ],
-    "totalFairValue": 435.7279999999999,
-    "totalPrincipal": 461.114
+    "totalFairValue": 403.174,
+    "totalPrincipal": 427.23400000000004
   },
   {
     "ticker": "FDUS",
@@ -47664,7 +47313,7 @@
         "fairValue": 25.4
       },
       {
-        "borrower": "Other liabilities",
+        "borrower": "Payable for investments purchased",
         "industry": "Unknown",
         "investmentType": "Equity",
         "rate": null,
@@ -47862,13 +47511,13 @@
         "fairValue": 39.065
       },
       {
-        "borrower": "Mezzanine Debt - Class E",
+        "borrower": "Venture 45 CLO, Limited",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": 11.58,
         "maturity": "07/01/2035",
-        "principal": 12,
-        "fairValue": 11.400000000000002
+        "principal": 6,
+        "fairValue": 5.934
       },
       {
         "borrower": "Contract Datascan Holdings, Inc.",
@@ -47988,6 +47637,15 @@
         "fairValue": 17.221
       },
       {
+        "borrower": "Battalion CLO XI Ltd.",
+        "industry": "Unknown",
+        "investmentType": "First Lien Senior Secured",
+        "rate": 10.98,
+        "maturity": "04/01/2034",
+        "principal": 6,
+        "fairValue": 5.466
+      },
+      {
         "borrower": "Preferred equity",
         "industry": "Unknown",
         "investmentType": "Preferred Equity",
@@ -48013,15 +47671,6 @@
         "maturity": "N/A",
         "principal": 126.775,
         "fairValue": 88.735
-      },
-      {
-        "borrower": "United States",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 4.987,
-        "fairValue": 4.865
       },
       {
         "borrower": "Cayman Islands",
@@ -48074,17 +47723,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 260.474,
-        "fairValue": 195.72699999999998
-      },
-      {
-        "borrower": "Transfers from Level 3 to Level 2",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 85.433,
-        "fairValue": 66.177
+        "principal": 345.907,
+        "fairValue": 261.904
       },
       {
         "borrower": "Natixis Facility",
@@ -48123,13 +47763,13 @@
         "fairValue": 5.8500000000000005
       },
       {
-        "borrower": "Mezzanine debt",
+        "borrower": "Structured Finance Securities:",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 10.703,
-        "fairValue": 9.686
+        "principal": 1.74,
+        "fairValue": 1.612
       },
       {
         "borrower": "Planet Bingo, LLC (F/K/A 3rd Rock Gaming Holdings, LLC)",
@@ -48177,8 +47817,8 @@
         "fairValue": 14.113
       }
     ],
-    "totalFairValue": 1647.4952999999998,
-    "totalPrincipal": 2551.4249999999993
+    "totalFairValue": 1634.5563,
+    "totalPrincipal": 2537.474999999999
   },
   {
     "ticker": "TPVG",
@@ -48898,7 +48538,7 @@
         "fairValue": 2.54
       },
       {
-        "borrower": "Gross transfers out of Level 3",
+        "borrower": "Transfers between investment types",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -49007,7 +48647,7 @@
     "filingDate": "2022-07-26",
     "holdings": [
       {
-        "borrower": "Cash, Cash Equivalents and Short-term Investments",
+        "borrower": "6 Months Ended",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
@@ -50510,17 +50150,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "12/01/2030",
-        "principal": 20,
-        "fairValue": 20
-      },
-      {
-        "borrower": "Unsecured Debt – 0.1%",
-        "industry": "Beverage, Food, and Tobacco – 2.5%",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "10/01/2028",
-        "principal": 0.753,
-        "fairValue": 0.753
+        "principal": 20.753,
+        "fairValue": 20.753
       },
       {
         "borrower": "Alsay Incorporated – Preferred Stock(E)(G)",
@@ -50564,8 +50195,8 @@
         "investmentType": "Equity",
         "rate": null,
         "maturity": "N/A",
-        "principal": 10.193999999999999,
-        "fairValue": 1
+        "principal": 40.717,
+        "fairValue": 31.523
       },
       {
         "borrower": "First Citizens Premium Money Market Savings (3.25% market yield)(R)",
@@ -50658,15 +50289,6 @@
         "fairValue": 0.45
       },
       {
-        "borrower": "CASH EQUIVALENTS - 6.6%",
-        "industry": "Automobile – 1.8%",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 30.523,
-        "fairValue": 30.523
-      },
-      {
         "borrower": "Preferred equity",
         "industry": "Unknown",
         "investmentType": "Preferred Equity",
@@ -50683,15 +50305,6 @@
         "maturity": "N/A",
         "principal": 231.41799999999998,
         "fairValue": 198.73399999999998
-      },
-      {
-        "borrower": "Unsecured debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 0.95,
-        "fairValue": 0.8880000000000001
       },
       {
         "borrower": "Preferred and common equity / equivalents(A)",
@@ -50838,8 +50451,8 @@
         "fairValue": 12.12
       }
     ],
-    "totalFairValue": 2681.528999999999,
-    "totalPrincipal": 3524.472
+    "totalFairValue": 2680.640999999999,
+    "totalPrincipal": 3523.5220000000013
   },
   {
     "ticker": "GAIN",
@@ -50992,7 +50605,7 @@
         "fairValue": 32.906
       },
       {
-        "borrower": "Secured Debt - Promissory Note",
+        "borrower": "FC2 LLC",
         "industry": "Chemicals",
         "investmentType": "First Lien Senior Secured",
         "rate": 6.5,
@@ -51240,17 +50853,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 76.981,
-        "fairValue": 40.471000000000004
-      },
-      {
-        "borrower": "Unsecured Debt - Term Loan",
-        "industry": "Consumer Finance",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 3.684,
-        "fairValue": 3.684
+        "principal": 80.665,
+        "fairValue": 44.155
       },
       {
         "borrower": "Protein For Pets Opco, LLC",
@@ -51478,7 +51082,7 @@
         "fairValue": 6.414999999999999
       },
       {
-        "borrower": "Unsecured Debt - Corporate Bond",
+        "borrower": "CSC Holdings, LLC",
         "industry": "Diversified Telecommunication Services",
         "investmentType": "First Lien Senior Secured",
         "rate": 4.13,
@@ -53854,15 +53458,6 @@
         "fairValue": 75.84673000000001
       },
       {
-        "borrower": "Unsecured Debt",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 6.7330000000000005,
-        "fairValue": 6.103
-      },
-      {
         "borrower": "Structured Products and Other",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -53913,17 +53508,17 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 163.74300000000002,
-        "fairValue": 54.711000000000006
+        "principal": 200.18500000000003,
+        "fairValue": 87.982
       },
       {
-        "borrower": "Transfers into Level 3",
+        "borrower": "Proceeds from sales and repayments of investments",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 405.385,
-        "fairValue": 265.22099999999995
+        "principal": 373.74399999999997,
+        "fairValue": 235.148
       },
       {
         "borrower": "Net realized gains (losses)",
@@ -53944,15 +53539,6 @@
         "fairValue": 2.337
       },
       {
-        "borrower": "Proceeds from sales and repayments of investments",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 4.801,
-        "fairValue": 3.198
-      },
-      {
         "borrower": "JP MORGAN CHASE BANK N.A",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -53971,8 +53557,8 @@
         "fairValue": 160
       }
     ],
-    "totalFairValue": 13069.57041999999,
-    "totalPrincipal": 15084.300469999993
+    "totalFairValue": 13063.46741999999,
+    "totalPrincipal": 15077.567469999993
   },
   {
     "ticker": "SCM",
@@ -54059,8 +53645,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 388.709,
-        "fairValue": 299.051
+        "principal": 404.839,
+        "fairValue": 314.52
       },
       {
         "borrower": "Equity interests",
@@ -54844,37 +54430,10 @@
         "maturity": "N/A",
         "principal": 2.403,
         "fairValue": 2.303
-      },
-      {
-        "borrower": "Cash and cash equivalents",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 80.087,
-        "fairValue": 1.68
-      },
-      {
-        "borrower": "Cash and cash equivalents, reserve accounts",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 20.106,
-        "fairValue": 15.786
-      },
-      {
-        "borrower": "Unsecured loan",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 16.13,
-        "fairValue": 15.469
       }
     ],
-    "totalFairValue": 3181.461999999999,
-    "totalPrincipal": 3883.8779999999997
+    "totalFairValue": 3163.995999999999,
+    "totalPrincipal": 3783.6849999999995
   },
   {
     "ticker": "NEWT",
@@ -55095,17 +54654,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 96.223,
-        "fairValue": 43.266
-      },
-      {
-        "borrower": "Accounts Receivable and Inventory",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 194.23699999999997,
-        "fairValue": 185.152
+        "principal": 290.46,
+        "fairValue": 228.418
       },
       {
         "borrower": "Past Due and Accruing",
@@ -55189,22 +54739,13 @@
         "fairValue": 1.834
       },
       {
-        "borrower": "Transfers into Level 33",
+        "borrower": "Other factors",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 36.806,
-        "fairValue": 12.456
-      },
-      {
-        "borrower": "Transfers out of Level 33",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 77.701,
-        "fairValue": 60.561
+        "principal": 114.50699999999999,
+        "fairValue": 73.017
       },
       {
         "borrower": "Cash and due from banks",
@@ -55342,7 +54883,7 @@
         "fairValue": 8.856
       }
     ],
-    "totalFairValue": 3078.3490000000015,
+    "totalFairValue": 3078.3490000000006,
     "totalPrincipal": 4157.086
   },
   {
@@ -55398,15 +54939,6 @@
     "name": "Monroe Capital Corp",
     "filingDate": "2026-03-05",
     "holdings": [
-      {
-        "borrower": "Unitranche secured loans",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 126.24100000000001,
-        "fairValue": 101.57099999999998
-      },
       {
         "borrower": "Aerospace & Defense",
         "industry": "Unknown",
@@ -55903,22 +55435,13 @@
         "fairValue": 1.308
       },
       {
-        "borrower": "Cash and cash equivalents, beginning of year",
+        "borrower": "Net cash provided by (used in) financing activities",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 9.044,
-        "fairValue": 4.958
-      },
-      {
-        "borrower": "Cash and cash equivalents, end of year",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 9.044,
-        "fairValue": 4.958
+        "principal": 18.088,
+        "fairValue": 9.916
       },
       {
         "borrower": "Cash interest paid during the year",
@@ -57226,15 +56749,6 @@
         "fairValue": 32.73
       },
       {
-        "borrower": "United States",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 187.635,
-        "fairValue": 164.61599999999999
-      },
-      {
         "borrower": "International",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
@@ -57267,8 +56781,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 35.18,
-        "fairValue": 34.273
+        "principal": 67.947,
+        "fairValue": 63.907000000000004
       },
       {
         "borrower": "Net realized gain (loss) on investments",
@@ -57278,15 +56792,6 @@
         "maturity": "N/A",
         "principal": 0.686,
         "fairValue": 0.634
-      },
-      {
-        "borrower": "Transfers in (out) of Level 3",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 32.767,
-        "fairValue": 29.634
       },
       {
         "borrower": "Carrying Value",
@@ -57316,8 +56821,8 @@
         "fairValue": 47.721000000000004
       }
     ],
-    "totalFairValue": 2991.72,
-    "totalPrincipal": 3525.8360000000002
+    "totalFairValue": 2725.5330000000004,
+    "totalPrincipal": 3211.9600000000005
   },
   {
     "ticker": "OXSQ",
@@ -57326,22 +56831,13 @@
     "filingDate": "2026-08-10",
     "holdings": [
       {
-        "borrower": "Assets ($ in millions)",
+        "borrower": "6 Months Ended",
         "industry": "Unknown",
         "investmentType": "Subordinated",
         "rate": null,
         "maturity": "N/A",
-        "principal": 787.8000000000001,
-        "fairValue": 745.6999999999999
-      },
-      {
-        "borrower": "Quoted Prices in Active Markets for Identical Assets (Level 1)",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 475,
-        "fairValue": 475
+        "principal": 540.5,
+        "fairValue": 498.4
       },
       {
         "borrower": "Equity and other investments",
@@ -57349,26 +56845,17 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 586,
-        "fairValue": 571.8
+        "principal": 828.3999999999999,
+        "fairValue": 814.1999999999998
       },
       {
-        "borrower": "5.50% Unsecured Notes",
+        "borrower": "Carrying Value",
         "industry": "Unknown",
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 318.4,
-        "fairValue": 310.4
-      },
-      {
-        "borrower": "7.75% Unsecured Notes",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 1152.6,
-        "fairValue": 1047.2
+        "principal": 1471,
+        "fairValue": 1357.5999999999997
       },
       {
         "borrower": "Net unrealized appreciation included in earnings",
@@ -57385,17 +56872,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 24.2,
-        "fairValue": 23.6
-      },
-      {
-        "borrower": "Transfers in and/or (out) of level 3",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 2419.2,
-        "fairValue": 1522.3
+        "principal": 1610.8,
+        "fairValue": 949.8
       },
       {
         "borrower": "Net realized losses included in earnings",
@@ -57448,12 +56926,12 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 132.2,
-        "fairValue": 131.2
+        "principal": 964.7999999999998,
+        "fairValue": 727.3000000000002
       }
     ],
-    "totalFairValue": 5106.200000000001,
-    "totalPrincipal": 6333.2
+    "totalFairValue": 4626.3,
+    "totalPrincipal": 5853.299999999999
   },
   {
     "ticker": "OFS",
@@ -57974,8 +57452,8 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 130.394,
-        "fairValue": 128.97199999999998
+        "principal": 146.936,
+        "fairValue": 145.04199999999997
       },
       {
         "borrower": "U.S. Government agency obligations",
@@ -58010,20 +57488,11 @@
         "investmentType": "First Lien Senior Secured",
         "rate": null,
         "maturity": "N/A",
-        "principal": 49.333,
-        "fairValue": 41.122
+        "principal": 61.410999999999994,
+        "fairValue": 53.069
       },
       {
-        "borrower": "Asset-backed securities",
-        "industry": "Unknown",
-        "investmentType": "First Lien Senior Secured",
-        "rate": null,
-        "maturity": "N/A",
-        "principal": 28.62,
-        "fairValue": 28.017
-      },
-      {
-        "borrower": "Other liabilities",
+        "borrower": "Lease liabilities",
         "industry": "Bank owned life insurance",
         "investmentType": "Equity",
         "rate": null,
@@ -58086,8 +57555,8 @@
         "fairValue": 2.852
       }
     ],
-    "totalFairValue": 329.53399999999993,
-    "totalPrincipal": 348.5380000000001
+    "totalFairValue": 329.534,
+    "totalPrincipal": 348.53800000000007
   },
   {
     "ticker": "ICMB",
