@@ -1,0 +1,548 @@
+{
+  "timestamp": "2026-10-31T16:41:46.456Z",
+  "inputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/edgar-data.json",
+  "outputFile": "/Users/joetoledano/Coding/louiza/capital/src/data/funds-normalized.json",
+  "totalFunds": 41,
+  "totalHoldingsRaw": 6432,
+  "totalHoldingsEnriched": 6432,
+  "industryClassification": {
+    "classified": 3405,
+    "unclassified": 3027,
+    "highConfidence": 542,
+    "mediumConfidence": 2724,
+    "lowConfidence": 3166,
+    "topSectors": [
+      {
+        "sector": "Industrials",
+        "count": 824
+      },
+      {
+        "sector": "Information Technology",
+        "count": 628
+      },
+      {
+        "sector": "Health Care",
+        "count": 556
+      },
+      {
+        "sector": "Consumer Discretionary",
+        "count": 288
+      },
+      {
+        "sector": "Financials",
+        "count": 274
+      },
+      {
+        "sector": "Communication Services",
+        "count": 248
+      },
+      {
+        "sector": "Consumer Staples",
+        "count": 225
+      },
+      {
+        "sector": "Materials",
+        "count": 153
+      },
+      {
+        "sector": "Real Estate",
+        "count": 99
+      },
+      {
+        "sector": "Energy",
+        "count": 87
+      }
+    ]
+  },
+  "borrowerNormalization": {
+    "uniqueRaw": 5771,
+    "uniqueNormalized": 5310,
+    "potentialDuplicates": 897,
+    "duplicateGroups": [
+      {
+        "canonicalName": "First Lien Revolving Loan",
+        "aliases": [
+          "First-lien revolving loan ($4,287 par, due 11/2029)",
+          "First-lien revolving loan (GBP 593 par, due 9/2028)",
+          "First-lien revolving loan ($32,713 par, due 6/2027)",
+          "First-lien revolving loan ($2,916 par, due 12/2027)",
+          "First-lien revolving loan ($27,943 par, due 6/2026)",
+          "First-lien revolving loan ($1,203 par, due 2/2031)",
+          "First-lien revolving loan ($6,887 par, due 5/2029)",
+          "First-lien revolving loan ($3,177 par, due 1/2032)",
+          "First-lien revolving loan ($945 par, due 10/2031)",
+          "First-lien revolving loan ($580 par, due 12/2029)",
+          "First-lien revolving loan ($294 par, due 10/2031)",
+          "First-lien revolving loan ($902 par, due 10/2027)",
+          "First-lien revolving loan ($528 par, due 9/2031)",
+          "First-lien revolving loan ($669 par, due 7/2027)",
+          "First-lien revolving loan ($899 par, due 5/2027)",
+          "First-lien revolving loan ($409 par, due 7/2030)",
+          "First-lien loan (GBP 9,953 par, due 12/2030)",
+          "First-lien loan (EUR 5,216 par, due 7/2031)",
+          "First-lien loan (EUR 4,392 par, due 7/2031)",
+          "First-lien loan ($13,820 par, due 8/2031)",
+          "First-lien loan ($52,499 par, due 6/2031)",
+          "First-lien loan ($13,890 par, due 8/2031)",
+          "First-lien loan ($49,169 par, due 6/2031)",
+          "First-lien loan ($1,848 par, due 4/2031)",
+          "First-lien loan (GBP 58 par, due 8/2030)",
+          "First-lien loan ($3,764 par, due 1/2031)",
+          "First-lien loan ($1,327 par, due 9/2026)",
+          "First-lien loan ($988 par, due 10/2029)"
+        ],
+        "count": 28
+      },
+      {
+        "canonicalName": "Common Equity",
+        "aliases": [
+          "Common Equity (52,763 Class A units)",
+          "Common Equity (3,695 Class B units)",
+          "Common Equity (1,290 Class A units)",
+          "Common equity, warrants and other",
+          "Common Equity - Class A-1 Common",
+          "Common LP Units (23.8 units)",
+          "Common Equity (12,663 Units)",
+          "Common Equity - Common Stock",
+          "Common Equity (1,135 units)",
+          "Common equity and warrants",
+          "Common Equity (499 units)",
+          "Common equity & warrants",
+          "Common Equity"
+        ],
+        "count": 13
+      },
+      {
+        "canonicalName": "Leia Acquisition",
+        "aliases": [
+          "Leia Acquisition Ltd. (fka Swift Worldwide Resources Holdco Ltd)",
+          "Gainwell Acquisition Corp. (Milano Acquisition Corp)",
+          "Helix Acquisition Holdings, Inc.",
+          "Logix Acquisition Company, LLC",
+          "Bobtail AcquisitionCo, LLC",
+          "Tolemar Acquisition, Inc.",
+          "Vista Acquisition, LLC",
+          "Rail Acquisitions LLC",
+          "BLI Acquisition, LLC"
+        ],
+        "count": 9
+      },
+      {
+        "canonicalName": "Warrants",
+        "aliases": [
+          "Warrants (to purchase 50,456 Class A Common Units of Marine One Holdco, LLC)",
+          "Warrants (to purchase Class A Common Units of Marine One Holdco, LLC)",
+          "Warrants (warrants to purchase up to $73,000 in common stock)",
+          "Warrants - Class D (0.2471 units)",
+          "Warrants of EF Holdco, LLC",
+          "Warrants (3,841 warrants)",
+          "Warrants - Warrants",
+          "Warrants"
+        ],
+        "count": 8
+      },
+      {
+        "canonicalName": "Growth Capital Loan",
+        "aliases": [
+          "Growth Capital Loan (Prime + 5.75% PIK interest, 13.25% floor, 4.52% EOT payment)",
+          "Growth Capital Loan (4.97% cash interest + 4.78% PIK interest, 6.75% EOT payment)",
+          "Growth Capital Loan (12.00% PIK interest, 5.48% EOT payment)",
+          "Growth Capital Loan (9.75% cash interest, 6.75% EOT payment)",
+          "Growth Capital Loan (6.00% PIK interest, 7.50% EOT payment)",
+          "Growth Capital Loan (9.00% PIK interest)",
+          "Growth Capital Loan"
+        ],
+        "count": 7
+      },
+      {
+        "canonicalName": "Preferred LP Units",
+        "aliases": [
+          "Preferred LP Units (71,000 units) (SOFR + 6.00%, 9.7% Cash)",
+          "Preferred Units (47,074,638 units)",
+          "Preferred Units (80,539,543 units)",
+          "Preferred A Units",
+          "Preferred B Units",
+          "Preferred equity",
+          "Preferred Equity"
+        ],
+        "count": 7
+      },
+      {
+        "canonicalName": "Tiger Acquisition",
+        "aliases": [
+          "Tiger Acquisition, LLC (dba Sabre Industries)",
+          "Team Acquisition Corporation",
+          "Pioneer AcquisitionCo, LLC",
+          "Zenith AcquisitionCo, LLC",
+          "Tempo Acquisition, LLC",
+          "Tiger Acquisition LLC",
+          "RHI Acquisition LLC"
+        ],
+        "count": 7
+      },
+      {
+        "canonicalName": "Structured Credit",
+        "aliases": [
+          "Structured Credit ($5,000 par, due 1/2038)",
+          "Structured Credit ($3,000 par, due 1/2039)",
+          "Structured Credit Partners JV, LLC",
+          "Structured credit investments",
+          "Structured Finance (A)",
+          "Structured products",
+          "Structured Finance"
+        ],
+        "count": 7
+      },
+      {
+        "canonicalName": "Net Change IN Unrealized Appreciation ON Investment Transactions Due TO Gcic/gbdc 3 A",
+        "aliases": [
+          "Net change in unrealized appreciation (depreciation) on investment transactions due to GCIC/GBDC 3 a",
+          "Net change in unrealized appreciation (depreciation) of investments",
+          "Net change in unrealized (depreciation) appreciation of investments",
+          "Net change in unrealized appreciation (depreciation)",
+          "Net change in unrealized appreciation on investments",
+          "Net change in unrealized appreciation/(depreciation)"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Series A Preferred Units TO Spartan Energy",
+        "aliases": [
+          "Series A Preferred Units to Spartan Energy Holdings, Inc.",
+          "Series A Preferred Units of TCSPV Holdings IV, LLC",
+          "Series A Preferred Interests (802,479 units)",
+          "Series A Preferred Units of BFC-SDR, LLC",
+          "Series B Preferred Units of BFC-SDR, LLC",
+          "Series A Preferred Interests"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Blst Operating",
+        "aliases": [
+          "BLST Operating Company, LLC (139,883 Class A units)",
+          "BLST Operating Company, LLC",
+          "STS Operating, Inc.",
+          "ATS Operating, LLC",
+          "ATS OPERATING, LLC",
+          "STS Operating Inc"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Spar",
+        "aliases": [
+          "Sparus Holdings, LLC (f/k/a Sparus Holdings, Inc.)",
+          "Sparq Holdings, Inc. (300,000 common units)",
+          "Sparq Holdings, Inc. (Revolver)",
+          "Sparta UK Bidco, Ltd.",
+          "Sparq Holdings, Inc.",
+          "SPAU Holdings, LLC"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Accretion OF Discounts ON Notes Issued",
+        "aliases": [
+          "Accretion of discounts (premium) on notes issued",
+          "Accretion of discount (amortization of premium)",
+          "Accretion of discounts and premiums, net",
+          "Accretion of discounts on notes issued",
+          "Accretion of discounts",
+          "Accretion of discount"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Net Realized /gains Included IN Earnings",
+        "aliases": [
+          "Net realized (losses)/gains included in earnings",
+          "Net realized and unrealized (losses) gains",
+          "Net realized losses included in earnings",
+          "Net realized gains (losses)",
+          "Net realized gain (loss)(A)",
+          "Net realized gain (loss)"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Kbhs Acquisition",
+        "aliases": [
+          "KBHS Acquisition, LLC (d/b/a Alita Care, LLC)",
+          "HS4 Acquisitionco, Inc. (Revolver)",
+          "KPSKY Acquisition, Inc.",
+          "HS4 Acquisitionco, Inc.",
+          "GS Acquisitionco, Inc.",
+          "SG Acquisition, Inc."
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Transfers IN And/or OF Level 3",
+        "aliases": [
+          "Transfers in and/or (out) of level 3",
+          "Transfers in (out) of Level 3",
+          "Transfers into Level 33",
+          "Transfers into Level 3",
+          "Transfers in (a)(c)",
+          "Transfers in (a)"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Class A Units",
+        "aliases": [
+          "Class A Units (925,796,475 units)",
+          "Class B Units (1,124,813 units)",
+          "Class A Units (222,886 units)",
+          "Class AA Units (19,093 units)",
+          "Class P Units",
+          "Class A Units"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Bayside",
+        "aliases": [
+          "Bayside Parent, LLC (dba Pro-PT)",
+          "Bayside Parent, LLC (equity)",
+          "Bayside Parent, LLC (loan)",
+          "Bayside Parent, LLC",
+          "Bayside Opco, LLC+",
+          "Bayside Opco, LLC"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "6.875% Notes Due 2029",
+        "aliases": [
+          "6.875% Notes due 2029",
+          "6.125% Notes due 2030",
+          "6.125% Notes due 2031",
+          "8.625% Notes due 2025",
+          "2.625% Notes due 2027",
+          "7.875% Notes due 2029"
+        ],
+        "count": 6
+      },
+      {
+        "canonicalName": "Money Market Funds",
+        "aliases": [
+          "Money market funds (included in cash equivalents and restricted cash equivalents)",
+          "Money market securities",
+          "Money market funds",
+          "Money market rate",
+          "Money Market Fund"
+        ],
+        "count": 5
+      }
+    ]
+  },
+  "perFundQuality": [
+    {
+      "ticker": "ARCC",
+      "score": 88,
+      "holdings": 644
+    },
+    {
+      "ticker": "BXSL",
+      "score": 94,
+      "holdings": 369
+    },
+    {
+      "ticker": "FSK",
+      "score": 75,
+      "holdings": 299
+    },
+    {
+      "ticker": "OBDC",
+      "score": 13,
+      "holdings": 6
+    },
+    {
+      "ticker": "MAIN",
+      "score": 68,
+      "holdings": 225
+    },
+    {
+      "ticker": "GBDC",
+      "score": 32,
+      "holdings": 666
+    },
+    {
+      "ticker": "HTGC",
+      "score": 54,
+      "holdings": 181
+    },
+    {
+      "ticker": "PSEC",
+      "score": 66,
+      "holdings": 176
+    },
+    {
+      "ticker": "TSLX",
+      "score": 45,
+      "holdings": 206
+    },
+    {
+      "ticker": "OCSL",
+      "score": 76,
+      "holdings": 382
+    },
+    {
+      "ticker": "NMFC",
+      "score": 71,
+      "holdings": 197
+    },
+    {
+      "ticker": "ORCC",
+      "score": 63,
+      "holdings": 313
+    },
+    {
+      "ticker": "GSBD",
+      "score": 54,
+      "holdings": 61
+    },
+    {
+      "ticker": "BBDC",
+      "score": 39,
+      "holdings": 391
+    },
+    {
+      "ticker": "BCSF",
+      "score": 66,
+      "holdings": 309
+    },
+    {
+      "ticker": "TRIN",
+      "score": 50,
+      "holdings": 215
+    },
+    {
+      "ticker": "CSWC",
+      "score": 59,
+      "holdings": 202
+    },
+    {
+      "ticker": "TCPC",
+      "score": 14,
+      "holdings": 12
+    },
+    {
+      "ticker": "CGBD",
+      "score": 66,
+      "holdings": 309
+    },
+    {
+      "ticker": "PFLT",
+      "score": 64,
+      "holdings": 89
+    },
+    {
+      "ticker": "MFIC",
+      "score": 13,
+      "holdings": 19
+    },
+    {
+      "ticker": "FDUS",
+      "score": 43,
+      "holdings": 58
+    },
+    {
+      "ticker": "TPVG",
+      "score": 62,
+      "holdings": 90
+    },
+    {
+      "ticker": "SLRC",
+      "score": 45,
+      "holdings": 2
+    },
+    {
+      "ticker": "CCAP",
+      "score": 13,
+      "holdings": 6
+    },
+    {
+      "ticker": "HRZN",
+      "score": 19,
+      "holdings": 69
+    },
+    {
+      "ticker": "WHF",
+      "score": 13,
+      "holdings": 8
+    },
+    {
+      "ticker": "GLAD",
+      "score": 71,
+      "holdings": 114
+    },
+    {
+      "ticker": "GAIN",
+      "score": 44,
+      "holdings": 347
+    },
+    {
+      "ticker": "SCM",
+      "score": 13,
+      "holdings": 4
+    },
+    {
+      "ticker": "SAR",
+      "score": 22,
+      "holdings": 94
+    },
+    {
+      "ticker": "NEWT",
+      "score": 13,
+      "holdings": 51
+    },
+    {
+      "ticker": "CION",
+      "score": 28,
+      "holdings": 1
+    },
+    {
+      "ticker": "RWAY",
+      "score": 13,
+      "holdings": 2
+    },
+    {
+      "ticker": "MRCC",
+      "score": 61,
+      "holdings": 213
+    },
+    {
+      "ticker": "OXSQ",
+      "score": 13,
+      "holdings": 14
+    },
+    {
+      "ticker": "OFS",
+      "score": 13,
+      "holdings": 4
+    },
+    {
+      "ticker": "PFX",
+      "score": 13,
+      "holdings": 3
+    },
+    {
+      "ticker": "LIEN",
+      "score": 50,
+      "holdings": 45
+    },
+    {
+      "ticker": "NCDL",
+      "score": 17,
+      "holdings": 14
+    },
+    {
+      "ticker": "ICMB",
+      "score": 13,
+      "holdings": 22
+    }
+  ]
+}

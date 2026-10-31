@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useMemo, useState, useCallback } from 'react';
-import ReactECharts from 'echarts-for-react';
-import { colors, chartColors, echartsTheme, formatters } from '@/lib/design-tokens';
+import { useMemo, useState, useCallback } from "react";
+import ReactECharts from "echarts-for-react";
+import { colors, chartColors, echartsTheme, formatters } from "@/lib/design-tokens";
 
 interface DonutDataItem {
   label: string;
@@ -37,9 +37,7 @@ export function EChartsDonut({
   const [hiddenItems, setHiddenItems] = useState<Set<string>>(new Set());
 
   const total = useMemo(() => {
-    return data
-      .filter((d) => !hiddenItems.has(d.label))
-      .reduce((sum, d) => sum + d.value, 0);
+    return data.filter((d) => !hiddenItems.has(d.label)).reduce((sum, d) => sum + d.value, 0);
   }, [data, hiddenItems]);
 
   const chartData = useMemo(() => {
@@ -67,12 +65,15 @@ export function EChartsDonut({
 
   const option = useMemo(() => {
     const effectiveCenterLabel = centerLabel || {
-      title: 'Total',
+      title: "Total",
       value: formatValue(total),
     };
 
     return {
       ...echartsTheme,
+      legend: {
+        show: false, // We use custom legend below
+      },
       title: title
         ? {
             text: title,
@@ -83,8 +84,13 @@ export function EChartsDonut({
         : undefined,
       tooltip: {
         ...echartsTheme.tooltip,
-        trigger: 'item',
-        formatter: (params: { name: string; value: number; percent: number; data: { originalValue: number } }) => {
+        trigger: "item",
+        formatter: (params: {
+          name: string;
+          value: number;
+          percent: number;
+          data: { originalValue: number };
+        }) => {
           const displayValue = params.data.originalValue;
           return `
             <div style="font-size: 12px; color: ${colors.textSecondary};">
@@ -101,13 +107,13 @@ export function EChartsDonut({
       },
       series: [
         {
-          type: 'pie',
-          radius: ['55%', '80%'],
-          center: ['50%', '55%'],
+          type: "pie",
+          radius: ["55%", "80%"],
+          center: ["50%", "55%"],
           avoidLabelOverlap: false,
           label: {
             show: true,
-            position: 'center',
+            position: "center",
             formatter: () => {
               return `{title|${effectiveCenterLabel.title}}\n{value|${effectiveCenterLabel.value}}`;
             },
@@ -135,7 +141,7 @@ export function EChartsDonut({
             scaleSize: 5,
             itemStyle: {
               shadowBlur: 15,
-              shadowColor: 'rgba(0, 0, 0, 0.3)',
+              shadowColor: "rgba(0, 0, 0, 0.3)",
             },
           },
           data: chartData,
@@ -161,10 +167,10 @@ export function EChartsDonut({
         option={option}
         style={{ height: showLegend ? height - 60 : height }}
         onEvents={onSliceClick ? handleEvents : undefined}
-        opts={{ renderer: 'canvas' }}
+        opts={{ renderer: "canvas" }}
       />
       {showLegend && (
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-2 px-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-1.5 mt-3 px-2">
           {data.map((item, index) => {
             const isHidden = hiddenItems.has(item.label);
             const color = item.color || chartColors[index % chartColors.length];
@@ -172,15 +178,15 @@ export function EChartsDonut({
               <button
                 key={item.label}
                 onClick={() => handleLegendClick(item.label)}
-                className={`flex items-center gap-1.5 text-xs transition-opacity ${
-                  isHidden ? 'opacity-40' : 'opacity-100'
+                className={`flex items-center gap-1.5 text-[11px] transition-opacity text-left ${
+                  isHidden ? "opacity-40" : "opacity-100"
                 } hover:opacity-80`}
               >
                 <span
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  className="w-2 h-2 rounded-full flex-shrink-0"
                   style={{ backgroundColor: color }}
                 />
-                <span className="text-zinc-400 truncate max-w-[100px]">{item.label}</span>
+                <span className="text-zinc-400 truncate">{item.label}</span>
               </button>
             );
           })}

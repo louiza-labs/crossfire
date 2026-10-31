@@ -50,7 +50,7 @@ const columns = [
   }),
   columnHelper.accessor("ticker", {
     header: "Fund",
-    cell: info => (
+    cell: (info) => (
       <Link href={`/funds/${info.row.original.id}`} className="group">
         <span className="ticker-badge group-hover:bg-cyan-500/25 transition-colors">
           {info.getValue()}
@@ -60,19 +60,17 @@ const columns = [
   }),
   columnHelper.accessor("name", {
     header: "Name",
-    cell: info => (
-      <span className="text-zinc-400 text-sm truncate max-w-[200px] block">
-        {info.getValue()}
-      </span>
+    cell: (info) => (
+      <span className="text-zinc-400 text-sm truncate max-w-[200px] block">{info.getValue()}</span>
     ),
   }),
   columnHelper.accessor("managerName", {
     header: "Manager",
-    cell: info => <span className="text-zinc-500 text-sm">{info.getValue()}</span>,
+    cell: (info) => <span className="text-zinc-500 text-sm">{info.getValue()}</span>,
   }),
   columnHelper.accessor("type", {
     header: "Type",
-    cell: info => (
+    cell: (info) => (
       <span className="text-[10px] bg-zinc-800/80 text-zinc-400 px-1.5 py-0.5 rounded font-medium">
         {info.getValue()}
       </span>
@@ -80,7 +78,7 @@ const columns = [
   }),
   columnHelper.accessor("totalAssets", {
     header: () => <span className="text-right block">Total Assets</span>,
-    cell: info => (
+    cell: (info) => (
       <span className="text-right block tabular-nums font-medium text-zinc-200">
         {formatters.currency(info.getValue() * 1e6)}
       </span>
@@ -89,15 +87,13 @@ const columns = [
   }),
   columnHelper.accessor("holdingCount", {
     header: () => <span className="text-right block">Positions</span>,
-    cell: info => (
-      <span className="text-right block tabular-nums text-zinc-400">
-        {info.getValue()}
-      </span>
+    cell: (info) => (
+      <span className="text-right block tabular-nums text-zinc-400">{info.getValue()}</span>
     ),
   }),
   columnHelper.accessor("avgRate", {
     header: () => <span className="text-right block">Avg Rate</span>,
-    cell: info => (
+    cell: (info) => (
       <span className="text-right block tabular-nums text-zinc-400">
         {formatters.percent(info.getValue())}
       </span>
@@ -105,10 +101,8 @@ const columns = [
   }),
   columnHelper.accessor("topIndustry", {
     header: "Top Industry",
-    cell: info => (
-      <span className="text-zinc-500 text-xs truncate max-w-[140px] block">
-        {info.getValue()}
-      </span>
+    cell: (info) => (
+      <span className="text-zinc-500 text-xs truncate max-w-[140px] block">{info.getValue()}</span>
     ),
   }),
 ];
@@ -120,23 +114,26 @@ export default function FundsPage() {
   const stats = useMemo(() => getStats(), []);
 
   const data = useMemo(() => {
-    return funds.map(fund => {
-      const fundHoldings = holdings.filter(h => h.fundId === fund.id);
-      const avgRate = fundHoldings.length > 0
-        ? fundHoldings.reduce((sum, h) => sum + h.rate, 0) / fundHoldings.length
-        : 0;
+    return funds.map((fund) => {
+      const fundHoldings = holdings.filter((h) => h.fundId === fund.id);
+      const avgRate =
+        fundHoldings.length > 0
+          ? fundHoldings.reduce((sum, h) => sum + h.rate, 0) / fundHoldings.length
+          : 0;
 
-      // Calculate top industry
+      // Calculate top industry (excluding Unknown/Unclassified)
       const industryMap = new Map<string, number>();
-      fundHoldings.forEach(h => {
-        industryMap.set(h.industry, (industryMap.get(h.industry) || 0) + h.fairValue);
+      fundHoldings.forEach((h) => {
+        if (h.industry && h.industry !== "Unknown" && h.industry !== "Unclassified") {
+          industryMap.set(h.industry, (industryMap.get(h.industry) || 0) + h.fairValue);
+        }
       });
-      const topIndustry = [...industryMap.entries()]
-        .sort((a, b) => b[1] - a[1])[0]?.[0] || "N/A";
+      const sortedIndustries = [...industryMap.entries()].sort((a, b) => b[1] - a[1]);
+      const topIndustry = sortedIndustries[0]?.[0] || "—";
 
-      const holdingsWithBorrower = fundHoldings.map(h => ({
+      const holdingsWithBorrower = fundHoldings.map((h) => ({
         ...h,
-        borrowerName: borrowers.find(b => b.id === h.borrowerId)?.name || "Unknown",
+        borrowerName: borrowers.find((b) => b.id === h.borrowerId)?.name || "Unknown",
       }));
 
       return {
@@ -159,21 +156,22 @@ export default function FundsPage() {
     return [...data]
       .sort((a, b) => b.totalAssets - a.totalAssets)
       .slice(0, 10)
-      .map(f => ({
+      .map((f) => ({
         label: f.ticker,
         value: f.totalAssets * 1e6,
       }));
   }, [data]);
 
-  // Industry concentration donut
+  // Industry concentration donut (excluding Unknown/Unclassified)
   const industryChartData = useMemo(() => {
-    const industries = getIndustryConcentration().slice(0, 8);
-    const otherTotal = getIndustryConcentration()
-      .slice(8)
-      .reduce((sum, i) => sum + i.totalExposure, 0);
+    const allIndustries = getIndustryConcentration().filter(
+      (i) => i.industry !== "Unknown" && i.industry !== "Unclassified"
+    );
+    const topIndustries = allIndustries.slice(0, 8);
+    const otherTotal = allIndustries.slice(8).reduce((sum, i) => sum + i.totalExposure, 0);
 
-    const result = industries.map((ind, i) => ({
-      label: ind.industry,
+    const result = topIndustries.map((ind, i) => ({
+      label: ind.industry.length > 25 ? ind.industry.slice(0, 25) + "…" : ind.industry,
       value: ind.totalExposure * 1e6,
       color: chartColors[i % chartColors.length],
     }));
@@ -227,7 +225,9 @@ export default function FundsPage() {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-4">Top 10 Funds by Assets</h3>
+            <h3 className="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-4">
+              Top 10 Funds by Assets
+            </h3>
             <EChartsBar
               data={fundAssetChartData}
               height={260}
@@ -236,12 +236,10 @@ export default function FundsPage() {
             />
           </div>
           <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-4">Industry Concentration</h3>
-            <EChartsDonut
-              data={industryChartData}
-              height={300}
-              formatValue={formatters.currency}
-            />
+            <h3 className="text-xs font-medium text-zinc-400 uppercase tracking-wider mb-4">
+              Industry Concentration
+            </h3>
+            <EChartsDonut data={industryChartData} height={300} formatValue={formatters.currency} />
           </div>
         </div>
 
@@ -250,23 +248,26 @@ export default function FundsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                {table.getHeaderGroups().map(headerGroup => (
+                {table.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id} className="border-b border-zinc-800 bg-zinc-900/80">
-                    {headerGroup.headers.map(header => (
+                    {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
                         className={`px-4 py-2.5 text-left text-[10px] font-medium text-zinc-500 uppercase tracking-wider ${
-                          header.column.getCanSort() ? "cursor-pointer hover:text-zinc-300 transition-colors select-none" : ""
+                          header.column.getCanSort()
+                            ? "cursor-pointer hover:text-zinc-300 transition-colors select-none"
+                            : ""
                         }`}
                         onClick={header.column.getToggleSortingHandler()}
                       >
                         <span className="inline-flex items-center gap-1">
                           {flexRender(header.column.columnDef.header, header.getContext())}
-                          {header.column.getIsSorted() && (
-                            header.column.getIsSorted() === "asc"
-                              ? <ChevronUp className="w-3 h-3" />
-                              : <ChevronDown className="w-3 h-3" />
-                          )}
+                          {header.column.getIsSorted() &&
+                            (header.column.getIsSorted() === "asc" ? (
+                              <ChevronUp className="w-3 h-3" />
+                            ) : (
+                              <ChevronDown className="w-3 h-3" />
+                            ))}
                         </span>
                       </th>
                     ))}
@@ -274,10 +275,12 @@ export default function FundsPage() {
                 ))}
               </thead>
               <tbody>
-                {table.getRowModel().rows.map(row => (
+                {table.getRowModel().rows.map((row) => (
                   <Fragment key={row.id}>
-                    <tr className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors ${row.getIsExpanded() ? "bg-zinc-800/40" : ""}`}>
-                      {row.getVisibleCells().map(cell => (
+                    <tr
+                      className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors ${row.getIsExpanded() ? "bg-zinc-800/40" : ""}`}
+                    >
+                      {row.getVisibleCells().map((cell) => (
                         <td key={cell.id} className="px-4 py-2.5 text-sm">
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </td>
@@ -321,7 +324,7 @@ const holdingColumnHelper = createColumnHelper<HoldingRow>();
 const holdingColumns = [
   holdingColumnHelper.accessor("borrowerName", {
     header: "Company",
-    cell: info => (
+    cell: (info) => (
       <Link
         href={`/borrowers/${info.row.original.borrowerId}`}
         className="text-zinc-200 hover:text-cyan-400 transition-colors"
@@ -332,15 +335,13 @@ const holdingColumns = [
   }),
   holdingColumnHelper.accessor("industry", {
     header: "Industry",
-    cell: info => (
-      <span className="text-zinc-500 text-xs max-w-48 truncate block">
-        {info.getValue()}
-      </span>
+    cell: (info) => (
+      <span className="text-zinc-500 text-xs max-w-48 truncate block">{info.getValue()}</span>
     ),
   }),
   holdingColumnHelper.accessor("principal", {
     header: () => <span className="text-right block">Principal</span>,
-    cell: info => (
+    cell: (info) => (
       <span className="text-right block tabular-nums text-zinc-300">
         {formatters.currency(info.getValue() * 1e6)}
       </span>
@@ -348,11 +349,12 @@ const holdingColumns = [
   }),
   holdingColumnHelper.accessor("fairValue", {
     header: () => <span className="text-right block">Fair Value</span>,
-    cell: info => {
+    cell: (info) => {
       const fv = info.getValue();
       const principal = info.row.original.principal;
       const diff = fv - principal;
-      const colorClass = diff > 0.1 ? "text-emerald-400" : diff < -0.1 ? "text-red-400" : "text-zinc-400";
+      const colorClass =
+        diff > 0.1 ? "text-emerald-400" : diff < -0.1 ? "text-red-400" : "text-zinc-400";
       return (
         <span className={`text-right block tabular-nums ${colorClass}`}>
           {formatters.currency(fv * 1e6)}
@@ -362,7 +364,7 @@ const holdingColumns = [
   }),
   holdingColumnHelper.accessor("rate", {
     header: () => <span className="text-right block">Rate</span>,
-    cell: info => (
+    cell: (info) => (
       <span className="text-right block tabular-nums text-zinc-400">
         {info.getValue() > 0 ? formatters.percent(info.getValue()) : "—"}
       </span>
@@ -370,7 +372,7 @@ const holdingColumns = [
   }),
   holdingColumnHelper.accessor("maturity", {
     header: "Maturity",
-    cell: info => (
+    cell: (info) => (
       <span className="text-zinc-500 text-sm">
         {info.getValue() ? formatters.dateShort(info.getValue()) : "—"}
       </span>
@@ -402,28 +404,34 @@ function HoldingsSubTable({ holdings }: { holdings: HoldingRow[] }) {
           Holdings ({holdings.length})
         </span>
         <span className="text-xs text-zinc-500">
-          Total: <span className="text-zinc-300 tabular-nums">{formatters.currency(totalValue * 1e6)}</span>
+          Total:{" "}
+          <span className="text-zinc-300 tabular-nums">
+            {formatters.currency(totalValue * 1e6)}
+          </span>
         </span>
       </div>
       <table className="w-full text-sm">
         <thead>
-          {table.getHeaderGroups().map(headerGroup => (
+          {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="text-zinc-500 text-[10px] uppercase tracking-wider">
-              {headerGroup.headers.map(header => (
+              {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
                   className={`py-1.5 px-2 first:pl-0 text-left ${
-                    header.column.getCanSort() ? "cursor-pointer hover:text-zinc-300 transition-colors" : ""
+                    header.column.getCanSort()
+                      ? "cursor-pointer hover:text-zinc-300 transition-colors"
+                      : ""
                   }`}
                   onClick={header.column.getToggleSortingHandler()}
                 >
                   <span className="inline-flex items-center gap-1">
                     {flexRender(header.column.columnDef.header, header.getContext())}
-                    {header.column.getIsSorted() && (
-                      header.column.getIsSorted() === "asc"
-                        ? <ChevronUp className="w-2.5 h-2.5" />
-                        : <ChevronDown className="w-2.5 h-2.5" />
-                    )}
+                    {header.column.getIsSorted() &&
+                      (header.column.getIsSorted() === "asc" ? (
+                        <ChevronUp className="w-2.5 h-2.5" />
+                      ) : (
+                        <ChevronDown className="w-2.5 h-2.5" />
+                      ))}
                   </span>
                 </th>
               ))}
@@ -431,9 +439,12 @@ function HoldingsSubTable({ holdings }: { holdings: HoldingRow[] }) {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id} className="border-t border-zinc-800/30 hover:bg-zinc-800/20 transition-colors">
-              {row.getVisibleCells().map(cell => (
+          {table.getRowModel().rows.map((row) => (
+            <tr
+              key={row.id}
+              className="border-t border-zinc-800/30 hover:bg-zinc-800/20 transition-colors"
+            >
+              {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="py-1.5 px-2 first:pl-0">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
