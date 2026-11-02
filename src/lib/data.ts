@@ -275,6 +275,15 @@ const INVALID_PATTERNS = [
   /^(metals\s*&?\s*mining)$/i,
   /^(paper\s*&?\s*forest)/i,
   /^(independent\s+power)/i,
+  // Date patterns - sometimes dates appear as borrower names or industries
+  /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d/i,
+  /^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}$/i,
+  /^\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}$/i,
+  /^(q[1-4]|fy)\s*\d{2,4}/i,
+  /^\d{4}$/i,
+  /^(fiscal\s+)?(year|quarter)\s+\d/i,
+  /^as\s+of\s+/i,
+  /^\d{1,2}\s+(january|february|march|april|may|june|july|august|september|october|november|december)/i,
 ];
 
 function isInvalidBorrower(name: string): boolean {
@@ -283,12 +292,26 @@ function isInvalidBorrower(name: string): boolean {
   return INVALID_PATTERNS.some((p) => p.test(lower));
 }
 
+// Date patterns that should not be valid industries
+const DATE_PATTERNS = [
+  /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d/i,
+  /^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}$/i,
+  /^\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}$/i,
+  /^(q[1-4]|fy)\s*\d{2,4}/i,
+  /^\d{4}$/i,
+  /^(fiscal\s+)?(year|quarter)\s+\d/i,
+  /^as\s+of\s+/i,
+  /^\d{1,2}\s+(january|february|march|april|may|june|july|august|september|october|november|december)/i,
+];
+
 // Check if a holding has a valid industry classification
 function hasValidIndustry(industry: string | undefined): boolean {
   if (!industry) return false;
   const lower = industry.toLowerCase().trim();
   // Filter out entries with Unknown/Unclassified industry - these are likely not real borrowers
   if (lower === "unknown" || lower === "unclassified" || lower === "") return false;
+  // Filter out date-like values
+  if (DATE_PATTERNS.some((pattern) => pattern.test(industry))) return false;
   return true;
 }
 

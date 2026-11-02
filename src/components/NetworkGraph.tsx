@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback, useState, useMemo } from "react";
 import * as THREE from "three";
+import SpriteText from "three-spritetext";
 
 // Throttle helper - limits how often a function can fire
 function throttle<T extends (...args: Parameters<T>) => void>(fn: T, ms: number): T {
@@ -456,10 +457,16 @@ export function NetworkGraph({
               }
 
               if (n.type === "fund" && n.ticker) {
-                const labelSprite = createTextSprite(n.ticker, color, 48);
-                labelSprite.position.set(0, coreSize + 12, 0);
-                labelSprite.name = "label";
-                group.add(labelSprite);
+                // Clean minimal label using SpriteText
+                const label = new SpriteText(n.ticker, 8, "#ffffff");
+                label.fontFace = "Inter, system-ui, sans-serif";
+                label.fontWeight = "600";
+                label.backgroundColor = false; // Transparent background
+                label.strokeWidth = 0.5; // Subtle outline for readability
+                label.strokeColor = "rgba(0,0,0,0.8)";
+                label.position.set(0, coreSize + 8, 0);
+                label.name = "label";
+                group.add(label);
               }
 
               // Cache on the node itself
@@ -1041,45 +1048,6 @@ function createGlowTextureInternal(color: string): THREE.CanvasTexture {
 
   const texture = new THREE.CanvasTexture(canvas);
   return texture;
-}
-
-// Create text sprite for labels
-function createTextSprite(text: string, color: string, size: number): any {
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d")!;
-
-  canvas.width = 512;
-  canvas.height = 128;
-
-  ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-  ctx.beginPath();
-  ctx.roundRect(128, 32, 256, 64, 8);
-  ctx.fill();
-
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 15;
-  ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 0;
-
-  ctx.font = `700 ${size}px "Inter", system-ui, sans-serif`;
-  ctx.fillStyle = "#ffffff";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-
-  ctx.fillText(text, 256, 64);
-  ctx.fillText(text, 256, 64);
-
-  const texture = new THREE.CanvasTexture(canvas);
-  const material = new THREE.SpriteMaterial({
-    map: texture,
-    transparent: true,
-    depthWrite: false,
-  });
-  const sprite = new THREE.Sprite(material);
-  sprite.scale.set(50, 12.5, 1);
-  sprite.renderOrder = 999;
-
-  return sprite;
 }
 
 // Helper function to generate graph data

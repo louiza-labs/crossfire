@@ -127,25 +127,26 @@ export default function Home() {
     !filters.showFundLinks ||
     !filters.showSingleFundBorrowers;
 
-  // Intro animation sequence
+  // Intro animation sequence - waits for user to click explore
   useEffect(() => {
     const phases = [
-      { delay: 400, phase: 1 },
-      { delay: 1200, phase: 2 },
-      { delay: 2400, phase: 3 },
-      { delay: 3200, phase: 4 },
+      { delay: 300, phase: 1 },
+      { delay: 800, phase: 2 },
+      { delay: 1400, phase: 3 },
     ];
 
     const timeouts = phases.map(({ delay, phase }) =>
       setTimeout(() => setIntroPhase(phase), delay)
     );
 
-    const hideTimeout = setTimeout(() => setShowIntro(false), 3500);
-
     return () => {
       timeouts.forEach(clearTimeout);
-      clearTimeout(hideTimeout);
     };
+  }, []);
+
+  const handleExplore = useCallback(() => {
+    setIntroPhase(4);
+    setTimeout(() => setShowIntro(false), 500);
   }, []);
 
   const handleNodeClick = useCallback((node: GraphNode) => {
@@ -175,24 +176,98 @@ export default function Home() {
       {/* Intro overlay */}
       {showIntro && (
         <div
-          className={`fixed inset-0 z-50 bg-black flex items-center justify-center transition-opacity duration-700 ${
-            introPhase >= 3 ? "opacity-0 pointer-events-none" : "opacity-100"
+          className={`fixed inset-0 z-50 bg-black flex flex-col items-center justify-center transition-opacity duration-500 ${
+            introPhase >= 4 ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
         >
-          <div className="text-center space-y-4">
-            <h1
-              className={`text-5xl md:text-7xl font-light tracking-tight text-white transition-all duration-700 ${
+          {/* Center content */}
+          <div className="text-center space-y-6">
+            <div
+              className={`transition-all duration-700 ${
                 introPhase >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Crossfire
-            </h1>
-            <p
-              className={`text-sm md:text-base text-zinc-600 font-mono transition-all duration-700 ${
-                introPhase >= 2 ? "opacity-100" : "opacity-0"
+              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-white">
+                Crossfire
+              </h1>
+              <p className="text-[10px] md:text-xs text-white/30 uppercase tracking-[0.25em] mt-3 font-medium">
+                Private Credit Intelligence
+              </p>
+            </div>
+
+            {/* Stats row */}
+            <div
+              className={`flex items-center justify-center gap-8 md:gap-12 transition-all duration-700 delay-100 ${
+                introPhase >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              {graphData.nodes.length} entities · {sharedBorrowers.length} overlaps
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-light text-white tabular-nums">
+                  {funds.length}
+                </div>
+                <div className="text-[9px] text-white/40 uppercase tracking-widest mt-1">
+                  BDC Funds
+                </div>
+              </div>
+              <div className="w-px h-8 bg-white/10" />
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-light text-white tabular-nums">
+                  {borrowers.length.toLocaleString()}
+                </div>
+                <div className="text-[9px] text-white/40 uppercase tracking-widest mt-1">
+                  Borrowers
+                </div>
+              </div>
+              <div className="w-px h-8 bg-white/10" />
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-light text-[#e0f2fe] tabular-nums">
+                  {graphData.links.length.toLocaleString()}
+                </div>
+                <div className="text-[9px] text-white/40 uppercase tracking-widest mt-1">
+                  Connections
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div
+              className={`pt-4 transition-all duration-700 delay-200 ${
+                introPhase >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <button
+                onClick={handleExplore}
+                className="group relative px-8 py-3 bg-white/[0.03] border border-white/[0.08] rounded-full text-sm text-white/80 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Explore Network
+                  <svg
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom description */}
+          <div
+            className={`absolute bottom-12 left-0 right-0 text-center transition-all duration-700 delay-300 ${
+              introPhase >= 3 ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <p className="text-xs text-white/25 max-w-md mx-auto px-6 leading-relaxed">
+              Mapping shared borrowers across {funds.length} Business Development Companies to
+              expose concentration risk in private credit markets.
             </p>
           </div>
         </div>
