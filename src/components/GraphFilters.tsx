@@ -14,6 +14,7 @@ interface GraphFiltersProps {
   filters: GraphFilterState;
   onChange: (filters: GraphFilterState) => void;
   industries: string[];
+  inline?: boolean;
 }
 
 // Minimal checkbox component
@@ -60,7 +61,7 @@ function Checkbox({
   );
 }
 
-export function GraphFilters({ filters, onChange, industries }: GraphFiltersProps) {
+export function GraphFilters({ filters, onChange, industries, inline = false }: GraphFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const updateFilter = <K extends keyof GraphFilterState>(key: K, value: GraphFilterState[K]) => {
@@ -72,6 +73,83 @@ export function GraphFilters({ filters, onChange, industries }: GraphFiltersProp
     filters.minExposure > 0 ||
     !filters.showFundLinks ||
     !filters.showSingleFundBorrowers;
+
+  // Inline mode - just render the filter controls without wrapper
+  if (inline) {
+    return (
+      <div className="space-y-4">
+        <Checkbox
+          checked={filters.showFundLinks}
+          onChange={(checked) => updateFilter("showFundLinks", checked)}
+          label="Fund connections"
+          colorDot="#4ade80"
+        />
+        <Checkbox
+          checked={filters.showSingleFundBorrowers}
+          onChange={(checked) => updateFilter("showSingleFundBorrowers", checked)}
+          label="Single-fund positions"
+          colorDot="#52525b"
+        />
+        <div className="pt-1">
+          <label className="text-[9px] text-white/30 uppercase tracking-[0.14em] block mb-2 font-medium">
+            Industry
+          </label>
+          <select
+            value={filters.industryFilter || ""}
+            onChange={(e) => updateFilter("industryFilter", e.target.value || null)}
+            className="w-full h-8 text-[11px] bg-white/[0.03] border border-white/[0.06] text-white/80 rounded-md px-2.5 focus:outline-none focus:border-white/[0.12] transition-all duration-200 appearance-none cursor-pointer"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.3)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 8px center",
+              backgroundSize: "16px",
+              paddingRight: "32px",
+            }}
+          >
+            <option value="">All Industries</option>
+            {industries.slice(0, 25).map((ind) => (
+              <option key={ind} value={ind}>
+                {ind.length > 28 ? ind.slice(0, 28) + "…" : ind}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="pt-1">
+          <label className="text-[9px] text-white/30 uppercase tracking-[0.14em] block mb-2 font-medium">
+            Min Exposure: <span className="text-white/60">${filters.minExposure}M+</span>
+          </label>
+          <input
+            type="range"
+            min={0}
+            max={500}
+            step={10}
+            value={filters.minExposure}
+            onChange={(e) => updateFilter("minExposure", Number(e.target.value))}
+            className="w-full h-1 bg-white/[0.06] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e0f2fe] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:scale-110"
+          />
+          <div className="flex justify-between text-[9px] text-white/20 mt-1.5 font-mono">
+            <span>$0</span>
+            <span>$500M+</span>
+          </div>
+        </div>
+        {hasActiveFilters && (
+          <button
+            onClick={() =>
+              onChange({
+                showFundLinks: true,
+                showSingleFundBorrowers: true,
+                industryFilter: null,
+                minExposure: 0,
+              })
+            }
+            className="text-[10px] text-[#e0f2fe]/70 hover:text-[#e0f2fe] transition-colors duration-200"
+          >
+            Reset all
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="border-t border-white/[0.04] pt-5 mt-5">
