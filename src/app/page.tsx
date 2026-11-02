@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo, useDeferredValue, useTransition } from "react";
-import { Search, X, PanelLeftClose, PanelLeft, Zap } from "lucide-react";
+import { Search, X, PanelLeftClose, PanelLeft, Zap, ChevronDown } from "lucide-react";
 import {
   funds,
   borrowers,
@@ -121,6 +121,11 @@ export default function Home() {
   const industries = getUniqueIndustries();
   const graphData = useMemo(() => generateGraphData(funds, borrowers, holdings), []);
   const criticalCount = sharedBorrowers.filter((b) => b.funds.length >= 4).length;
+  const hasActiveFilters =
+    filters.industryFilter !== null ||
+    filters.minExposure > 0 ||
+    !filters.showFundLinks ||
+    !filters.showSingleFundBorrowers;
 
   // Intro animation sequence
   useEffect(() => {
@@ -254,24 +259,17 @@ export default function Home() {
           sidebarExpanded ? "w-72 translate-x-0" : "w-72 -translate-x-full"
         }`}
       >
-        <div className="h-full flex flex-col px-6 py-6 pt-16 bg-gradient-to-r from-[#050506]/98 via-[#050506]/80 to-transparent">
-          {/* Header with branding - futuristic minimal */}
-          <div className="mb-8 pointer-events-auto">
-            <h1 className="text-lg font-light text-white/95 tracking-wide">Crossfire</h1>
-            <p className="text-[9px] text-white/30 uppercase tracking-[0.2em] mt-1 font-medium">
-              Private Credit Intelligence
-            </p>
-          </div>
-
-          {/* Search Bar - minimal design */}
-          <div className="mb-8 pointer-events-auto">
+        <div className="h-full flex flex-col bg-gradient-to-r from-[#050506]/98 via-[#050506]/90 to-transparent">
+          {/* Fixed header */}
+          <div className="flex-shrink-0 px-5 pt-16 pb-4 pointer-events-auto">
+            {/* Search Bar */}
             <div className="relative group">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30 transition-colors group-focus-within:text-white/50" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search..."
+                placeholder="Search funds or borrowers..."
                 className="w-full h-9 pl-9 pr-8 bg-white/[0.03] border border-white/[0.06] rounded-lg text-sm text-white/90 placeholder:text-white/25 focus:outline-none focus:border-white/[0.12] focus:bg-white/[0.04] transition-all duration-200"
               />
               {searchQuery && (
@@ -285,55 +283,67 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Key Metrics Grid - refined spacing */}
-          <div className="grid grid-cols-2 gap-2 mb-8 pointer-events-auto">
-            <MetricCard
-              value={`$${(stats.totalExposure / 1000).toFixed(0)}B`}
-              label="Exposure"
-              size="large"
-            />
-            <MetricCard value={funds.length.toString()} label="Funds" accent />
-            <MetricCard value={borrowers.length.toLocaleString()} label="Companies" />
-            <button onClick={() => setShowConcentrated(true)} className="text-left group">
-              <MetricCard
-                value={sharedBorrowers.length.toString()}
-                label="Shared"
-                accent
-                interactive
-              />
-            </button>
-          </div>
-
-          {/* Critical Warning - subtle design */}
-          {criticalCount > 0 && (
-            <div className="mb-8 px-3 py-2.5 bg-[#f87171]/[0.06] border border-[#f87171]/[0.12] rounded-lg pointer-events-auto">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#f87171] animate-pulse-subtle" />
-                <span className="text-sm font-light tabular-nums text-[#f87171]">
-                  {criticalCount}
-                </span>
-                <span className="text-[10px] text-[#f87171]/60 tracking-wide">
-                  critical borrowers
-                </span>
+          {/* Scrollable content */}
+          <div className="flex-1 overflow-y-auto overflow-x-hidden px-5 pb-4 pointer-events-auto scrollbar-thin">
+            {/* Critical Warning - always visible if present */}
+            {criticalCount > 0 && (
+              <div className="mb-4 px-3 py-2.5 bg-[#f87171]/[0.06] border border-[#f87171]/[0.12] rounded-lg">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#f87171] animate-pulse-subtle" />
+                  <span className="text-sm font-light tabular-nums text-[#f87171]">
+                    {criticalCount}
+                  </span>
+                  <span className="text-[10px] text-[#f87171]/60 tracking-wide">
+                    critical borrowers
+                  </span>
+                </div>
               </div>
-            </div>
-          )}
-
-          {/* Legend */}
-          <div className="mb-4 pointer-events-auto">
-            <GraphLegend onFilterByType={setLegendFilter} activeType={legendFilter} />
-          </div>
-
-          {/* Filters */}
-          <div className="pointer-events-auto">
-            <GraphFilters filters={filters} onChange={handleFilterChange} industries={industries} />
-            {isPending && (
-              <div className="mt-2 text-[10px] text-amber-400/70 font-mono">Updating graph...</div>
             )}
+
+            {/* Stats Section */}
+            <CollapsibleSection title="Overview" defaultOpen>
+              <div className="grid grid-cols-2 gap-2">
+                <MetricCard
+                  value={`$${(stats.totalExposure / 1000).toFixed(0)}B`}
+                  label="Exposure"
+                  size="large"
+                />
+                <MetricCard value={funds.length.toString()} label="Funds" accent />
+                <MetricCard value={borrowers.length.toLocaleString()} label="Companies" />
+                <button onClick={() => setShowConcentrated(true)} className="text-left group">
+                  <MetricCard
+                    value={sharedBorrowers.length.toString()}
+                    label="Shared"
+                    accent
+                    interactive
+                  />
+                </button>
+              </div>
+            </CollapsibleSection>
+
+            {/* Legend Section */}
+            <CollapsibleSection title="Legend" defaultOpen>
+              <GraphLegend onFilterByType={setLegendFilter} activeType={legendFilter} />
+            </CollapsibleSection>
+
+            {/* Filters Section */}
+            <CollapsibleSection title="Filters" defaultOpen badge={hasActiveFilters}>
+              <GraphFilters
+                filters={filters}
+                onChange={handleFilterChange}
+                industries={industries}
+                inline
+              />
+              {isPending && (
+                <div className="mt-2 text-[10px] text-amber-400/70 font-mono">
+                  Updating graph...
+                </div>
+              )}
+            </CollapsibleSection>
           </div>
 
-          {/* Controls hint - refined typography */}
-          <div className="mt-auto pt-6">
+          {/* Fixed footer */}
+          <div className="flex-shrink-0 px-5 py-4 border-t border-white/[0.04] pointer-events-auto">
             <div className="text-[9px] text-white/20 font-mono tracking-wide space-y-1">
               <div>Drag to rotate · Scroll to zoom</div>
               <div>Click node to select · ESC to clear</div>
@@ -405,6 +415,49 @@ function MetricCard({
         {interactive && (
           <span className="ml-0.5 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
         )}
+      </div>
+    </div>
+  );
+}
+
+// Collapsible section component
+function CollapsibleSection({
+  title,
+  children,
+  defaultOpen = true,
+  badge = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+  badge?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <div className="mb-4">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center justify-between w-full py-2 group"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] text-white/40 uppercase tracking-[0.12em] font-medium group-hover:text-white/60 transition-colors">
+            {title}
+          </span>
+          {badge && <span className="w-1.5 h-1.5 rounded-full bg-[#e0f2fe]" />}
+        </div>
+        <ChevronDown
+          className={`w-3.5 h-3.5 text-white/30 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-200 ${
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        {children}
       </div>
     </div>
   );
