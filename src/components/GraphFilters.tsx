@@ -16,7 +16,7 @@ interface GraphFiltersProps {
   industries: string[];
 }
 
-// Custom checkbox component with clear visual feedback
+// Minimal checkbox component
 function Checkbox({
   checked,
   onChange,
@@ -32,27 +32,27 @@ function Checkbox({
     <button
       type="button"
       onClick={() => onChange(!checked)}
-      className="flex items-center gap-2 w-full text-left group"
+      className="flex items-center gap-2.5 w-full text-left group"
     >
       <div
-        className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${
+        className={`w-3.5 h-3.5 rounded-[4px] border flex items-center justify-center transition-all duration-200 ${
           checked
-            ? "bg-cyan-500 border-cyan-500"
-            : "bg-zinc-900 border-zinc-700 group-hover:border-zinc-500"
+            ? "bg-[#e0f2fe] border-[#e0f2fe]"
+            : "bg-transparent border-white/20 group-hover:border-white/40"
         }`}
       >
-        {checked && <Check className="w-3 h-3 text-black stroke-[3]" />}
+        {checked && <Check className="w-2.5 h-2.5 text-[#050506] stroke-[3]" />}
       </div>
       <span
-        className={`text-xs transition-colors ${
-          checked ? "text-zinc-200" : "text-zinc-500 group-hover:text-zinc-300"
+        className={`text-[11px] transition-colors duration-200 ${
+          checked ? "text-white/80" : "text-white/40 group-hover:text-white/60"
         }`}
       >
         {label}
       </span>
       {colorDot && (
         <span
-          className="w-1.5 h-1.5 rounded-full ml-auto"
+          className="w-1.5 h-1.5 rounded-full ml-auto opacity-60"
           style={{ backgroundColor: colorDot }}
         />
       )}
@@ -63,10 +63,7 @@ function Checkbox({
 export function GraphFilters({ filters, onChange, industries }: GraphFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const updateFilter = <K extends keyof GraphFilterState>(
-    key: K,
-    value: GraphFilterState[K]
-  ) => {
+  const updateFilter = <K extends keyof GraphFilterState>(key: K, value: GraphFilterState[K]) => {
     onChange({ ...filters, [key]: value });
   };
 
@@ -77,34 +74,32 @@ export function GraphFilters({ filters, onChange, industries }: GraphFiltersProp
     !filters.showSingleFundBorrowers;
 
   return (
-    <div className="border-t border-zinc-800/50 pt-4 mt-4">
+    <div className="border-t border-white/[0.04] pt-5 mt-5">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="flex items-center justify-between w-full text-left group"
       >
         <div className="flex items-center gap-2">
-          <span className="text-[10px] text-zinc-600 uppercase tracking-wider font-medium group-hover:text-zinc-400 transition-colors">
+          <span className="text-[9px] text-white/35 uppercase tracking-[0.14em] font-medium group-hover:text-white/50 transition-colors duration-200">
             Filters
           </span>
-          {hasActiveFilters && (
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-          )}
+          {hasActiveFilters && <span className="w-1 h-1 rounded-full bg-[#e0f2fe]" />}
         </div>
         {isExpanded ? (
-          <ChevronUp className="w-3 h-3 text-zinc-600" />
+          <ChevronUp className="w-3 h-3 text-white/30" />
         ) : (
-          <ChevronDown className="w-3 h-3 text-zinc-600" />
+          <ChevronDown className="w-3 h-3 text-white/30" />
         )}
       </button>
 
       {isExpanded && (
-        <div className="mt-3 space-y-3">
+        <div className="mt-4 space-y-4">
           {/* Toggle: Fund-to-fund links */}
           <Checkbox
             checked={filters.showFundLinks}
             onChange={(checked) => updateFilter("showFundLinks", checked)}
             label="Fund connections"
-            colorDot="#10b981"
+            colorDot="#4ade80"
           />
 
           {/* Toggle: Single-fund borrowers */}
@@ -116,14 +111,21 @@ export function GraphFilters({ filters, onChange, industries }: GraphFiltersProp
           />
 
           {/* Industry filter */}
-          <div>
-            <label className="text-[10px] text-zinc-600 uppercase tracking-wider block mb-1.5">
+          <div className="pt-1">
+            <label className="text-[9px] text-white/30 uppercase tracking-[0.14em] block mb-2 font-medium">
               Industry
             </label>
             <select
               value={filters.industryFilter || ""}
               onChange={(e) => updateFilter("industryFilter", e.target.value || null)}
-              className="w-full h-7 text-xs bg-zinc-900 border border-zinc-800 text-zinc-300 rounded px-2 focus:outline-none focus:border-zinc-600 transition-colors"
+              className="w-full h-8 text-[11px] bg-white/[0.03] border border-white/[0.06] text-white/80 rounded-md px-2.5 focus:outline-none focus:border-white/[0.12] transition-all duration-200 appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.3)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 8px center",
+                backgroundSize: "16px",
+                paddingRight: "32px",
+              }}
             >
               <option value="">All Industries</option>
               {industries.slice(0, 25).map((ind) => (
@@ -135,9 +137,9 @@ export function GraphFilters({ filters, onChange, industries }: GraphFiltersProp
           </div>
 
           {/* Exposure slider */}
-          <div>
-            <label className="text-[10px] text-zinc-600 uppercase tracking-wider block mb-1.5">
-              Min Exposure: ${filters.minExposure}M+
+          <div className="pt-1">
+            <label className="text-[9px] text-white/30 uppercase tracking-[0.14em] block mb-2 font-medium">
+              Min Exposure: <span className="text-white/60">${filters.minExposure}M+</span>
             </label>
             <input
               type="range"
@@ -146,9 +148,9 @@ export function GraphFilters({ filters, onChange, industries }: GraphFiltersProp
               step={10}
               value={filters.minExposure}
               onChange={(e) => updateFilter("minExposure", Number(e.target.value))}
-              className="w-full h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+              className="w-full h-1 bg-white/[0.06] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e0f2fe] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:scale-110"
             />
-            <div className="flex justify-between text-[9px] text-zinc-700 mt-0.5">
+            <div className="flex justify-between text-[9px] text-white/20 mt-1.5 font-mono">
               <span>$0</span>
               <span>$500M+</span>
             </div>
@@ -165,9 +167,9 @@ export function GraphFilters({ filters, onChange, industries }: GraphFiltersProp
                   minExposure: 0,
                 })
               }
-              className="text-[10px] text-cyan-500 hover:text-cyan-400 transition-colors"
+              className="text-[10px] text-[#e0f2fe]/70 hover:text-[#e0f2fe] transition-colors duration-200"
             >
-              Reset all filters
+              Reset all
             </button>
           )}
         </div>

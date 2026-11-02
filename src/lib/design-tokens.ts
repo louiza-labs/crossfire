@@ -1,137 +1,272 @@
 /**
- * Design Tokens for Professional Financial Platform
- * Following Bloomberg/TradingView patterns
+ * Design Tokens — 2026 Futuristic Minimalist System
+ * Subtle, understated elegance with restrained color and refined typography
  */
 
 // =============================================================================
-// COLOR PALETTE
+// COLOR PALETTE — Monochromatic with singular accent
 // =============================================================================
 
 export const colors = {
-  // Directional colors (reserved semantics)
-  positive: '#10b981', // Green - ONLY for gains/up
-  negative: '#ef4444', // Red - ONLY for losses/down
-  neutral: '#71717a', // Gray - flat/no change
+  // Primary surface hierarchy (very dark grays, not pure black)
+  surface: {
+    base: "#050506", // Deepest background
+    elevated: "#0a0a0c", // Cards, panels
+    overlay: "#0f0f12", // Modals, popovers
+    subtle: "#141418", // Hover states
+    muted: "#1a1a1f", // Active states
+  },
 
-  // Accent colors (non-directional)
-  cyan: '#00d4ff', // Primary accent, funds
-  purple: '#a855f7', // Secondary accent
-  amber: '#f59e0b', // Warnings, attention
-  blue: '#3b82f6', // Info, links
-
-  // Surface hierarchy
-  bg0: '#000000', // Deepest background
-  bg1: '#09090b', // Card background
-  bg2: '#18181b', // Elevated surfaces
-  bg3: '#27272a', // Hover states
-
-  // Border colors
-  border: '#27272a',
-  borderSubtle: '#1f1f23',
-  borderHover: '#3f3f46',
+  // Border system (ultra-subtle)
+  border: {
+    default: "rgba(255, 255, 255, 0.06)",
+    subtle: "rgba(255, 255, 255, 0.04)",
+    emphasis: "rgba(255, 255, 255, 0.10)",
+    focus: "rgba(255, 255, 255, 0.20)",
+  },
 
   // Text hierarchy
-  textPrimary: '#fafafa',
-  textSecondary: '#a1a1aa',
-  textTertiary: '#71717a',
-  textMuted: '#52525b',
+  text: {
+    primary: "rgba(255, 255, 255, 0.95)",
+    secondary: "rgba(255, 255, 255, 0.64)",
+    tertiary: "rgba(255, 255, 255, 0.44)",
+    muted: "rgba(255, 255, 255, 0.28)",
+    disabled: "rgba(255, 255, 255, 0.16)",
+  },
 
-  // Risk levels
-  riskLow: '#10b981',
-  riskMedium: '#f59e0b',
-  riskHigh: '#ef4444',
-  riskCritical: '#dc2626',
+  // Singular accent — ice blue/white (futuristic, neutral)
+  accent: {
+    primary: "#e0f2fe", // Ice blue - primary interactions
+    secondary: "#bae6fd", // Slightly deeper
+    muted: "rgba(224, 242, 254, 0.12)",
+    subtle: "rgba(224, 242, 254, 0.06)",
+  },
+
+  // Semantic colors (reserved, used sparingly)
+  semantic: {
+    positive: "#4ade80", // Softer green
+    negative: "#f87171", // Softer red
+    warning: "#fbbf24", // Amber
+    info: "#93c5fd", // Light blue
+  },
+
+  // Risk indicators (for data visualization)
+  risk: {
+    low: "#4ade80",
+    medium: "#fbbf24",
+    high: "#fb923c",
+    critical: "#f87171",
+  },
 } as const;
 
-// Chart color palette (for series, non-directional)
+// Chart colors — Monochromatic with subtle variation
 export const chartColors: string[] = [
-  '#00d4ff', // Cyan
-  '#a855f7', // Purple
-  '#f59e0b', // Amber
-  '#3b82f6', // Blue
-  '#ec4899', // Pink
-  '#14b8a6', // Teal
-  '#8b5cf6', // Violet
-  '#f97316', // Orange
-  '#06b6d4', // Cyan dark
-  '#84cc16', // Lime
+  "#e0f2fe", // Ice blue
+  "#a5b4fc", // Lavender
+  "#c4b5fd", // Light violet
+  "#93c5fd", // Sky
+  "#7dd3fc", // Cyan
+  "#5eead4", // Teal
+  "#86efac", // Mint
+  "#fde047", // Yellow
+  "#fdba74", // Peach
+  "#fca5a5", // Rose
 ];
 
 // =============================================================================
-// TYPOGRAPHY
+// TYPOGRAPHY — Refined, light, spacious
 // =============================================================================
 
 export const typography = {
-  // Data display (tabular numerals)
-  dataXl: 'text-2xl font-semibold tabular-nums tracking-tight',
-  dataLg: 'text-lg font-medium tabular-nums',
-  dataMd: 'text-sm font-medium tabular-nums',
-  dataSm: 'text-xs font-medium tabular-nums',
+  // Display (large headlines)
+  display: {
+    lg: "text-4xl font-extralight tracking-tight leading-none",
+    md: "text-3xl font-extralight tracking-tight leading-none",
+    sm: "text-2xl font-light tracking-tight leading-none",
+  },
 
-  // Labels
-  label: 'text-[10px] uppercase tracking-wider text-zinc-500 font-medium',
-  labelSm: 'text-[9px] uppercase tracking-widest text-zinc-600 font-medium',
+  // Headings
+  heading: {
+    h1: "text-xl font-light tracking-[-0.02em] leading-snug",
+    h2: "text-base font-normal tracking-[-0.01em] leading-snug",
+    h3: "text-sm font-medium tracking-normal leading-snug",
+  },
 
-  // Headers
-  h1: 'text-2xl font-semibold tracking-tight',
-  h2: 'text-lg font-semibold tracking-tight',
-  h3: 'text-sm font-semibold tracking-tight',
+  // Data display (tabular numerals, financial data)
+  data: {
+    xl: "text-3xl font-extralight tabular-nums tracking-tight",
+    lg: "text-xl font-light tabular-nums tracking-tight",
+    md: "text-base font-normal tabular-nums",
+    sm: "text-sm font-normal tabular-nums",
+    xs: "text-xs font-normal tabular-nums",
+  },
 
-  // Body
-  body: 'text-sm text-zinc-300',
-  bodySm: 'text-xs text-zinc-400',
+  // Labels (uppercase, widely spaced)
+  label: {
+    default: "text-[10px] uppercase tracking-[0.12em] font-medium",
+    sm: "text-[9px] uppercase tracking-[0.14em] font-medium",
+    lg: "text-[11px] uppercase tracking-[0.10em] font-medium",
+  },
 
-  // Monospace (tickers, rates, identifiers)
-  mono: 'font-mono text-sm',
-  monoSm: 'font-mono text-xs',
+  // Body text
+  body: {
+    default: "text-sm font-normal leading-relaxed",
+    sm: "text-xs font-normal leading-relaxed",
+    lg: "text-base font-normal leading-relaxed",
+  },
+
+  // Monospace (tickers, codes, identifiers)
+  mono: {
+    default: "font-mono text-sm tracking-tight",
+    sm: "font-mono text-xs tracking-tight",
+    lg: "font-mono text-base tracking-tight",
+  },
 } as const;
 
 // =============================================================================
-// SPACING
+// SPACING — Generous, breathing room
 // =============================================================================
 
 export const spacing = {
-  // Table row heights
-  rowCompact: 'h-8', // 32px
-  rowDefault: 'h-10', // 40px
-  rowRelaxed: 'h-12', // 48px
+  // Component heights
+  height: {
+    xs: "h-6", // 24px - tiny buttons
+    sm: "h-8", // 32px - small buttons, compact rows
+    md: "h-10", // 40px - default buttons
+    lg: "h-12", // 48px - large buttons, touch targets
+    xl: "h-14", // 56px - hero elements
+  },
 
-  // Card padding
-  cardPadding: 'p-4',
-  cardPaddingSm: 'p-3',
-  cardPaddingLg: 'p-6',
+  // Padding scales
+  padding: {
+    xs: "p-2", // 8px
+    sm: "p-3", // 12px
+    md: "p-4", // 16px
+    lg: "p-6", // 24px
+    xl: "p-8", // 32px
+    "2xl": "p-12", // 48px
+  },
 
-  // Section gaps
-  sectionGap: 'gap-6',
-  itemGap: 'gap-4',
-  tightGap: 'gap-2',
+  // Gap scales
+  gap: {
+    xs: "gap-1", // 4px
+    sm: "gap-2", // 8px
+    md: "gap-4", // 16px
+    lg: "gap-6", // 24px
+    xl: "gap-8", // 32px
+    "2xl": "gap-12", // 48px
+  },
+
+  // Section spacing
+  section: {
+    compact: "space-y-4",
+    default: "space-y-6",
+    relaxed: "space-y-8",
+    generous: "space-y-12",
+  },
 } as const;
 
 // =============================================================================
-// COMPONENT STYLES
+// COMPONENT STYLES — Subtle, refined
 // =============================================================================
 
 export const components = {
-  // Cards
-  card: 'bg-zinc-900/80 border border-zinc-800 rounded-lg',
-  cardHover: 'hover:border-zinc-700 transition-colors',
-  cardElevated: 'bg-zinc-900 border border-zinc-800 rounded-lg shadow-lg',
+  // Cards — Minimal borders, subtle elevation
+  card: {
+    base: "bg-[#0a0a0c] rounded-xl border border-white/[0.04] backdrop-blur-sm",
+    elevated:
+      "bg-[#0a0a0c] rounded-xl border border-white/[0.06] shadow-[0_1px_3px_rgba(0,0,0,0.5),0_8px_24px_rgba(0,0,0,0.4)]",
+    interactive:
+      "bg-[#0a0a0c] rounded-xl border border-white/[0.04] hover:border-white/[0.08] hover:bg-[#0f0f12] transition-all duration-300",
+    glass: "bg-white/[0.02] rounded-xl border border-white/[0.06] backdrop-blur-xl",
+  },
 
-  // Tables
-  tableHeader: 'text-[10px] uppercase tracking-wider text-zinc-500 font-medium',
-  tableCell: 'text-sm tabular-nums',
-  tableRow: 'border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors',
+  // Buttons — Ghostly by default, accent on primary
+  button: {
+    base: "rounded-lg font-medium transition-all duration-200 ease-out",
+    primary: "bg-white/[0.08] text-white/90 hover:bg-white/[0.12] active:bg-white/[0.06]",
+    secondary: "bg-transparent text-white/60 hover:text-white/90 hover:bg-white/[0.04]",
+    ghost: "bg-transparent text-white/50 hover:text-white/80 hover:bg-white/[0.04]",
+    accent:
+      "bg-[#e0f2fe]/[0.10] text-[#e0f2fe] hover:bg-[#e0f2fe]/[0.15] border border-[#e0f2fe]/[0.20]",
+    danger: "bg-[#f87171]/[0.10] text-[#f87171] hover:bg-[#f87171]/[0.15]",
+  },
 
-  // Buttons
-  buttonGhost: 'hover:bg-zinc-800/50 transition-colors rounded px-2 py-1',
-  buttonPrimary: 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 transition-colors rounded px-3 py-1.5',
+  // Inputs — Ultra minimal
+  input: {
+    base: "bg-white/[0.03] border border-white/[0.06] rounded-lg text-white/90 placeholder:text-white/30 focus:border-white/[0.12] focus:bg-white/[0.04] focus:outline-none transition-all duration-200",
+  },
 
-  // Badges
-  badge: 'inline-flex items-center px-2 py-0.5 rounded text-xs font-medium',
-  badgePositive: 'bg-emerald-500/20 text-emerald-400',
-  badgeNegative: 'bg-red-500/20 text-red-400',
-  badgeNeutral: 'bg-zinc-500/20 text-zinc-400',
-  badgeWarning: 'bg-amber-500/20 text-amber-400',
+  // Tables — Clean lines, generous spacing
+  table: {
+    header:
+      "text-[10px] uppercase tracking-[0.12em] font-medium text-white/40 border-b border-white/[0.04]",
+    row: "border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors duration-150",
+    cell: "text-sm tabular-nums py-3",
+  },
+
+  // Badges — Pill-shaped, muted
+  badge: {
+    base: "inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-medium tracking-wide",
+    default: "bg-white/[0.06] text-white/60",
+    accent: "bg-[#e0f2fe]/[0.10] text-[#e0f2fe]",
+    positive: "bg-[#4ade80]/[0.10] text-[#4ade80]",
+    negative: "bg-[#f87171]/[0.10] text-[#f87171]",
+    warning: "bg-[#fbbf24]/[0.10] text-[#fbbf24]",
+  },
+
+  // Dividers
+  divider: {
+    horizontal: "border-t border-white/[0.04]",
+    vertical: "border-l border-white/[0.04]",
+  },
+} as const;
+
+// =============================================================================
+// EFFECTS — Subtle glow, refined shadows
+// =============================================================================
+
+export const effects = {
+  // Glows (for accent elements)
+  glow: {
+    sm: "shadow-[0_0_12px_rgba(224,242,254,0.15)]",
+    md: "shadow-[0_0_24px_rgba(224,242,254,0.20)]",
+    lg: "shadow-[0_0_48px_rgba(224,242,254,0.25)]",
+  },
+
+  // Focus rings
+  focus: {
+    default: "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20",
+    accent: "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#e0f2fe]/40",
+  },
+
+  // Backdrop blur
+  blur: {
+    sm: "backdrop-blur-sm",
+    md: "backdrop-blur-md",
+    lg: "backdrop-blur-xl",
+  },
+} as const;
+
+// =============================================================================
+// ANIMATIONS — Subtle, refined motion
+// =============================================================================
+
+export const animations = {
+  // Durations
+  duration: {
+    fast: "duration-150",
+    default: "duration-200",
+    slow: "duration-300",
+    slower: "duration-500",
+  },
+
+  // Easings
+  ease: {
+    default: "ease-out",
+    smooth: "ease-[cubic-bezier(0.4,0,0.2,1)]",
+    bounce: "ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+  },
 } as const;
 
 // =============================================================================
@@ -139,9 +274,6 @@ export const components = {
 // =============================================================================
 
 export const formatters = {
-  /**
-   * Format currency with appropriate suffix (B, M, K)
-   */
   currency: (value: number, decimals = 1): string => {
     if (value >= 1e9) return `$${(value / 1e9).toFixed(decimals)}B`;
     if (value >= 1e6) return `$${(value / 1e6).toFixed(decimals)}M`;
@@ -149,98 +281,91 @@ export const formatters = {
     return `$${value.toFixed(decimals)}`;
   },
 
-  /**
-   * Format currency with full precision (for tables)
-   */
   currencyFull: (value: number): string => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     }).format(value);
   },
 
-  /**
-   * Format percentage
-   */
-  percent: (value: number, decimals = 1): string => {
-    return `${value.toFixed(decimals)}%`;
-  },
+  percent: (value: number, decimals = 1): string => `${value.toFixed(decimals)}%`,
 
-  /**
-   * Format large numbers with commas
-   */
-  number: (value: number): string => {
-    return new Intl.NumberFormat('en-US').format(value);
-  },
+  number: (value: number): string => new Intl.NumberFormat("en-US").format(value),
 
-  /**
-   * Format date to short form
-   */
   dateShort: (date: string): string => {
-    return new Date(date).toLocaleDateString('en-US', {
-      month: 'short',
-      year: 'numeric',
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
     });
   },
 
-  /**
-   * Format change with sign and color class
-   */
   change: (value: number, decimals = 1): { text: string; colorClass: string } => {
-    const sign = value > 0 ? '+' : '';
+    const sign = value > 0 ? "+" : "";
     const text = `${sign}${value.toFixed(decimals)}%`;
-    const colorClass = value > 0 ? 'text-emerald-400' : value < 0 ? 'text-red-400' : 'text-zinc-400';
+    const colorClass =
+      value > 0 ? "text-[#4ade80]" : value < 0 ? "text-[#f87171]" : "text-white/40";
     return { text, colorClass };
   },
 } as const;
 
 // =============================================================================
-// ECHARTS THEME
+// ECHARTS THEME — Refined, minimal
 // =============================================================================
 
 export const echartsTheme = {
-  backgroundColor: 'transparent',
+  backgroundColor: "transparent",
   textStyle: {
-    fontFamily: 'Inter, system-ui, sans-serif',
-    color: colors.textSecondary,
+    fontFamily: "var(--font-inter), system-ui, sans-serif",
+    color: "rgba(255, 255, 255, 0.5)",
   },
   title: {
     textStyle: {
-      color: colors.textPrimary,
-      fontWeight: 600,
+      color: "rgba(255, 255, 255, 0.9)",
+      fontWeight: 300,
       fontSize: 14,
+      letterSpacing: "-0.01em",
     },
   },
   legend: {
     textStyle: {
-      color: colors.textSecondary,
+      color: "rgba(255, 255, 255, 0.5)",
       fontSize: 11,
     },
   },
   tooltip: {
-    backgroundColor: colors.bg2,
-    borderColor: colors.border,
+    backgroundColor: "#0f0f12",
+    borderColor: "rgba(255, 255, 255, 0.08)",
+    borderWidth: 1,
     textStyle: {
-      color: colors.textPrimary,
+      color: "rgba(255, 255, 255, 0.9)",
       fontSize: 12,
     },
+    extraCssText: "border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);",
   },
   grid: {
-    borderColor: colors.borderSubtle,
+    borderColor: "rgba(255, 255, 255, 0.04)",
   },
   categoryAxis: {
-    axisLine: { lineStyle: { color: colors.borderSubtle } },
-    axisTick: { lineStyle: { color: colors.borderSubtle } },
-    axisLabel: { color: colors.textTertiary, fontSize: 10 },
-    splitLine: { lineStyle: { color: colors.borderSubtle, type: 'dashed' } },
+    axisLine: { lineStyle: { color: "rgba(255, 255, 255, 0.06)" } },
+    axisTick: { show: false },
+    axisLabel: {
+      color: "rgba(255, 255, 255, 0.4)",
+      fontSize: 10,
+      fontFamily: "var(--font-inter), system-ui, sans-serif",
+    },
+    splitLine: { lineStyle: { color: "rgba(255, 255, 255, 0.03)", type: "solid" } },
   },
   valueAxis: {
-    axisLine: { lineStyle: { color: colors.borderSubtle } },
-    axisTick: { lineStyle: { color: colors.borderSubtle } },
-    axisLabel: { color: colors.textTertiary, fontSize: 10 },
-    splitLine: { lineStyle: { color: colors.borderSubtle, type: 'dashed' } },
+    axisLine: { show: false },
+    axisTick: { show: false },
+    axisLabel: {
+      color: "rgba(255, 255, 255, 0.4)",
+      fontSize: 10,
+      fontFamily: "var(--font-inter), system-ui, sans-serif",
+    },
+    splitLine: { lineStyle: { color: "rgba(255, 255, 255, 0.03)", type: "solid" } },
   },
   color: chartColors as unknown as string[],
 } as const;

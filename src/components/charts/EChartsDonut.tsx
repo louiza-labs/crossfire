@@ -93,13 +93,13 @@ export function EChartsDonut({
         }) => {
           const displayValue = params.data.originalValue;
           return `
-            <div style="font-size: 12px; color: ${colors.textSecondary};">
+            <div style="font-size: 12px; color: ${colors.text.secondary};">
               ${params.name}
             </div>
-            <div style="font-size: 14px; font-weight: 600; color: ${colors.textPrimary}; margin-top: 4px;">
+            <div style="font-size: 14px; font-weight: 300; color: ${colors.text.primary}; margin-top: 4px;">
               ${formatValue(displayValue)}
             </div>
-            <div style="font-size: 11px; color: ${colors.textTertiary}; margin-top: 2px;">
+            <div style="font-size: 11px; color: ${colors.text.tertiary}; margin-top: 2px;">
               ${params.percent.toFixed(1)}% of total
             </div>
           `;
@@ -121,13 +121,13 @@ export function EChartsDonut({
               title: {
                 fontSize: 11,
                 fontWeight: 500,
-                color: colors.textTertiary,
+                color: colors.text.tertiary,
                 padding: [0, 0, 4, 0],
               },
               value: {
                 fontSize: 20,
-                fontWeight: 600,
-                color: colors.textPrimary,
+                fontWeight: 300,
+                color: colors.text.primary,
               },
             },
           },

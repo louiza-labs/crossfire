@@ -98,6 +98,15 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "unitranche secured loans",
   "equipment financing",
   "asset based finance",
+  // Financial instruments
+  "foreign currency forward contracts",
+  "foreign currency forwards",
+  "interest rate swaps",
+  "interest rate caps",
+  "credit default swaps",
+  "total return swaps",
+  "currency hedges",
+  "forward contracts",
   // Balance sheet items
   "other assets",
   "other liabilities",
@@ -124,6 +133,85 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "southwest",
   "west",
   "pacific",
+  "netherlands",
+  "germany",
+  "france",
+  "ireland",
+  "luxembourg",
+  "switzerland",
+  "australia",
+  "japan",
+  // GICS industries that appear as section headers (full names)
+  "air freight & logistics",
+  "construction & engineering",
+  "construction & building",
+  "it services",
+  "investment type",
+  "financials",
+  "semiconductors",
+  "road & rail",
+  "trading companies",
+  "trading companies & distributors",
+  "electrical equipment",
+  "machinery",
+  "building products",
+  "containers & packaging",
+  "hotels, restaurants & leisure",
+  "household durables",
+  "textiles, apparel",
+  "textiles, apparel & luxury goods",
+  "auto components",
+  "automobiles",
+  "food & staples",
+  "beverages",
+  "pharmaceuticals",
+  "biotechnology",
+  "life sciences",
+  "life sciences tools & services",
+  "diversified reits",
+  "electric utilities",
+  "gas utilities",
+  "water utilities",
+  "metals & mining",
+  "chemicals",
+  "entertainment",
+  "interactive media",
+  "cable & satellite",
+  // Asset categories / Multi-sector
+  "multi-sector holdings",
+  "multi-sector",
+  "diversified holdings",
+  "other holdings",
+  "miscellaneous",
+  // More GICS industries
+  "commercial services & supplies",
+  "health care equipment & supplies",
+  "health care providers & services",
+  "internet & direct marketing retail",
+  "internet software & services",
+  "communications equipment",
+  "electronic equipment, instruments & components",
+  "technology hardware, storage & peripherals",
+  "diversified financial services",
+  "insurance",
+  "banks",
+  "consumer finance",
+  "real estate management & development",
+  "oil, gas & consumable fuels",
+  "paper & forest products",
+  "independent power and renewable electricity producers",
+  "marine",
+  "airlines",
+  "leisure products",
+  "household products",
+  "personal products",
+  "food products",
+  "tobacco",
+  "distributors",
+  "multiline retail",
+  "specialty retail",
+  "diversified consumer services",
+  "textiles & apparel",
 ]);
 
 // Additional patterns to filter (for partial matching)
@@ -138,6 +226,64 @@ const INVALID_BORROWER_PATTERNS = [
   /^(carrying|fair)\s+value$/i, // Accounting terms
   /^(repayments|purchases|sales)\s+(and|of)/i, // Transaction summaries
   /^equity\s+(and|investments)/i, // Equity section headers
+  /^media:\s/i, // Media sub-industries like "Media: Advertising, Printing & Publishing"
+  /^(diversified\s+)?telecommunication/i, // Telecom sector headers
+  /^wireless\s+telecommunication/i,
+  // Industry subcategory formats with colons
+  /^transportation:\s/i, // "Transportation: Cargo", "Transportation: Infrastructure"
+  /^technology:\s/i, // "Technology: Software"
+  /^healthcare:\s/i, // "Healthcare: Services"
+  /^energy:\s/i, // "Energy: Equipment"
+  /^consumer:\s/i, // "Consumer: Discretionary"
+  /^industrials:\s/i, // "Industrials: Services"
+  /^financials:\s/i, // "Financials: Insurance"
+  /^materials:\s/i, // "Materials: Chemicals"
+  /^utilities:\s/i, // "Utilities: Electric"
+  /^real\s+estate:\s/i, // "Real Estate: REITs"
+  /^communication\s+services:\s/i,
+  // Financial instruments and derivatives
+  /^(foreign\s+)?currency\s+(forward|swap|hedge)/i,
+  /^interest\s+rate\s+(swap|cap|floor|collar)/i,
+  /^credit\s+(default\s+)?swap/i,
+  /^(total\s+)?return\s+swap/i,
+  /forward\s+contract/i,
+  /^derivative/i,
+  // Asset categories
+  /^multi-?sector/i, // "Multi-Sector Holdings"
+  /^diversified\s+(holdings|investments)/i,
+  /^(other|miscellaneous)\s+(holdings|investments|assets)/i,
+  // More GICS patterns
+  /^(road\s*&?\s*rail|marine|airlines|air\s+freight)$/i,
+  /^(containers\s*&?\s*packaging)$/i,
+  /^(aerospace\s*&?\s*defense)$/i,
+  /^(leisure\s+products)$/i,
+  /^(personal\s+products)$/i,
+  /^(household\s+(durables|products))$/i,
+  /^(building\s+products)$/i,
+  /^(electrical\s+equipment)$/i,
+  /^(electronic\s+equipment)/i,
+  /^(commercial\s+services)/i,
+  /^(professional\s+services)$/i,
+  /^(health\s+care\s+(equipment|providers|services))/i,
+  /^(life\s+sciences\s+tools)/i,
+  /^(internet\s+(software|&|and))/i,
+  /^(software\s*&?\s*services)$/i,
+  /^(capital\s+goods)$/i,
+  /^(construction\s+(&|and)\s+(engineering|materials))$/i,
+  /^(trading\s+companies)/i,
+  /^(food\s+(&|and)\s+staples)/i,
+  /^(textiles,?\s+apparel)/i,
+  /^(auto\s+components)$/i,
+  /^(hotels,?\s+restaurants)/i,
+  /^(specialty\s+retail)$/i,
+  /^(multiline\s+retail)$/i,
+  /^(consumer\s+finance)$/i,
+  /^(diversified\s+financial)/i,
+  /^(real\s+estate\s+management)/i,
+  /^(oil,?\s+gas)/i,
+  /^(metals\s*&?\s*mining)$/i,
+  /^(paper\s*&?\s*forest)/i,
+  /^(independent\s+power)/i,
 ];
 
 // Check if a borrower name is actually an industry category header or invalid entry
@@ -148,16 +294,31 @@ function isIndustryCategory(name: string): boolean {
   return false;
 }
 
+// Check if a holding should be filtered out based on industry
+function hasValidIndustry(industry: string | undefined): boolean {
+  if (!industry) return false;
+  const lower = industry.toLowerCase().trim();
+  // Filter out entries with Unknown/Unclassified industry - these are likely not real borrowers
+  if (lower === "unknown" || lower === "unclassified" || lower === "") return false;
+  return true;
+}
+
 // Transform raw data into app data model
 const managerMap = new Map<string, Manager>();
 const borrowerMap = new Map<string, Borrower>();
 let borrowerIdCounter = 1;
 
-// First pass: calculate total assets per fund from holdings (excluding category headers)
+// First pass: calculate total assets per fund from holdings (excluding category headers and unknown industry)
 const fundTotals = fundsData.map((fund) => ({
   ...fund,
   totalAssets: fund.holdings
-    .filter((h) => !isIndustryCategory(h.borrower))
+    .filter((h) => {
+      if (isIndustryCategory(h.borrower)) return false;
+      const industry =
+        h.gicsSector && h.gicsSector !== "Unclassified" ? h.gicsSector : h.industry || "Unknown";
+      if (!hasValidIndustry(industry)) return false;
+      return true;
+    })
     .reduce((sum, h) => sum + h.fairValue, 0),
   manager: deriveManager(fund.name),
   type: "BDC",
@@ -203,19 +364,22 @@ fundsData.forEach((fundData, fundIdx) => {
       return;
     }
 
+    // Skip entries with Unknown/Unclassified industry - these are likely not real borrowers
+    const industry =
+      holding.gicsSector && holding.gicsSector !== "Unclassified"
+        ? holding.gicsSector
+        : holding.industry || "Unknown";
+    if (!hasValidIndustry(industry)) {
+      return;
+    }
+
     const borrowerKey = holding.borrower.toLowerCase().trim();
 
     if (!borrowerMap.has(borrowerKey)) {
-      // Use GICS sector as primary industry if available
-      const industry =
-        holding.gicsSector && holding.gicsSector !== "Unclassified"
-          ? holding.gicsSector
-          : holding.industry || "Unclassified";
-
       borrowerMap.set(borrowerKey, {
         id: `b${borrowerIdCounter++}`,
         name: holding.borrower,
-        industry,
+        industry, // Use the already-computed industry variable
         gicsSector: holding.gicsSector,
         gicsIndustryGroup: holding.gicsIndustryGroup,
       });
@@ -226,12 +390,6 @@ fundsData.forEach((fundData, fundIdx) => {
     // Round values to avoid floating point display issues
     const principal = Math.round(holding.principal * 100) / 100;
     const fairValue = Math.round(holding.fairValue * 100) / 100;
-
-    // Use GICS sector as primary industry if available
-    const industry =
-      holding.gicsSector && holding.gicsSector !== "Unclassified"
-        ? holding.gicsSector
-        : holding.industry || "Unclassified";
 
     holdings.push({
       id: `h${fundIdx}_${holdingIdx}`,

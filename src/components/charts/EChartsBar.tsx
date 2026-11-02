@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useMemo } from 'react';
-import ReactECharts from 'echarts-for-react';
-import { colors, echartsTheme, formatters } from '@/lib/design-tokens';
+import { useMemo } from "react";
+import ReactECharts from "echarts-for-react";
+import { colors, echartsTheme, formatters } from "@/lib/design-tokens";
 
 interface BarDataItem {
   label: string;
@@ -39,7 +39,7 @@ export function EChartsBar({
   const option = useMemo(() => {
     const categories = chartData.map((d) => d.label);
     const values = chartData.map((d) => d.value);
-    const barColors = chartData.map((d, i) => d.color || colors.cyan);
+    const barColors = chartData.map((d, i) => d.color || colors.accent.primary);
 
     return {
       ...echartsTheme,
@@ -53,21 +53,21 @@ export function EChartsBar({
         : undefined,
       tooltip: {
         ...echartsTheme.tooltip,
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'shadow',
+          type: "shadow",
           shadowStyle: {
-            color: 'rgba(0, 212, 255, 0.05)',
+            color: "rgba(0, 212, 255, 0.05)",
           },
         },
         formatter: (params: { name: string; value: number }[]) => {
           const item = params[0];
-          if (!item) return '';
+          if (!item) return "";
           return `
-            <div style="font-size: 12px; color: ${colors.textSecondary};">
+            <div style="font-size: 12px; color: ${colors.text.secondary};">
               ${item.name}
             </div>
-            <div style="font-size: 14px; font-weight: 600; color: ${colors.textPrimary}; margin-top: 4px;">
+            <div style="font-size: 14px; font-weight: 300; color: ${colors.text.primary}; margin-top: 4px;">
               ${formatValue(item.value)}
             </div>
           `;
@@ -81,7 +81,7 @@ export function EChartsBar({
         containLabel: true,
       },
       xAxis: {
-        type: 'value',
+        type: "value",
         show: showGrid,
         axisLine: { show: false },
         axisTick: { show: false },
@@ -95,7 +95,7 @@ export function EChartsBar({
         },
       },
       yAxis: {
-        type: 'category',
+        type: "category",
         data: categories,
         inverse: true,
         axisLine: { show: false },
@@ -103,13 +103,13 @@ export function EChartsBar({
         axisLabel: {
           ...echartsTheme.categoryAxis.axisLabel,
           width: 120,
-          overflow: 'truncate',
-          ellipsis: '...',
+          overflow: "truncate",
+          ellipsis: "...",
         },
       },
       series: [
         {
-          type: 'bar',
+          type: "bar",
           data: values.map((value, index) => ({
             value,
             itemStyle: {
@@ -117,19 +117,19 @@ export function EChartsBar({
               borderRadius: [0, 4, 4, 0],
             },
           })),
-          barWidth: '60%',
+          barWidth: "60%",
           label: {
             show: true,
-            position: 'right',
+            position: "right",
             formatter: (params: { value: number }) => formatValue(params.value),
-            color: colors.textSecondary,
+            color: colors.text.secondary,
             fontSize: 11,
-            fontFamily: 'Inter, system-ui, sans-serif',
+            fontFamily: "Inter, system-ui, sans-serif",
           },
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
-              shadowColor: 'rgba(0, 212, 255, 0.3)',
+              shadowColor: "rgba(0, 212, 255, 0.3)",
             },
           },
         },
@@ -154,7 +154,7 @@ export function EChartsBar({
         option={option}
         style={{ height }}
         onEvents={onBarClick ? handleEvents : undefined}
-        opts={{ renderer: 'canvas' }}
+        opts={{ renderer: "canvas" }}
       />
     </div>
   );
