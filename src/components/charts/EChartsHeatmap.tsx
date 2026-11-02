@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useMemo } from 'react';
-import ReactECharts from 'echarts-for-react';
-import { colors, echartsTheme, formatters } from '@/lib/design-tokens';
+import { useMemo } from "react";
+import ReactECharts from "echarts-for-react";
+import { colors, echartsTheme, formatters } from "@/lib/design-tokens";
 
 interface HeatmapData {
   xLabels: string[];
@@ -28,7 +28,7 @@ export function EChartsHeatmap({
   formatValue = formatters.currency,
   onCellClick,
   showValues = false,
-  colorRange = ['#27272a', '#3b82f6', '#00d4ff'],
+  colorRange = ["#27272a", "#3b82f6", "#00d4ff"],
   className,
 }: EChartsHeatmapProps) {
   const { seriesData, maxValue, minValue } = useMemo(() => {
@@ -64,20 +64,20 @@ export function EChartsHeatmap({
         : undefined,
       tooltip: {
         ...echartsTheme.tooltip,
-        position: 'top',
+        position: "top",
         formatter: (params: { data: [number, number, number] }) => {
           const [xIndex, yIndex, value] = params.data;
           const xLabel = data.xLabels[xIndex];
           const yLabel = data.yLabels[yIndex];
           return `
-            <div style="font-size: 11px; color: ${colors.textTertiary};">
+            <div style="font-size: 11px; color: ${colors.text.tertiary};">
               ${yLabel}
             </div>
-            <div style="font-size: 12px; color: ${colors.textSecondary}; margin-top: 2px;">
+            <div style="font-size: 12px; color: ${colors.text.secondary}; margin-top: 2px;">
               ${xLabel}
             </div>
-            <div style="font-size: 14px; font-weight: 600; color: ${colors.textPrimary}; margin-top: 4px;">
-              ${value > 0 ? formatValue(value) : '—'}
+            <div style="font-size: 14px; font-weight: 300; color: ${colors.text.primary}; margin-top: 4px;">
+              ${value > 0 ? formatValue(value) : "—"}
             </div>
           `;
         },
@@ -90,16 +90,16 @@ export function EChartsHeatmap({
         containLabel: false,
       },
       xAxis: {
-        type: 'category',
+        type: "category",
         data: data.xLabels,
-        position: 'bottom',
+        position: "bottom",
         axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: {
           ...echartsTheme.categoryAxis.axisLabel,
           rotate: 45,
           interval: 0,
-          overflow: 'truncate',
+          overflow: "truncate",
           width: 80,
         },
         splitArea: {
@@ -107,13 +107,13 @@ export function EChartsHeatmap({
         },
       },
       yAxis: {
-        type: 'category',
+        type: "category",
         data: data.yLabels,
         axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: {
           ...echartsTheme.categoryAxis.axisLabel,
-          overflow: 'truncate',
+          overflow: "truncate",
           width: 110,
         },
         splitArea: {
@@ -124,13 +124,13 @@ export function EChartsHeatmap({
         min: 0,
         max: maxValue,
         calculable: true,
-        orient: 'horizontal',
-        left: 'center',
+        orient: "horizontal",
+        left: "center",
         bottom: 0,
         itemWidth: 12,
         itemHeight: 120,
         textStyle: {
-          color: colors.textTertiary,
+          color: colors.text.tertiary,
           fontSize: 10,
         },
         inRange: {
@@ -140,28 +140,28 @@ export function EChartsHeatmap({
       },
       series: [
         {
-          type: 'heatmap',
+          type: "heatmap",
           data: seriesData,
           label: {
             show: showValues,
             fontSize: 9,
-            color: colors.textPrimary,
+            color: colors.text.primary,
             formatter: (params: { data: [number, number, number] }) => {
               const value = params.data[2];
-              if (value === 0) return '';
+              if (value === 0) return "";
               return formatValue(value);
             },
           },
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-              borderColor: colors.cyan,
+              shadowColor: "rgba(0, 0, 0, 0.5)",
+              borderColor: colors.accent.primary,
               borderWidth: 1,
             },
           },
           itemStyle: {
-            borderColor: colors.bg0,
+            borderColor: colors.surface.base,
             borderWidth: 1,
           },
         },
@@ -187,7 +187,7 @@ export function EChartsHeatmap({
         option={option}
         style={{ height }}
         onEvents={onCellClick ? handleEvents : undefined}
-        opts={{ renderer: 'canvas' }}
+        opts={{ renderer: "canvas" }}
       />
     </div>
   );

@@ -67,48 +67,70 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "real estate",
   "utilities",
   "information technology",
+  "consumer",
+  "consumer discretionary",
+  "consumer staples",
+  "unknown",
   // Security types
   "unsecured debt",
   "secured loan",
+  "secured debt",
+  "unsecured loan",
   "derivative instrument",
+  "derivative instruments",
   "investment type",
+  // Financial instruments
+  "foreign currency forward contracts",
+  "foreign currency forwards",
+  "interest rate swaps",
+  "interest rate caps",
+  "credit default swaps",
+  "total return swaps",
+  "currency hedges",
+  "forward contracts",
   // Balance sheet
   "other assets",
   "other liabilities",
+  "liabilities",
+  "assets",
   // Column headers
   "company",
   "unknown",
   "portfolio company",
   "borrower",
   "issuer",
-  // GICS industries
+  // GICS industries (full names)
   "air freight & logistics",
   "construction & engineering",
   "construction & building",
   "it services",
   "professional services",
   "commercial services",
+  "commercial services & supplies",
   "capital goods",
   "electrical equipment",
   "machinery",
   "building products",
   "trading companies",
-  "consumer discretionary",
-  "consumer staples",
+  "trading companies & distributors",
   "semiconductors",
   "software",
+  "software & services",
   "tech hardware",
   "communications equipment",
   "electronic equipment",
+  "electronic equipment, instruments & components",
   "hotels, restaurants & leisure",
   "household durables",
   "household products",
   "textiles, apparel",
+  "textiles, apparel & luxury goods",
   "leisure products",
   "auto components",
   "automobiles",
   "distributors",
   "internet & direct retail",
+  "internet & direct marketing retail",
   "multiline retail",
   "specialty retail",
   "food & staples",
@@ -117,14 +139,19 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "pharmaceuticals",
   "biotechnology",
   "life sciences",
+  "life sciences tools & services",
+  "health care equipment & supplies",
+  "health care providers & services",
   "diversified reits",
   "equity reits",
   "electric utilities",
   "gas utilities",
   "water utilities",
   "oil, gas & consumable",
+  "oil, gas & consumable fuels",
   "metals & mining",
   "paper & forest",
+  "paper & forest products",
   "chemicals",
   "construction materials",
   "media",
@@ -133,6 +160,12 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "diversified telecommunication",
   "wireless telecommunication",
   "cable & satellite",
+  // Asset categories / Multi-sector
+  "multi-sector holdings",
+  "multi-sector",
+  "diversified holdings",
+  "other holdings",
+  "miscellaneous",
   // Countries/regions
   "netherlands",
   "united states",
@@ -146,6 +179,30 @@ const INDUSTRY_CATEGORY_NAMES = new Set([
   "switzerland",
   "australia",
   "japan",
+  "mid-atlantic",
+  "northeast",
+  "southeast",
+  "midwest",
+  "southwest",
+  "west",
+  "pacific",
+  // More industries
+  "marine",
+  "airlines",
+  "road & rail",
+  "containers & packaging",
+  "aerospace & defense",
+  "diversified financial services",
+  "insurance",
+  "banks",
+  "consumer finance",
+  "real estate management & development",
+  "independent power and renewable electricity producers",
+  "personal products",
+  "tobacco",
+  "diversified consumer services",
+  "internet software & services",
+  "technology hardware, storage & peripherals",
 ]);
 
 const INVALID_PATTERNS = [
@@ -157,12 +214,82 @@ const INVALID_PATTERNS = [
   /^(carrying|fair)\s+value$/i,
   /^media:\s/i, // Media sub-industries like "Media: Advertising, Printing & Publishing"
   /^(aerospace|telecommunications|road\s*&?\s*rail|containers\s*&?\s*packaging)$/i,
+  // Explicit GICS industries that slip through
+  /^air\s+freight\s*&?\s*logistics$/i,
+  /^construction\s*&?\s*(engineering|building|materials)$/i,
+  /^it\s+services$/i,
+  /^investment\s+type$/i,
+  /^(netherlands|united\s+states|united\s+kingdom|germany|france|canada|europe|ireland|luxembourg|switzerland|australia|japan)$/i,
+  // Industry subcategory formats with colons
+  /^transportation:\s/i, // "Transportation: Cargo", "Transportation: Infrastructure"
+  /^technology:\s/i,
+  /^healthcare:\s/i,
+  /^energy:\s/i,
+  /^consumer:\s/i,
+  /^industrials:\s/i,
+  /^financials:\s/i,
+  /^materials:\s/i,
+  /^utilities:\s/i,
+  /^real\s+estate:\s/i,
+  /^communication\s+services:\s/i,
+  // Financial instruments and derivatives
+  /^(foreign\s+)?currency\s+(forward|swap|hedge)/i,
+  /^interest\s+rate\s+(swap|cap|floor|collar)/i,
+  /^credit\s+(default\s+)?swap/i,
+  /^(total\s+)?return\s+swap/i,
+  /forward\s+contract/i,
+  /^derivative/i,
+  // Asset categories
+  /^multi-?sector/i,
+  /^diversified\s+(holdings|investments)/i,
+  /^(other|miscellaneous)\s+(holdings|investments|assets)/i,
+  // More GICS patterns
+  /^(road\s*&?\s*rail|marine|airlines|air\s+freight)$/i,
+  /^(containers\s*&?\s*packaging)$/i,
+  /^(aerospace\s*&?\s*defense)$/i,
+  /^(leisure\s+products)$/i,
+  /^(personal\s+products)$/i,
+  /^(household\s+(durables|products))$/i,
+  /^(building\s+products)$/i,
+  /^(electrical\s+equipment)$/i,
+  /^(electronic\s+equipment)/i,
+  /^(commercial\s+services)/i,
+  /^(professional\s+services)$/i,
+  /^(health\s+care\s+(equipment|providers|services))/i,
+  /^(life\s+sciences\s+tools)/i,
+  /^(internet\s+(software|&|and))/i,
+  /^(software\s*&?\s*services)$/i,
+  /^(capital\s+goods)$/i,
+  /^(construction\s+(&|and)\s+(engineering|materials))$/i,
+  /^(trading\s+companies)/i,
+  /^(food\s+(&|and)\s+staples)/i,
+  /^(textiles,?\s+apparel)/i,
+  /^(auto\s+components)$/i,
+  /^(hotels,?\s+restaurants)/i,
+  /^(specialty\s+retail)$/i,
+  /^(multiline\s+retail)$/i,
+  /^(consumer\s+finance)$/i,
+  /^(diversified\s+financial)/i,
+  /^(real\s+estate\s+management)/i,
+  /^(oil,?\s+gas)/i,
+  /^(metals\s*&?\s*mining)$/i,
+  /^(paper\s*&?\s*forest)/i,
+  /^(independent\s+power)/i,
 ];
 
 function isInvalidBorrower(name: string): boolean {
   const lower = name.toLowerCase().trim();
   if (INDUSTRY_CATEGORY_NAMES.has(lower)) return true;
-  return INVALID_PATTERNS.some((p) => p.test(name));
+  return INVALID_PATTERNS.some((p) => p.test(lower));
+}
+
+// Check if a holding has a valid industry classification
+function hasValidIndustry(industry: string | undefined): boolean {
+  if (!industry) return false;
+  const lower = industry.toLowerCase().trim();
+  // Filter out entries with Unknown/Unclassified industry - these are likely not real borrowers
+  if (lower === "unknown" || lower === "unclassified" || lower === "") return false;
+  return true;
 }
 
 function deriveManager(fundName: string): string {
@@ -197,7 +324,14 @@ function processRawData(rawFunds: FundData[]): ProcessedData {
     }
 
     // Filter and process holdings
-    const validHoldings = fund.holdings.filter((h) => !isInvalidBorrower(h.borrower));
+    const validHoldings = fund.holdings.filter((h) => {
+      if (isInvalidBorrower(h.borrower)) return false;
+      // Filter out entries with Unknown/Unclassified industry
+      const industry =
+        h.gicsSector && h.gicsSector !== "Unclassified" ? h.gicsSector : h.industry || "Unknown";
+      if (!hasValidIndustry(industry)) return false;
+      return true;
+    });
     const totalAssets = validHoldings.reduce((sum, h) => sum + h.fairValue, 0);
 
     // Update manager AUM
